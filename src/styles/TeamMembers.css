@@ -1,0 +1,228 @@
+.team-header {
+  margin-bottom: 2rem;
+}
+
+.search-filter-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  margin-left: 0.5rem;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.date-range {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.date-inputs {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.date-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.date-input input {
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  width: 120px;
+}
+
+.date-input .iconify {
+  position: absolute;
+  right: 0.75rem;
+  color: #666;
+}
+
+.team-members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.member-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.member-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.member-header {
+  margin-bottom: 1.5rem;
+}
+
+.member-info {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.member-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.member-details h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+}
+
+.member-location {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.view-profile {
+  color: #0066cc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: inline-block;
+}
+
+.member-stats {
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.stats-row:last-child {
+  margin-bottom: 0;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.stat-value {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.member-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Ant Design Overrides */
+
+.ant-select-selector {
+  border-radius: 8px !important;
+  height: 40px !important;
+  padding: 4px 11px !important;
+}
+
+.ant-select-selection-placeholder,
+.ant-select-selection-item {
+  line-height: 32px !important;
+}
+
+.ant-btn {
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ant-btn-primary {
+  background-color: #0066cc;
+}
+
+@media (max-width: 768px) {
+  .search-filter-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-filter-section > div {
+    width: 100%;
+  }
+
+  .ant-input-affix-wrapper {
+    max-width: none !important;
+  }
+
+  .team-members-grid {
+    grid-template-columns: 1fr;
+  }
+}

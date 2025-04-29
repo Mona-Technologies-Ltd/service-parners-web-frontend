@@ -1,0 +1,140 @@
+.overall-rating-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.rating-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.rating-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: #0066cc;
+  border-radius: 4px;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.star-filled {
+  color: #ffc107;
+}
+
+.star-empty {
+  color: #e0e0e0;
+}
+
+.average-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.rating-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.review-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.review-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #0066cc, #0099ff);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+.review-header {
+  margin-bottom: 1rem;
+}
+
+.claim-id {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.review-type {
+  display: inline-block;
+  background: #e8f4ff;
+  color: #0066cc;
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.rating-circle {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 40px;
+  height: 40px;
+  background: #f8f9fa;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #0066cc;
+}
+
+.review-comment {
+  margin-bottom: 1rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.review-date {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}

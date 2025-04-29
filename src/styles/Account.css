@@ -1,0 +1,655 @@
+.account-tabs {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 0.5px solid #9cd5f6;
+  margin-bottom: 2rem;
+}
+
+.tab-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  color: #666;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+  color: #0066cc;
+}
+
+.tab-button.active {
+  color: #0066cc;
+  font-weight: 600;
+}
+
+.tab-button.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #38b6ff;
+}
+
+.tab-content {
+  background: #f5f7fa;
+  min-height: calc(100vh - 200px);
+}
+
+/* Profile Card Styles */
+.profile-card {
+  background: white;
+  padding: 2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e6e8eb;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.profile-image-container {
+  position: relative;
+}
+
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-image-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #0066cc;
+  border: 2px solid white;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.profile-details h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: #e8f3ff;
+  color: #0066cc;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+/* Business Card Styles */
+.business-card {
+  background: white;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e6e8eb;
+}
+
+.business-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "business-name address"
+    "team-members business-type"
+    "phone-number registration"
+    "opening-hours opening-hours";
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-group[data-field="businessName"] {
+  grid-area: business-name;
+}
+
+.info-group[data-field="address"] {
+  grid-area: address;
+  justify-self: end;
+  width: 100%;
+  max-width: 400px;
+}
+
+.info-group[data-field="teamMembers"] {
+  grid-area: team-members;
+}
+
+.info-group[data-field="businessType"] {
+  grid-area: business-type;
+  justify-self: end;
+  width: 100%;
+  max-width: 400px;
+}
+
+.info-group[data-field="phoneNumber"] {
+  grid-area: phone-number;
+}
+
+.info-group[data-field="registrationNumber"] {
+  grid-area: registration;
+  justify-self: end;
+  width: 100%;
+  max-width: 400px;
+}
+
+.info-group[data-field="openingHours"] {
+  grid-area: opening-hours;
+}
+
+.info-label {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.info-value .form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: white;
+}
+
+.info-value .form-control:disabled {
+  background-color: transparent;
+  border-color: transparent;
+  padding: 0;
+  color: #333;
+  font-weight: 500;
+}
+
+.business-type-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: #e8f9ff;
+  color: #00a3cc;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+.opening-hours-tag {
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  background: #dbebff;
+  color: #004aad;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 2rem;
+}
+
+.edit-button {
+  background-color: #0066cc;
+  color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #0052a3;
+}
+
+.close-account-button {
+  background-color: white;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.close-account-button:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #666;
+}
+
+.modal-close:hover {
+  color: #333;
+}
+
+.modal-description {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-body label {
+  font-weight: 500;
+  color: #333;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #0768e9;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: #e8f2ff;
+}
+
+.modal-input:focus {
+  outline: none;
+  border-color: #0768e9;
+  box-shadow: 0 0 0 2px rgba(7, 104, 233, 0.1);
+}
+
+.confirm-delete-button {
+  background-color: #ff0000;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-delete-button:hover {
+  background-color: #cc0000;
+}
+
+.confirm-delete-button:disabled {
+  background-color: #ffcccc;
+  cursor: not-allowed;
+}
+
+.static-text {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+  padding: 0.25rem 0;
+}
+
+/* Password Management Styles */
+.password-header {
+  margin-bottom: 2rem;
+}
+
+.password-header h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.password-header .subtitle {
+  color: #666;
+  margin: 0;
+}
+
+.alert {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.alert-danger {
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  color: #ff4d4f;
+}
+
+.alert-success {
+  background-color: #f6ffed;
+  border: 1px solid #b7eb8f;
+  color: #52c41a;
+}
+
+/* Bank Information Styles */
+.bank-information {
+  background: white;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e6e8eb;
+  margin: 2rem;
+}
+
+.bank-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.bank-header h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.bank-header .subtitle {
+  color: #666;
+  margin: 0;
+}
+
+.add-bank-button {
+  background-color: #004aad;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-bank-button:hover {
+  background-color: #003d8f;
+}
+
+.bank-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.bank-card {
+  background: #f8fbff;
+  padding: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  position: relative;
+}
+
+.bank-logo {
+  width: 48px;
+  height: 48px;
+  background: #dbebff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bank-logo img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.bank-details {
+  flex: 1;
+}
+
+.account-number {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.account-name {
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.bank-name {
+  color: #004aad;
+  font-weight: 500;
+}
+
+.bank-actions {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 4px;
+  background: white;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-button:hover {
+  background: #dbebff;
+  color: #004aad;
+}
+
+.action-button.delete:hover {
+  background: #fff2f0;
+  color: #ff4d4f;
+}
+
+/* Bank Selection Styles */
+.bank-select-container {
+  position: relative;
+  width: 100%;
+}
+
+.bank-search-input {
+  position: relative;
+  width: 100%;
+  background: #e8f2ff;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: text;
+  border: 1px solid #0768e9;
+  transition: all 0.2s ease;
+}
+
+.bank-search-input:focus-within {
+  border-color: #0768e9;
+  box-shadow: 0 0 0 2px rgba(7, 104, 233, 0.1);
+}
+
+.bank-search-input input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 14px;
+  outline: none;
+  color: #333;
+}
+
+.bank-search-input input::placeholder {
+  color: #8c8c8c;
+}
+
+.search-icon {
+  color: #8c8c8c;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.bank-list-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  border: 1px solid #e6e8eb;
+}
+
+.bank-group {
+  padding: 8px 0;
+}
+
+.group-letter {
+  padding: 8px 16px;
+  color: #8c8c8c;
+  font-size: 14px;
+  font-weight: 500;
+  background: #f8fbff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.bank-option {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bank-option:hover {
+  background-color: #f8fbff;
+}
+
+.bank-option.selected {
+  background-color: #f0f7ff;
+}
+
+.bank-option .bank-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 12px;
+  background: #f8fbff;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.bank-option span {
+  flex: 1;
+  font-size: 14px;
+  color: #333;
+}
+
+.bank-option .chevron-icon {
+  color: #8c8c8c;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.bank-option:hover .chevron-icon,
+.bank-option.selected .chevron-icon {
+  opacity: 1;
+}
+
+.bank-list-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.bank-list-dropdown::-webkit-scrollbar-track {
+  background: #f8fbff;
+  border-radius: 3px;
+}
+
+.bank-list-dropdown::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+.bank-list-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}

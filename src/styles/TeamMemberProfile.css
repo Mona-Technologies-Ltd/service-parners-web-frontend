@@ -1,0 +1,121 @@
+.profile-container {
+  width: 100%;
+}
+
+.profile-content {
+  display: flex;
+  gap: 24px;
+  margin: 0 auto;
+}
+
+.profile-info-card {
+  flex: 1;
+  background: white;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 50%;
+}
+
+.status-card {
+  flex: 1;
+  background: white;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 50%;
+}
+
+.profile-header {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+
+.profile-details {
+  flex: 1;
+}
+
+.profile-details h2 {
+  margin: 0 0 16px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  color: #666;
+}
+
+.status-card h2 {
+  margin: 0 0 24px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.status-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.status-item {
+  padding: 16px;
+  flex: 1;
+}
+
+/* Specific background colors for each status item */
+.status-item:nth-child(1) {
+  background-color: #d7f0ff;
+}
+
+.status-item:nth-child(2) {
+  background-color: #e8f2ff;
+}
+
+.status-item:nth-child(3) {
+  background-color: rgba(222, 231, 255, 0.35);
+}
+
+.status-label {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.status-value {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.date-joined .status-value.highlight {
+  color: #1890ff;
+}
+
+@media (max-width: 768px) {
+  .profile-content {
+    flex-direction: column;
+  }
+
+  .status-card {
+    min-width: unset;
+  }
+
+  .status-grid {
+    flex-direction: column;
+  }
+}

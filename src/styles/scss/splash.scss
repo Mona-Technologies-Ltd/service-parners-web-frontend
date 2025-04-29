@@ -1,0 +1,74 @@
+.splash-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #002484;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 10C26.6667 10 32.7778 12.5 36.6667 14C40 16 40 19 40 19L34.4444 21.5L34.1667 18.5C34.1667 18.5 30.8333 14 20 14C9.16667 14 5.83333 18.5 5.83333 18.5L5.55556 21.5L0 19C0 19 0 16 3.33333 14C7.22222 12.5 13.3333 10 20 10Z' fill='%230a319b'/%3E%3Cpath d='M20 7C28 7 34.6667 9 38.8889 11C43.1111 13 43.1111 18 43.1111 18L36.3333 22L35.3333 17C35.3333 17 31.3333 13 20 13C8.66667 13 4.66667 17 4.66667 17L3.66667 22L-3.0162e-07 18C-3.0162e-07 18 0 13 4.22222 11C8.44444 9 12 7 20 7Z' fill='%230a319b'/%3E%3Cpath d='M31.1111 23L25.5556 24V26C25.5556 26 23.3333 32 20 32C16.6667 32 14.4444 26 14.4444 26V24L8.88889 23C8.88889 23 10 27 11.1111 29C12.2222 31 16.6667 35 20 35C23.3333 35 27.7778 31 28.8889 29C30 27 31.1111 23 31.1111 23Z' fill='%230a319b'/%3E%3C/svg%3E");
+    background-repeat: space;
+    opacity: 0.2;
+    z-index: 1;
+  }
+
+  .splash-logo-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .splash-logo {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 20px;
+  }
+
+  .splash-footer {
+    padding-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .splash-text-logo {
+    width: 200px;
+    margin-bottom: 15px;
+  }
+
+  .splash-tagline {
+    color: white;
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+// Animation for the logo
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.splash-logo {
+  animation: pulse 2s infinite ease-in-out;
+}

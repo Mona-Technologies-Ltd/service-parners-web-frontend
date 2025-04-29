@@ -1,0 +1,62 @@
+/* Component Library Overrides */
+
+/* Ant Design Overrides */
+.ant-btn,
+.ant-input,
+.ant-select,
+.ant-select-selector,
+.ant-input-number,
+.ant-picker,
+.ant-input-affix-wrapper,
+.ant-checkbox,
+.ant-radio,
+.ant-modal-content,
+.ant-card,
+.ant-tabs-tab,
+.ant-tag,
+.ant-badge,
+.ant-alert,
+.ant-notification-notice {
+  border-radius: 0 !important;
+}
+
+/* Bootstrap Overrides */
+.btn,
+.form-control,
+.input-group-text,
+.card,
+.alert,
+.modal-content,
+.dropdown-menu,
+.list-group-item,
+.nav-tabs .nav-link,
+.custom-select,
+.badge,
+.toast {
+  border-radius: 0 !important;
+}
+
+/* Kendo React Overrides */
+.k-button,
+.k-input,
+.k-textbox,
+.k-dropdown,
+.k-dropdown-button,
+.k-datepicker,
+.k-datetimepicker,
+.k-numerictextbox,
+.k-timepicker,
+.k-colorpicker,
+.k-combobox,
+.k-grid,
+.k-window,
+.k-card {
+  border-radius: 0 !important;
+}
+
+/* Override nested and dynamically created elements */
+[class*="ant-"] [class*="ant-"],
+.bootstrap *,
+.k-widget * {
+  border-radius: 0 !important;
+}

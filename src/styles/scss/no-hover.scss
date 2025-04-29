@@ -1,0 +1,102 @@
+/* Remove all hover effects from all buttons in the application */
+
+/* Target all Ant Design buttons */
+.ant-btn,
+button.ant-btn,
+.ant-btn-primary,
+.ant-btn-default,
+.ant-btn-dashed,
+.ant-btn-text,
+.ant-btn-link {
+  transition: none !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: inherit !important;
+    color: inherit !important;
+    border-color: inherit !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Special handling for primary buttons to maintain their blue background */
+.ant-btn-primary {
+  background-color: #0066cc !important;
+  color: white !important;
+  border-color: #0066cc !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: #0066cc !important;
+    color: white !important;
+    border-color: #0066cc !important;
+  }
+}
+
+/* Target styled components with Button in their name */
+[class*="Button"] {
+  transition: none !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Target specific buttons from ManageAdminsPage */
+.MoreButton,
+.AddButton,
+.SendInviteButton {
+  &:hover,
+  &:focus,
+  &:active {
+    color: inherit !important;
+    background-color: inherit !important;
+    border-color: inherit !important;
+  }
+}
+
+/* Ensure SendInviteButton maintains its blue style */
+.SendInviteButton {
+  background-color: #0066cc !important;
+  color: white !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: #0066cc !important;
+    color: white !important;
+  }
+}
+
+/* Override any transition-based animations */
+button,
+.ant-btn,
+[class*="Button"] {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Override any hover effects defined in overrides.scss */
+.queried-applications-page .ant-btn.action-button,
+.ant-modal .add-response-button,
+.ant-modal .approve-button,
+.ant-modal .watch-video-button {
+  &:hover,
+  &:focus,
+  &:active {
+    transform: none !important;
+    box-shadow: none !important;
+    background-color: inherit !important;
+    color: inherit !important;
+    border-color: inherit !important;
+  }
+}

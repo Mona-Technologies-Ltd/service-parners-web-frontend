@@ -1,0 +1,455 @@
+// Import Bootstrap
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+// Import Ant Design
+@import "antd/dist/reset.css";
+
+// Import custom styles
+@import "./auth.scss";
+@import "./splash.scss";
+@import "./dashboard.scss";
+@import "./support.scss";
+@import "./payments.scss";
+@import "./components/_phone-input.scss";
+
+// Import border-radius overrides
+@import "../css/overrides.css";
+
+// Import specific button overrides
+@import "./overrides.scss";
+
+// Import no-hover styles to disable all hover effects
+@import "./no-hover.scss";
+
+// Global styles
+html,
+body,
+#root {
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+// Custom Ant Design overrides
+.ant-form-item-explain-error {
+  font-size: 12px;
+}
+
+.ant-input,
+.ant-select,
+.ant-input-number,
+.ant-picker {
+  border-radius: 0;
+  height: 45px;
+}
+
+.ant-select-selector {
+  height: 45px !important;
+  padding-top: 4px !important;
+  border-radius: 0 !important;
+}
+
+// Buttons - Remove all hover effects
+.ant-btn,
+button.ant-btn,
+.ant-btn.ant-btn-primary,
+.ant-btn[type],
+button[type="button"],
+button[type="submit"] {
+  border-radius: 0;
+  transition: none !important;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  &.hover,
+  &:not([disabled]):hover {
+    color: inherit !important;
+    border-color: inherit !important;
+    background-color: inherit !important;
+    box-shadow: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+// Special case for primary buttons - maintain color but disable hover effects
+.ant-btn-primary,
+button.ant-btn-primary {
+  background-color: #0052cc !important;
+  color: #fff !important;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  &.hover,
+  &:not([disabled]):hover {
+    background-color: #0052cc !important;
+    color: #fff !important;
+    border-color: #0052cc !important;
+  }
+}
+
+// Disable hover effects for custom button components
+button,
+[class*="Button"] {
+  transition: none !important;
+
+  &:hover,
+  &:focus,
+  &:active {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+// Custom spacing utilities
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+// Common text styles
+.text-muted {
+  color: #8c8c8c;
+  font-size: 14px;
+}
+
+.text-primary {
+  color: #0052cc;
+}
+
+// Helper classes
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+// Success/error messages
+.success-message {
+  color: #52c41a;
+}
+
+.error-message {
+  color: #f5222d;
+}
+
+// Icon styles
+.icon-large {
+  font-size: 24px;
+}
+
+.icon-medium {
+  font-size: 18px;
+}
+
+.icon-small {
+  font-size: 14px;
+}
+
+.device-details-modal {
+  .ant-modal-content {
+    padding: 24px;
+    border-radius: 12px;
+  }
+
+  .ant-modal-close {
+    top: 24px;
+    right: 24px;
+  }
+
+  .modal-content {
+    padding: 8px 24px;
+    max-width: 720px;
+    margin: 0 auto;
+
+    .device-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      padding: 0;
+
+      .device-info {
+        .device-id {
+          color: #666;
+          font-size: 14px;
+          margin-bottom: 8px;
+        }
+
+        .device-brand {
+          font-size: 28px;
+          font-weight: 600;
+          margin-bottom: 12px;
+        }
+
+        .device-id-tag {
+          display: inline-block;
+          background-color: #e8f3ff;
+          color: #38b6ff;
+          padding: 8px 16px;
+          border-radius: 4px;
+          font-size: 14px;
+        }
+      }
+
+      .brand-logo {
+        width: 64px;
+        height: 64px;
+        background-color: #fff;
+        border: 1px solid #eee;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        margin-right: 0;
+      }
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding: 0;
+
+      .info-card {
+        display: flex;
+        gap: 16px;
+        padding: 20px;
+        background-color: #dbebff;
+        border: 1px solid #97c4ff;
+
+        .info-icon {
+          width: 40px;
+          height: 40px;
+          background-color: #97c4ff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #004aad;
+        }
+
+        .info-content {
+          h4 {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 6px;
+          }
+
+          p {
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.4;
+            font-weight: 600;
+
+            &.subtitle {
+              color: #666;
+              font-size: 13px;
+              margin-top: 4px;
+              font-weight: 600;
+            }
+          }
+        }
+      }
+    }
+
+    .date-section {
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 0;
+
+      .date-item {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        min-width: 120px;
+
+        .label {
+          color: #666;
+          font-size: 13px;
+        }
+
+        .value {
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+
+      .date-timeline {
+        flex: 1;
+        padding: 0 16px;
+
+        .timeline-line {
+          height: 2px;
+          background: #e8f3ff;
+          position: relative;
+
+          &::before,
+          &::after {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #0066ff;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+
+          &::before {
+            left: 0;
+          }
+
+          &::after {
+            right: 0;
+          }
+        }
+      }
+    }
+
+    .payment-section {
+      padding: 0;
+
+      h3 {
+        font-size: 18px;
+        margin-bottom: 16px;
+        font-weight: 500;
+      }
+
+      .payment-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 0;
+        border-bottom: 1px solid #eee;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        span {
+          font-size: 14px;
+
+          &.amount {
+            color: #000;
+            font-weight: 500;
+          }
+
+          &.commission {
+            color: #0066ff;
+            font-weight: 500;
+          }
+        }
+
+        .status-badge {
+          padding: 8px 16px;
+          border-radius: 4px;
+          font-size: 13px;
+
+          &.awaiting {
+            background-color: #fff8e6;
+            color: #ffb800;
+          }
+
+          &.paid {
+            background-color: #e8f8f0;
+            color: #00b871;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 
+ * ULTRA-AGGRESSIVE BUTTON HOVER OVERRIDES - DO NOT MODIFY
+ * This ensures that no hover effects appear on any buttons
+ */
+.ant-btn,
+button,
+input[type="button"],
+input[type="submit"],
+[class*="Button"],
+*[role="button"],
+.ant-btn-primary,
+.ant-btn-default,
+.ant-btn-text,
+.ant-btn-link,
+.ant-btn-dashed {
+  transition: none !important;
+  animation: none !important;
+  -webkit-transition: none !important;
+  -webkit-animation: none !important;
+}
+
+.ant-btn:hover,
+.ant-btn:focus,
+.ant-btn:active,
+.ant-btn-primary:hover,
+.ant-btn-primary:focus,
+.ant-btn-primary:active,
+button:hover,
+button:focus,
+button:active,
+input[type="button"]:hover,
+input[type="button"]:focus,
+input[type="button"]:active,
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+input[type="submit"]:active,
+[class*="Button"]:hover,
+[class*="Button"]:focus,
+[class*="Button"]:active,
+*[role="button"]:hover,
+*[role="button"]:focus,
+*[role="button"]:active {
+  filter: none !important;
+  transform: none !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  -webkit-filter: none !important;
+  -webkit-transform: none !important;
+}

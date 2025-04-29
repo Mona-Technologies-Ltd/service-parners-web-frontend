@@ -1,0 +1,43 @@
+.phone-frame {
+  position: relative;
+  width: 250px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iphone-frame-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.phone-content {
+  position: relative;
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  background: #fff;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.mona-header-logo {
+  width: 100px;
+  height: auto;
+  margin-top: 40px;
+}
+
+.mona-stack-icon {
+  width: 60px;
+  height: auto;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+}

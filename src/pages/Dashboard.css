@@ -1,0 +1,279 @@
+/* Dashboard Styles */
+.dashboard-container {
+  padding: 16px;
+  background-color: #f8fafc;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.dashboard-header h1 {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+  color: #111827;
+}
+
+.date-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Stat Cards */
+.stat-card {
+  position: relative;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  border: none;
+}
+
+.stat-card-inner {
+  position: relative;
+  padding: 24px;
+}
+
+.stat-icon {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.blue-bg {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: rgb(37, 99, 235);
+}
+
+.green-bg {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: rgb(16, 185, 129);
+}
+
+.yellow-bg {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: rgb(245, 158, 11);
+}
+
+.gold-bg {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: rgb(245, 158, 11);
+}
+
+.blue-outline {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: rgb(37, 99, 235);
+}
+
+.yellow-outline {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: rgb(245, 158, 11);
+}
+
+.green-outline {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: rgb(16, 185, 129);
+}
+
+.red-outline {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: rgb(239, 68, 68);
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: #6b7280;
+  margin: 0 0 16px 0;
+  line-height: 1.4;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.change-indicator {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  gap: 4px;
+}
+
+.positive {
+  color: #10b981;
+}
+
+.negative {
+  color: #ef4444;
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 32px 0 16px 0;
+  color: #111827;
+}
+
+/* Claims by Device */
+.claims-by-device {
+  margin-top: 32px;
+  background-color: white;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.claims-by-device h3 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 16px 0;
+  color: #111827;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.filter-buttons .ant-btn {
+  border-radius: 4px;
+  padding: 6px 12px;
+}
+
+.filter-buttons .ant-btn-primary {
+  background-color: #004aad;
+  color: white;
+}
+
+.filter-buttons .ant-btn:hover:not(.ant-btn-primary) {
+  background-color: rgba(0, 74, 173, 0.08);
+  border-color: #004aad;
+  color: #004aad;
+}
+
+/* Chart Styles */
+.chart-container {
+  height: 300px;
+  overflow-x: auto;
+  margin-top: 24px;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  gap: 16px;
+  padding-bottom: 36px; /* Space for labels */
+  min-width: 1000px; /* Ensure it's scrollable */
+}
+
+.chart-bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 40px;
+  position: relative;
+}
+
+.chart-bar {
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+}
+
+.chart-label {
+  position: absolute;
+  bottom: -40px;
+  font-size: 10px;
+  text-align: center;
+  color: #6b7280;
+  transform: rotate(-45deg);
+  transform-origin: left top;
+  width: 150px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Chart Bar Colors */
+.bar-color-1 {
+  background-color: #818cf8;
+}
+.bar-color-2 {
+  background-color: #c084fc;
+}
+.bar-color-3 {
+  background-color: #34d399;
+}
+.bar-color-4 {
+  background-color: #818cf8;
+}
+.bar-color-5 {
+  background-color: #a3e635;
+}
+.bar-color-6 {
+  background-color: #60a5fa;
+}
+.bar-color-7 {
+  background-color: #f87171;
+}
+.bar-color-8 {
+  background-color: #4ade80;
+}
+.bar-color-9 {
+  background-color: #38bdf8;
+}
+.bar-color-10 {
+  background-color: #475569;
+}
+.bar-color-11 {
+  background-color: #64748b;
+}
+.bar-color-12 {
+  background-color: #84cc16;
+}
+.bar-color-13 {
+  background-color: #fbbf24;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 16px;
+  }
+
+  .stat-card {
+    margin-bottom: 16px;
+  }
+}
+
+/* Override Ant Design card padding */
+:where(.css-dev-only-do-not-override-1a3rktk).ant-card .ant-card-body {
+  padding: 0 !important;
+}
