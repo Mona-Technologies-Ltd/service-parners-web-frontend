@@ -4,6 +4,7 @@ import { DownOutlined } from "@ant-design/icons";
 import "./Dashboard.css";
 import StatCard from "../components/Dashboard/StatCard";
 import DashboardChart from "../components/Dashboard/DashboardChart";
+import RepairClaimModal from "../components/claim/RepairClaimModal";
 
 const DashboardPage = () => {
   // Overview data
@@ -127,6 +128,7 @@ const DashboardPage = () => {
           />
         </Col>
       </Row>
+      
 
       {/* Claims Breakdown Section */}
       <h2 className="section-title">Claims Breakdown</h2>

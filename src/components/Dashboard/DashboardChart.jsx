@@ -84,7 +84,7 @@ const DashboardChart = ({ data }) => {
       y: {
         beginAtZero: true,
         grid: {
-          display: true,
+          display: false,
           color: "#f3f4f6",
         },
         border: {

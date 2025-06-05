@@ -26,6 +26,8 @@ import styled from "styled-components";
 import StatCard from "../components/Dashboard/StatCard";
 import CustomGrid from "../components/CustomGrid/CustomGrid";
 import { generateInvoicePDF } from "../utils/pdfUtils";
+import DashboardCards from "./PaymentDashboardCards";
+import InvoiceModal from "./InvoiceModal";
 
 const { TabPane } = Tabs;
 const { Search } = Input;
@@ -41,6 +43,50 @@ const PaymentPage = () => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [invoiceType, setInvoiceType] = useState(null); // 'single' or 'all'
   const pageSize = 10;
+const [show, setShow] = useState(true);
+const [showInvoiceModal, setShowInvoiceModal] = useState(false);
+const [invoiceData, setInvoiceData] = useState(null); // holds the invoice payload
+
+  const [selectedDateRange, setSelectedDateRange] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+const filterPayouts = () => {
+  return payoutsData.filter((item) => {
+    // Filter by status
+    const matchesStatus =
+      !selectedStatus || item.paymentStatus.toLowerCase() === selectedStatus;
+
+    // Filter by search (check reference and createdBy fields)
+    const searchLower = searchQuery.toLowerCase();
+    const matchesSearch =
+      !searchQuery ||
+      item.reference.toLowerCase().includes(searchLower) ||
+      item.createdBy.toLowerCase().includes(searchLower);
+
+    // Filter by date
+    const today = new Date();
+    const itemDate = new Date(item.date);
+
+    let matchesDate = true;
+    if (selectedDateRange === "today") {
+      matchesDate = itemDate.toDateString() === today.toDateString();
+    } else if (selectedDateRange === "yesterday") {
+      const yesterday = new Date();
+      yesterday.setDate(today.getDate() - 1);
+      matchesDate = itemDate.toDateString() === yesterday.toDateString();
+    } else if (selectedDateRange === "last7days") {
+      const past7Days = new Date();
+      past7Days.setDate(today.getDate() - 7);
+      matchesDate = itemDate >= past7Days && itemDate <= today;
+    } else if (selectedDateRange === "last30days") {
+      const past30Days = new Date();
+      past30Days.setDate(today.getDate() - 30);
+      matchesDate = itemDate >= past30Days && itemDate <= today;
+    }
+
+    return matchesStatus && matchesSearch && matchesDate;
+  });
+};
 
   // Data for stat cards
   const paymentStats = {
@@ -108,7 +154,7 @@ const PaymentPage = () => {
   };
 
   // Confirmed download of invoice
-  const handleConfirmedDownloadInvoice = () => {
+  const handleConfirmedDownloadInvoice = async() => {
     try {
       // Create invoice data from the payout record
       const invoiceData = {
@@ -137,7 +183,7 @@ const PaymentPage = () => {
       };
 
       // Generate and download the PDF
-      generateInvoicePDF(invoiceData);
+     await generateInvoicePDF(invoiceData);
 
       // Close modal and reset state
       setIsInvoiceConfirmModalVisible(false);
@@ -149,34 +195,61 @@ const PaymentPage = () => {
     }
   };
 
-  // Handle all action menu clicks
-  const handleMenuClick = (e, record) => {
-    const key = e.key;
-    switch (key) {
-      case "1": // Download Invoice
-        handleDownloadInvoice(record);
-        break;
-      case "2": // Print Receipt
-        // Implement print receipt functionality
-        console.log("Print Receipt for", record);
-        break;
-      case "3": // Upload Proof of Payment
-        // Implement upload proof functionality
-        console.log("Upload Proof for", record);
-        break;
-      case "4": // Upload DV
-        // Open upload DV modal and set current record
-        setCurrentPayoutRecord(record);
-        setIsUploadDVModalVisible(true);
-        break;
-      case "5": // Download Signed DV
-        // Implement download signed DV functionality
-        console.log("Download Signed DV for", record);
-        break;
-      default:
-        break;
-    }
-  };
+const handleMenuClick = (e, record) => {
+  const key = e.key;
+  let invoicePayload;
+  switch (key) {
+    case "1": // View Invoice
+       invoicePayload = {
+        reportId: `RPT${Math.floor(100000 + Math.random() * 900000)}`,
+        generatedBy: record?.createdBy || "Admin 1",
+        generatedOn: new Date().toISOString().slice(0, 16).replace("T", " "),
+        version: "1.0",
+        totalClaims: record?.approvedClaims || 0,
+        totalAmount: record?.amount || "₦0",
+        claims: Array(record?.approvedClaims || 1).fill({
+          id: "#0001",
+          brand: "Samsung",
+          model: "Galaxy S20",
+          sumInsured: "₦723,345",
+          claimAmount: "₦123,345",
+          approvedBy: "Admin 1",
+          date: record?.date || "2025-01-15",
+        }),
+        paymentDetails: {
+          accountName: "Mona Protect Limited",
+          bankName: "Commonwealth Bank",
+          accountNumber: "12345678",
+          sortCode: "CTBAU2S",
+          dueDate: "2024-02-01",
+        },
+      };
+
+      setInvoiceData(invoicePayload);
+      setShowInvoiceModal(true);
+      break;
+
+    case "2": // Print Receipt
+      console.log("Print Receipt for", record);
+      break;
+
+    case "3": // Upload Proof of Payment
+      console.log("Upload Proof of Payment for", record);
+      break;
+
+    case "4": // Upload DV
+      setCurrentPayoutRecord(record);
+      setIsUploadDVModalVisible(true);
+      break;
+
+    case "5": // Download Signed DV
+      console.log("Download Signed DV for", record);
+      break;
+
+    default:
+      break;
+  }
+};
 
   // Handle file upload
   const handleFileUpload = (info) => {
@@ -212,6 +285,36 @@ const PaymentPage = () => {
       key: "claimId",
     },
     {
+      title: "Device ID",
+      dataIndex: "deviceId",
+      key: "deviceId",
+    },
+    {
+      title: "Brand",
+      dataIndex: "brand",
+      key: "brand",
+    },
+    {
+      title: "Model",
+      dataIndex: "model",
+      key: "model",
+    },
+    {
+      title: "Amount",
+      dataIndex: "amount",
+      key: "amount",
+    },
+    {
+      title: "Approved by",
+      dataIndex: "approvedBy",
+      key: "approvedBy",
+    },
+    {
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
+    },
+        {
       title: "Device ID",
       dataIndex: "deviceId",
       key: "deviceId",
@@ -310,7 +413,7 @@ const PaymentPage = () => {
         <ActionDropdown
           overlay={
             <Menu onClick={(e) => handleMenuClick(e, record)}>
-              <Menu.Item key="1">Download Invoice</Menu.Item>
+              <Menu.Item key="1">View Invoice</Menu.Item>
               <Menu.Item key="2">Print Receipt</Menu.Item>
               <Menu.Item key="3">Upload Proof of Payment</Menu.Item>
               <Menu.Item key="4">Upload DV</Menu.Item>
@@ -343,7 +446,7 @@ const PaymentPage = () => {
   };
 
   // Confirmed generation of all invoices
-  const handleConfirmedGenerateAllInvoices = () => {
+  const handleConfirmedGenerateAllInvoices = async() => {
     try {
       // Create an invoice with all the current approved claims
       const invoiceData = {
@@ -365,7 +468,7 @@ const PaymentPage = () => {
       };
 
       // Generate and download the PDF
-      generateInvoicePDF(invoiceData);
+      await generateInvoicePDF(invoiceData);
 
       // Close modal and reset state
       setIsInvoiceConfirmModalVisible(false);
@@ -379,36 +482,13 @@ const PaymentPage = () => {
   return (
     <PaymentPageContainer>
       {/* Stats Cards */}
-      <Row gutter={[24, 24]}>
-        <Col xs={24} sm={12} lg={8}>
-          <StatCard
-            title="Total Approved Claims"
-            value="30"
-            icon={paymentStats.totalApproved.icon}
-            iconClass="pink-bg"
-            change={paymentStats.totalApproved.change}
-          />
-        </Col>
-        <Col xs={24} sm={12} lg={8}>
-          <StatCard
-            title="Total Payout Awaiting Confirmation"
-            value="30"
-            icon={paymentStats.totalPayout.icon}
-            iconClass="gold-bg"
-            change={paymentStats.totalPayout.change}
-          />
-        </Col>
-        <Col xs={24} sm={12} lg={8}>
-          <StatCard
-            title="Total Confirmed Payouts"
-            value="30"
-            icon={paymentStats.totalConfirmed.icon}
-            iconClass="green-bg"
-            change={paymentStats.totalConfirmed.change}
-          />
-        </Col>
-      </Row>
+   <InvoiceModal
+  open={showInvoiceModal}
+  onCancel={() => setShowInvoiceModal(false)}
+  invoiceData={invoiceData}
+/>
 
+<DashboardCards />
       {/* Tabs and Table */}
       <PaymentTabsSection>
         <div className="tabs-header">
@@ -440,29 +520,47 @@ const PaymentPage = () => {
           <PayoutsTabContent>
             <div className="filters-container">
               <div className="filters-label">Filter by:</div>
-              <div className="filters">
-                <Select defaultValue="" className="filter-select">
-                  <Option value="">Date</Option>
-                  <Option value="today">Today</Option>
-                  <Option value="yesterday">Yesterday</Option>
-                  <Option value="last7days">Last 7 Days</Option>
-                  <Option value="last30days">Last 30 Days</Option>
-                </Select>
+              <div className="filters-container">
+  <div className="filters-label">Filter by:</div>
+  <div className="filters">
+    <Select
+      value={selectedDateRange}
+      onChange={(value) => setSelectedDateRange(value)}
+      className="filter-select"
+    >
+      <Option value="">Date</Option>
+      <Option value="today">Today</Option>
+      <Option value="yesterday">Yesterday</Option>
+      <Option value="last7days">Last 7 Days</Option>
+      <Option value="last30days">Last 30 Days</Option>
+    </Select>
 
-                <Select defaultValue="" className="filter-select">
-                  <Option value="">Status</Option>
-                  <Option value="pending">Pending</Option>
-                  <Option value="paid">Paid</Option>
-                </Select>
+    <Select
+      value={selectedStatus}
+      onChange={(value) => setSelectedStatus(value)}
+      className="filter-select"
+    >
+      <Option value="">Status</Option>
+      <Option value="pending">Pending</Option>
+      <Option value="paid">Paid</Option>
+    </Select>
 
-                <Search placeholder="Search" className="search-input" />
-              </div>
+    <Search
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      placeholder="Search"
+      className="search-input"
+    />
+  </div>
+</div>
+
             </div>
 
             {/* Payouts Grid */}
             <CustomGrid
               columns={payoutsColumns}
-              data={currentPagePayoutsData}
+              // data={currentPagePayoutsData}
+                data={filterPayouts().slice(startIndex, endIndex)}
               currentPage={currentPage}
               pageSize={pageSize}
               totalItems={totalPayoutsItems}
@@ -739,6 +837,7 @@ const PaymentStatusBadge = styled.div`
   display: inline-block;
   padding: 4px 12px;
   font-size: 14px;
+  width: 10rem;
 
   &.pending {
     background-color: #fff8e1;

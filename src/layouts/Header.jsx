@@ -9,10 +9,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/slices/authSlice";
 import BreadcrumbComponent from "../components/Breadcrumb";
+import { AiOutlineCloseSquare, AiOutlineMenu } from "react-icons/ai";
 
 const { Header: AntHeader } = Layout;
 
-const Header = ({ collapsed, colorBgContainer }) => {
+const Header = ({ collapsed, colorBgContainer, setMobileSidebarVisible, mobileSidebarVisible }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
@@ -48,6 +49,14 @@ const Header = ({ collapsed, colorBgContainer }) => {
         className="header-left"
         style={{ display: "flex", alignItems: "center" }}
       >
+         <div id="menu_mobile_nav">
+          <button
+            style={{ padding: 12, border: "none", height: 10, background: "none" }}
+            onClick={() => setMobileSidebarVisible((prev) => !prev)}
+          >
+            {mobileSidebarVisible ? <AiOutlineCloseSquare size={20} /> : <AiOutlineMenu size={20} />}
+          </button>
+        </div>
         <BreadcrumbComponent />
       </div>
     </AntHeader>

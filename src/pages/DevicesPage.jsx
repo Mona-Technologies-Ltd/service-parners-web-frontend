@@ -30,12 +30,34 @@ const DevicesPage = () => {
       claims: 3,
       subscription: "Active",
     }));
+const filteredDevices = allDevicesData.filter((device) => {
+  const matchesModel =
+    !selectedDeviceModel || device.model === selectedDeviceModel;
+
+  const matchesStatus =
+    !selectedStatus ||
+    device.premiumStatus.toLowerCase() === selectedStatus.toLowerCase();
+
+  const matchesSearch =
+    !searchQuery ||
+    device.deviceId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    device.imeiNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    device.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    device.model.toLowerCase().includes(searchQuery.toLowerCase());
+
+  return matchesModel && matchesStatus && matchesSearch;
+});
+
+const totalItems = filteredDevices.length;
+const startIndex = (currentPage - 1) * pageSize;
+const endIndex = startIndex + pageSize;
+const currentPageData = filteredDevices.slice(startIndex, endIndex);
 
   // Calculate current page data
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  const currentPageData = allDevicesData.slice(startIndex, endIndex);
-  const totalItems = allDevicesData.length;
+  // const startIndex = (currentPage - 1) * pageSize;
+  // const endIndex = startIndex + pageSize;
+  // const currentPageData = allDevicesData.slice(startIndex, endIndex);
+  // const totalItems = allDevicesData.length;
 
   const columns = [
     {
@@ -176,24 +198,50 @@ const DevicesPage = () => {
     >
       <Container>
         <Header>
-          <Title>Devices</Title>
+          {/* <Title>Devices</Title> */}
           <FilterSection>
             <FilterLabel>Filter by:</FilterLabel>
             <SelectWrapper>
-              <Select
+              {/* <Select
                 placeholder="Device Model"
                 style={{ width: 150 }}
                 onChange={handleDeviceModelChange}
                 suffixIcon={<ArrowIcon />}
-              />
+              /> */}
+              <Select
+  placeholder="Device Model"
+  style={{ width: 150 }}
+  onChange={handleDeviceModelChange}
+  suffixIcon={<ArrowIcon />}
+  allowClear
+>
+  {[...new Set(allDevicesData.map((d) => d.model))].map((model) => (
+    <Select.Option key={model} value={model}>
+      {model}
+    </Select.Option>
+  ))}
+</Select>
             </SelectWrapper>
             <SelectWrapper>
-              <Select
+              {/* <Select
                 placeholder="Status"
                 style={{ width: 150 }}
                 onChange={handleStatusChange}
                 suffixIcon={<ArrowIcon />}
-              />
+              /> */}
+              <Select
+  placeholder="Status"
+  style={{ width: 150 }}
+  onChange={handleStatusChange}
+  suffixIcon={<ArrowIcon />}
+  allowClear
+>
+  {[...new Set(allDevicesData.map((d) => d.premiumStatus))].map((status) => (
+    <Select.Option key={status} value={status}>
+      {status}
+    </Select.Option>
+  ))}
+</Select>
             </SelectWrapper>
             <SearchInput placeholder="Search" onChange={handleSearchChange} />
           </FilterSection>
@@ -213,7 +261,8 @@ const DevicesPage = () => {
             Awaiting Policy Upload
           </TabItem>
           {activeTab === "Devices" && (
-            <PrintButton onClick={handlePrint}>Print</PrintButton>
+            // <PrintButton onClick={handlePrint}>Print</PrintButton>
+            <PrintButton>Print</PrintButton>
           )}
         </TabsContainer>
 
@@ -304,8 +353,8 @@ const PrintButton = styled(Button)`
   background-color: #004aad !important;
   color: white !important;
   border: none !important;
-  height: 36px;
-  width: 100px;
+  height: 26px;
+  width: 60px;
   transition: none !important;
 
   &&&&:hover,
@@ -322,14 +371,22 @@ const PrintButton = styled(Button)`
     transform: none !important;
     filter: none !important;
   }
+
+    @media (max-width: 768px) {
+        height: 26px;
+        width: 60px;
+        font-size: .5rem;
+         right: -1rem;
+  }
 `;
 
 const StatusBadge = styled.div`
   display: inline-block;
   padding: 4px 12px;
-  border-radius: 4px;
+  /* border-radius: 4px; */
   font-size: 14px;
   text-align: center;
+  width: 10rem;
 `;
 
 const SubscriptionBadge = styled.div`

@@ -66,6 +66,8 @@ const CustomGrid = ({
       };
     }
 
+
+
     if (column.title && column.title.toLowerCase().includes("date")) {
       return {
         flexGrow: 0,
@@ -74,17 +76,30 @@ const CustomGrid = ({
       };
     }
 
-    if (
-      column.title &&
-      (column.title.toLowerCase().includes("id") ||
-        column.title.toLowerCase().includes("status"))
-    ) {
-      return {
-        flexGrow: 0,
-        flexShrink: 0,
-        flexBasis: "130px",
-      };
-    }
+    // if (
+    //   column.title &&
+    //   (column.title.toLowerCase().includes("id") ||
+    //     column.title.toLowerCase().includes("status"))
+    // ) {
+    //   return {
+    //     flexGrow: 0,
+    //     flexShrink: 0,
+    //     flexBasis: "130px",
+    //   };
+
+      
+    // }
+if (column.key === "status") {
+  return {
+    width: "130px",
+    flexGrow: 0,
+    flexShrink: 0,
+    flexBasis: "130px",
+    maxWidth: "130px",
+    minWidth: "130px",
+  };
+}
+
 
     // Default flexible width with min/max constraints
     return {
@@ -117,16 +132,18 @@ const CustomGrid = ({
           {data?.map((item, rowIndex) => (
             <div key={rowIndex} className="grid-row">
               {columns.map((column, colIndex) => (
-                <div
-                  key={colIndex}
-                  className="grid-cell"
-                  style={getColumnStyle(column)}
-                >
-                  {column.render
-                    ? column.render(item[column.dataIndex], item)
-                    : item[column.dataIndex]}
-                </div>
-              ))}
+  <div
+    key={colIndex}
+    className={`grid-cell ${column.key === "status" ? "status-cell" : ""}`}
+    style={getColumnStyle(column)}
+  >
+    {column.render
+      ? column.render(item[column.dataIndex], item)
+      : item[column.dataIndex]}
+  </div>
+))}
+
+          
             </div>
           ))}
         </div>
@@ -171,8 +188,6 @@ const CustomGrid = ({
     </GridContainer>
   );
 };
-
-// Styled component integrated into the CustomGrid
 const GridContainer = styled.div`
   background-color: white;
   overflow-x: auto;
@@ -180,17 +195,16 @@ const GridContainer = styled.div`
   width: 100%;
 
   .grid-table {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-    min-width: fit-content;
+    display: flex;
+    flex-direction: column;
+    min-width: max-content; /* Ensures table doesn't shrink */
   }
 
   .grid-header {
     display: flex;
     background-color: #f5f5f5;
     border-bottom: 1px solid #e0e0e0;
-    min-width: fit-content;
+    /* width: fit-content; */
   }
 
   .grid-body {
@@ -200,8 +214,9 @@ const GridContainer = styled.div`
   .grid-row {
     display: flex;
     border-bottom: 1px solid #e0e0e0;
-    min-width: fit-content;
-    margin-bottom: 8px;
+    /* width: fit-content; */
+    /* margin-bottom: 8px; */
+
     &:hover {
       background-color: #f9f9f9;
     }
@@ -215,6 +230,9 @@ const GridContainer = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     box-sizing: border-box;
+    text-align: center;
+    /* background: red; */
+    /* width: 1rem; */
   }
 
   .grid-footer {
@@ -257,7 +275,103 @@ const GridContainer = styled.div`
       opacity: 0.5;
     }
   }
+
+  .status-cell {
+  width: 130px;
+  flex: 0 0 130px !important;
+  max-width: 130px !important;
+  min-width: 130px  !important;
+  width: 20px !important;
+}
+
 `;
+
+// Styled component integrated into the CustomGrid
+// const GridContainer = styled.div`
+//   background-color: white;
+//   overflow-x: auto;
+//   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+//   width: 100%;
+
+//   .grid-table {
+//     display: table;
+//     width: 100%;
+//     table-layout: fixed;
+//     min-width: fit-content;
+//   }
+
+//   .grid-header {
+//     display: flex;
+//     background-color: #f5f5f5;
+//     border-bottom: 1px solid #e0e0e0;
+//     min-width: fit-content;
+//   }
+
+//   .grid-body {
+//     background-color: white;
+//   }
+
+//   .grid-row {
+//     display: flex;
+//     border-bottom: 1px solid #e0e0e0;
+//     min-width: fit-content;
+//     margin-bottom: 8px;
+//     &:hover {
+//       background-color: #f9f9f9;
+//     }
+//   }
+
+//   .grid-cell {
+//     padding: 12px 16px;
+//     display: flex;
+//     align-items: center;
+//     white-space: nowrap;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//     box-sizing: border-box;
+//   }
+
+//   .grid-footer {
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding: 12px 16px;
+//     background-color: #f9f9f9;
+//   }
+
+//   .pagination-info {
+//     font-size: 14px;
+//     color: #666;
+//   }
+
+//   .pagination-controls {
+//     display: flex;
+//     gap: 8px;
+//   }
+
+//   .pagination-button {
+//     width: 32px;
+//     height: 32px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     cursor: pointer;
+//     background: #fff;
+//     color: #666;
+//     border: 1px solid #d9d9d9;
+
+//     &.active {
+//       background: #0066cc;
+//       color: #fff;
+//       border: 1px solid #0066cc;
+//     }
+
+//     &:disabled {
+//       cursor: not-allowed;
+//       opacity: 0.5;
+//     }
+//   }
+// `;
 
 CustomGrid.propTypes = {
   columns: PropTypes.arrayOf(

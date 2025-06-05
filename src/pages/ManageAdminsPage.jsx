@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Select, Input, Button, message, Modal, Form, Dropdown } from "antd";
 import CustomGrid from "../components/CustomGrid/CustomGrid";
 import { Icon } from "@iconify/react";
+import AdminInviteModal from "./AdminInviteModal";
 
 const ManageAdminsPage = () => {
   const [selectedRole, setSelectedRole] = useState(null);
@@ -11,46 +12,117 @@ const ManageAdminsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
+  const [showModal, setShowModal] = useState(false);
+// const [selectedRole, setSelectedRole] = useState(null);
+// const [selectedStatus, setSelectedStatus] = useState(null);
+// const [searchQuery, setSearchQuery] = useState("");
+// const [currentPage, setCurrentPage] = useState(1);
+
+
+// const totalItems = filteredData.length;
+// const currentPageData = filteredData.slice(startIndex, endIndex);
+
   const pageSize = 10;
 
   // Mock data for the admins table
-  const allAdminsData = Array(50)
-    .fill(null)
-    .map((_, index) => ({
-      id: index + 1,
-      adminId: `#AD${String(index + 1001).padStart(4, "0")}`,
-      name: [
-        "John Doe",
-        "Jane Smith",
-        "Robert Johnson",
-        "Maria Garcia",
-        "David Chen",
-      ][index % 5],
-      email: [
-        "john.doe@example.com",
-        "jane.smith@example.com",
-        "robert.j@example.com",
-        "maria.garcia@example.com",
-        "david.chen@example.com",
-      ][index % 5],
-      role: ["Super Admin", "Admin", "Support", "Claims Manager", "Viewer"][
-        index % 5
-      ],
-      department: ["IT", "Claims", "Customer Support", "Finance", "Management"][
-        index % 5
-      ],
-      dateAdded: new Date(
-        Date.now() - Math.floor(Math.random() * 10000000000)
-      ).toLocaleDateString(),
-      status:
-        index % 3 === 0 ? "Active" : index % 3 === 1 ? "Inactive" : "Suspended",
-    }));
+  // const allAdminsData = Array(50)
+  //   .fill(null)
+  //   .map((_, index) => ({
+  //     id: index + 1,
+  //     adminId: `#AD${String(index + 1001).padStart(4, "0")}`,
+  //     name: [
+  //       "John Doe",
+  //       "Jane Smith",
+  //       "Robert Johnson",
+  //       "Maria Garcia",
+  //       "David Chen",
+  //     ][index % 5],
+  //     email: [
+  //       "john.doe@example.com",
+  //       "jane.smith@example.com",
+  //       "robert.j@example.com",
+  //       "maria.garcia@example.com",
+  //       "david.chen@example.com",
+  //     ][index % 5],
+  //     role: ["Super Admin", "Admin", "Support", "Claims Manager", "Viewer"][
+  //       index % 5
+  //     ],
+  //     department: ["IT", "Claims", "Customer Support", "Finance", "Management"][
+  //       index % 5
+  //     ],
+  //     dateAdded: new Date(
+  //       Date.now() - Math.floor(Math.random() * 10000000000)
+  //     ).toLocaleDateString(),
+  //     status:
+  //       index % 3 === 0 ? "Active" : index % 3 === 1 ? "Inactive" : "Suspended",
+  //   }));
 
   // Calculate current page data
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  const currentPageData = allAdminsData.slice(startIndex, endIndex);
-  const totalItems = allAdminsData.length;
+  // const startIndex = (currentPage - 1) * pageSize;
+  // const endIndex = startIndex + pageSize;
+  // const currentPageData = allAdminsData.slice(startIndex, endIndex);
+  // const totalItems = allAdminsData.length;
+
+  // const allAdminsData = Array(50)
+  // .fill(null)
+  // .map((_, index) => ({
+  //   id: index + 1,
+  //   adminId: `#AD${String(index + 1001).padStart(4, "0")}`,
+  //   name: [
+  //     "John Doe",
+  //     "Jane Smith",
+  //     "Robert Johnson",
+  //     "Maria Garcia",
+  //     "David Chen",
+  //   ][index % 5],
+  //   email: [
+  //     "john.doe@example.com",
+  //     "jane.smith@example.com",
+  //     "robert.j@example.com",
+  //     "maria.garcia@example.com",
+  //     "david.chen@example.com",
+  //   ][index % 5],
+  //   role: ["Super Admin", "Admin", "Support", "Claims Manager", "Viewer"][
+  //     index % 5
+  //   ],
+  //   department: ["IT", "Claims", "Customer Support", "Finance", "Management"][
+  //     index % 5
+  //   ],
+  //   dateAdded: new Date(
+  //     Date.now() - Math.floor(Math.random() * 10000000000)
+  //   ).toLocaleDateString(),
+  //   status:
+  //     index % 3 === 0 ? "Active" : index % 3 === 1 ? "Inactive" : "Suspended",
+  // }));
+const allAdminsData = Array(50)
+  .fill(null)
+  .map((_, index) => ({
+    id: index + 1,
+    adminId: `#AD${String(index + 1001).padStart(4, "0")}`,
+    name: ["John Doe", "Jane Smith", "Robert Johnson", "Maria Garcia", "David Chen"][index % 5],
+    email: ["john.doe@example.com", "jane.smith@example.com", "robert.j@example.com", "maria.garcia@example.com", "david.chen@example.com"][index % 5],
+    role: ["Super Admin", "Admin", "Support", "Claims Manager", "Viewer"][index % 5],
+    department: ["IT", "Claims", "Customer Support", "Finance", "Management"][index % 5],
+    dateAdded: new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toLocaleDateString(),
+    status: index % 3 === 0 ? "Active" : index % 3 === 1 ? "Inactive" : "Suspended",
+  }));
+
+const startIndex = (currentPage - 1) * pageSize;
+const endIndex = startIndex + pageSize;
+const currentPageData = allAdminsData.slice(startIndex, endIndex);
+const totalItems = allAdminsData.length;
+
+const filteredData = allAdminsData.filter((admin) => {
+  const roleMatch = selectedRole ? admin.role === selectedRole : true;
+  const statusMatch = selectedStatus ? admin.status === selectedStatus : true;
+  const searchMatch = searchQuery
+    ? admin.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      admin.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      admin.adminId.toLowerCase().includes(searchQuery.toLowerCase())
+    : true;
+
+  return roleMatch && statusMatch && searchMatch;
+});
 
   const handleActivateAdmin = (record) => {
     message.success(`Admin ${record.name} activated successfully`);
@@ -168,21 +240,23 @@ const ManageAdminsPage = () => {
     setCurrentPage(page);
   };
 
-  const showAddAdminModal = () => {
-    setIsModalVisible(true);
-  };
+ const showAddAdminModal = () => {
+  setShowModal(true); // instead of setIsModalVisible(true)
+};
+
 
   const handleAddAdmin = () => {
-    form
-      .validateFields()
-      .then((values) => {
-        message.success(`Invitation sent to ${values.email}`);
-        form.resetFields();
-        setIsModalVisible(false);
-      })
-      .catch((info) => {
-        console.log("Validate Failed:", info);
-      });
+      setShowModal(false);
+    // form
+    //   .validateFields()
+    //   .then((values) => {
+    //     message.success(`Invitation sent to ${values.email}`);
+    //     form.resetFields();
+    //     setIsModalVisible(false);
+    //   })
+    //   .catch((info) => {
+    //     console.log("Validate Failed:", info);
+    //   });
   };
 
   return (
@@ -259,40 +333,10 @@ const ManageAdminsPage = () => {
         </div>
       </Container>
 
-      <Modal
-        title={null}
-        open={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
-        footer={null}
-        width={500}
-        centered
-        className="admin-invite-modal"
-        closeIcon={<CloseIcon onClick={() => setIsModalVisible(false)} />}
-        bodyStyle={{ padding: 0 }}
-      >
-        <ModalHeader>
-          <ModalTitle>Add New Admin</ModalTitle>
-        </ModalHeader>
-        <ModalBody>
-          <Form form={form} layout="vertical">
-            <Form.Item
-              name="email"
-              label="Email Address"
-              rules={[
-                { required: true, message: "Please enter admin email" },
-                { type: "email", message: "Please enter a valid email" },
-              ]}
-            >
-              <Input placeholder="Enter Admin's email address" size="large" />
-            </Form.Item>
-            <Form.Item style={{ marginBottom: 0, textAlign: "right" }}>
-              <SendInviteButton onClick={handleAddAdmin}>
-                Send Invite
-              </SendInviteButton>
-            </Form.Item>
-          </Form>
-        </ModalBody>
-      </Modal>
+   {showModal && (
+  <AdminInviteModal onClose={() => setShowModal(false)} />
+)}
+
     </div>
   );
 };
@@ -365,10 +409,12 @@ const AddButton = styled(Button)`
 
 const StatusBadge = styled.div`
   padding: 4px 8px;
-  border-radius: 4px;
+  /* border-radius: 4px; */
   font-size: 12px;
   font-weight: 500;
   display: inline-block;
+  width: 10rem;
+  text-align: center;
 `;
 
 const MoreButton = styled(Button)`
@@ -392,6 +438,7 @@ const MoreButton = styled(Button)`
 `;
 
 const ModalHeader = styled.div`
+width: 100%;
   background-color: #0066cc;
   padding: 20px;
   text-align: center;
@@ -404,7 +451,12 @@ const ModalTitle = styled.h2`
 `;
 
 const ModalBody = styled.div`
-  padding: 40px;
+  /* padding: 40px; */
+   padding: 0;
+
+  form {
+    padding: 24px; /* Apply spacing only to the form itself */
+  }
 `;
 
 const SendInviteButton = styled(Button)`
@@ -433,5 +485,11 @@ const CloseIcon = styled(Icon).attrs({
   cursor: pointer;
   z-index: 1;
 `;
+const AdminInviteModalWrapper = styled.div`
+  .ant-modal-body {
+    padding: 0 !important;
+  }
+`;
+
 
 export default ManageAdminsPage;

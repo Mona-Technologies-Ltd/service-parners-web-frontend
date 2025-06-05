@@ -29,6 +29,10 @@ const PremiumPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("unremitted");
   const pageSize = 10;
+const [dateFilter, setDateFilter] = useState("");
+const [brandFilter, setBrandFilter] = useState("");
+const [statusFilter, setStatusFilter] = useState("");
+const [searchText, setSearchText] = useState("");
 
   // Data for stat cards
   const premiumStats = {
@@ -64,6 +68,57 @@ const PremiumPage = () => {
       claims: "3",
       subscription: "Active",
     }));
+    const applyFilters = (data) => {
+  return data.filter((item) => {
+    const matchBrand =
+      !brandFilter || item.brand?.toLowerCase() === brandFilter.toLowerCase();
+
+    const matchStatus =
+      !statusFilter ||
+      item.subscription?.toLowerCase() === statusFilter.toLowerCase();
+
+    const matchSearch =
+      !searchText ||
+      item.deviceId?.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.imeiNumber?.includes(searchText);
+
+    // Date filter logic (simplified; assumes item.date exists and is ISO format)
+    const today = new Date();
+    let matchDate = true;
+    let yesterday;
+    let sevenDaysAgo;
+    let thirtyDaysAgo;
+
+    if (dateFilter) {
+      const itemDate = new Date(item.date);
+      switch (dateFilter) {
+        case "today":
+          matchDate = itemDate.toDateString() === today.toDateString();
+          break;
+        case "yesterday":
+          yesterday = new Date(today);
+          yesterday.setDate(today.getDate() - 1);
+          matchDate = itemDate.toDateString() === yesterday.toDateString();
+          break;
+        case "last7days":
+          sevenDaysAgo = new Date(today);
+          sevenDaysAgo.setDate(today.getDate() - 7);
+          matchDate = itemDate >= sevenDaysAgo;
+          break;
+        case "last30days":
+          thirtyDaysAgo = new Date(today);
+          thirtyDaysAgo.setDate(today.getDate() - 30);
+          matchDate = itemDate >= thirtyDaysAgo;
+          break;
+        default:
+          break;
+      }
+    }
+
+    return matchBrand && matchStatus && matchSearch && matchDate;
+  });
+};
+
 
   // Sample data for remitted premium records
   const remittedPremiumData = Array(30)
@@ -79,18 +134,30 @@ const PremiumPage = () => {
     }));
 
   // Calculate total items based on active tab
-  const totalItems =
-    activeTab === "unremitted"
-      ? unremittedPremiumData.length
-      : remittedPremiumData.length;
+  // const totalItems =
+  //   activeTab === "unremitted"
+  //     ? unremittedPremiumData.length
+  //     : remittedPremiumData.length;
 
-  // Calculate the current page's data based on active tab
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = Math.min(startIndex + pageSize, totalItems);
-  const currentPageData =
-    activeTab === "unremitted"
-      ? unremittedPremiumData.slice(startIndex, endIndex)
-      : remittedPremiumData.slice(startIndex, endIndex);
+  // // Calculate the current page's data based on active tab
+  // const startIndex = (currentPage - 1) * pageSize;
+  // const endIndex = Math.min(startIndex + pageSize, totalItems);
+  
+  // const currentPageData =
+  //   activeTab === "unremitted"
+  //     ? unremittedPremiumData.slice(startIndex, endIndex)
+  //     : remittedPremiumData.slice(startIndex, endIndex);
+const filteredData =
+  activeTab === "unremitted"
+    ? applyFilters(unremittedPremiumData)
+    : applyFilters(remittedPremiumData);
+
+const totalItems = filteredData.length;
+
+const startIndex = (currentPage - 1) * pageSize;
+const endIndex = Math.min(startIndex + pageSize, totalItems);
+
+const currentPageData = filteredData.slice(startIndex, endIndex);
 
   // Columns configuration for unremitted premium records
   const unremittedColumns = [
@@ -339,7 +406,7 @@ const PremiumPage = () => {
         <div className="filters-container">
           <div className="filters-label">Filter by:</div>
           <div className="filters">
-            <Select defaultValue="" className="filter-select">
+            {/* <Select defaultValue="" className="filter-select">
               <Option value="">Date</Option>
               <Option value="today">Today</Option>
               <Option value="yesterday">Yesterday</Option>
@@ -366,7 +433,53 @@ const PremiumPage = () => {
               </>
             )}
 
-            <Search placeholder="Search" className="search-input" />
+            <Search placeholder="Search" className="search-input" /> */}
+            <Select
+  value={dateFilter}
+  onChange={(value) => setDateFilter(value)}
+  className="filter-select"
+>
+  <Option value="">Date</Option>
+  <Option value="today">Today</Option>
+  <Option value="yesterday">Yesterday</Option>
+  <Option value="last7days">Last 7 Days</Option>
+  <Option value="last30days">Last 30 Days</Option>
+</Select>
+
+{activeTab === "unremitted" && (
+  <>
+    <Select
+      value={brandFilter}
+      onChange={(value) => setBrandFilter(value)}
+      className="filter-select"
+    >
+      <Option value="">Brand</Option>
+      <Option value="samsung">Samsung</Option>
+      <Option value="apple">Apple</Option>
+      <Option value="google">Google</Option>
+      <Option value="others">Others</Option>
+    </Select>
+
+    <Select
+      value={statusFilter}
+      onChange={(value) => setStatusFilter(value)}
+      className="filter-select"
+    >
+      <Option value="">Status</Option>
+      <Option value="active">Active</Option>
+      <Option value="pending">Pending</Option>
+      <Option value="inactive">Inactive</Option>
+    </Select>
+  </>
+)}
+
+<Search
+  value={searchText}
+  onChange={(e) => setSearchText(e.target.value)}
+  placeholder="Search"
+  className="search-input"
+/>
+
           </div>
         </div>
 
@@ -444,6 +557,8 @@ const PremiumStatusBadge = styled.div`
   display: inline-block;
   padding: 4px 12px;
   font-size: 14px;
+  width: 10rem;
+  text-align: center;
 
   &.pending {
     background-color: #fff8e1;

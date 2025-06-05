@@ -402,6 +402,10 @@ button,
     }
   }
 }
+/* If using CSS or a global stylesheet */
+.admin-invite-modal .ant-modal-body {
+  padding: 0;
+}
 
 /* 
  * ULTRA-AGGRESSIVE BUTTON HOVER OVERRIDES - DO NOT MODIFY

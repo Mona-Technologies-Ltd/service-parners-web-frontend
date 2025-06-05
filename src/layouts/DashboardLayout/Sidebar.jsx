@@ -9,7 +9,7 @@ import monaSingleLogo from "../../assets/monaSingleLogo.png";
 
 const { Sider } = Layout;
 
-const Sidebar = ({ collapsed, setCollapsed }) => {
+const Sidebar = ({ collapsed, setCollapsed, setMobileSidebarVisible, mobileSidebarVisible }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();

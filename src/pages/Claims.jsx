@@ -3,6 +3,7 @@ import { Card, Input, Select, DatePicker, Button } from "antd";
 import { Icon } from "@iconify/react";
 import styled from "styled-components";
 import CustomGrid from "../components/CustomGrid/CustomGrid";
+import RepairClaimModal from "../components/claim/RepairClaimModal";
 // import RepairDetailsModal from "../components/RepairDetailsModal/RepairDetailsModal";
 // import { printRepairsReport } from "../utils/printUtils";
 
@@ -14,6 +15,10 @@ const Claims = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDevice, setSelectedDevice] = useState(null);
+  const [statusFilter, setStatusFilter] = useState(null);
+const [dateFilter, setDateFilter] = useState(null);
+const [otherFilter, setOtherFilter] = useState(null);
+
   const pageSize = 10;
 
   // Generate sample data
@@ -44,12 +49,12 @@ const Claims = () => {
     }));
 
   // Calculate total items from the actual data
-  const totalItems = allData.length;
+  // const totalItems = allData.length;
 
   // Calculate the current page's data
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const currentPageData = allData.slice(startIndex, endIndex);
+  // const currentPageData = allData.slice(startIndex, endIndex);
 
   const handleViewDetails = (record) => {
     setSelectedDevice(record);
@@ -109,10 +114,12 @@ const Claims = () => {
           <span
             style={{
               padding: "4px 12px",
-              borderRadius: "4px",
+              // borderRadius: "4px",
               fontSize: "14px",
               ...getStatusStyle(value),
             }}
+
+            className="status_coloring"
           >
             {value}
           </span>
@@ -144,6 +151,63 @@ const Claims = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+const isWithinDateRange = (itemDate, filter) => {
+  const today = new Date();
+  const item = new Date(itemDate);
+ let last30;
+ let last7;
+let yesterday;
+let lastMonth;
+  switch (filter) {
+    case "today":
+      return item.toDateString() === today.toDateString();
+    case "yesterday":
+      yesterday = new Date(today);
+      yesterday.setDate(yesterday.getDate() - 1);
+      return item.toDateString() === yesterday.toDateString();
+    case "last7days":
+       last7 = new Date(today);
+      last7.setDate(today.getDate() - 7);
+      return item >= last7 && item <= today;
+    case "last30days":
+      last30 = new Date(today);
+      last30.setDate(today.getDate() - 30);
+      return item >= last30 && item <= today;
+    case "thisMonth":
+      return (
+        item.getMonth() === today.getMonth() &&
+        item.getFullYear() === today.getFullYear()
+      );
+    case "lastMonth":
+      lastMonth = new Date(today);
+      lastMonth.setMonth(today.getMonth() - 1);
+      return (
+        item.getMonth() === lastMonth.getMonth() &&
+        item.getFullYear() === lastMonth.getFullYear()
+      );
+    default:
+      return true;
+  }
+};
+// Filter data before pagination
+const filteredData = allData.filter((item) => {
+  const matchesStatus = statusFilter
+    ? item.status.toLowerCase() === statusFilter
+    : true;
+
+  const matchesOther = otherFilter
+    ? item.status.toLowerCase() === otherFilter
+    : true;
+
+  const matchesDate = dateFilter
+    ? isWithinDateRange(item.date, dateFilter)
+    : true;
+
+  return matchesStatus && matchesOther && matchesDate;
+});
+
+const totalItems = filteredData.length;
+const currentPageData = filteredData.slice(startIndex, endIndex);
 
   return (
     <div
@@ -166,11 +230,51 @@ const Claims = () => {
         >
           <h5>Repair Claims</h5>
           <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", height:'1rem' }}>
               <span>Filter by:</span>
               <Select
+  placeholder="Status"
+  style={{ width: "200px" }}
+  onChange={(value) => setStatusFilter(value)}
+  options={[
+    { value: "awaiting", label: "Awaiting" },
+    { value: "approved", label: "Approved" },
+    { value: "completed", label: "Completed" },
+    { value: "paid", label: "Paid" },
+    { value: "rejected", label: "Rejected" },
+  ]}
+/>
+
+<Select
+  placeholder="Date"
+  style={{ width: "200px" }}
+  onChange={(value) => setDateFilter(value)}
+  options={[
+    { value: "today", label: "Today" },
+    { value: "yesterday", label: "Yesterday" },
+    { value: "last7days", label: "Last 7 Days" },
+    { value: "last30days", label: "Last 30 Days" },
+    { value: "thisMonth", label: "This Month" },
+    { value: "lastMonth", label: "Last Month" },
+  ]}
+/>
+
+<Select
+  placeholder="Other"
+  style={{ width: "200px" }}
+  onChange={(value) => setOtherFilter(value)}
+  options={[
+    { value: "awaiting", label: "Awaiting" },
+    { value: "approved", label: "Approved" },
+    { value: "completed", label: "Completed" },
+    { value: "paid", label: "Paid" },
+    { value: "rejected", label: "Rejected" },
+  ]}
+/>
+
+              {/* <Select
                 placeholder="Status"
-                style={{ width: "200px" }}
+                style={{ width: "200px"}}
                 onChange={(value) => setSelectedStatus(value)}
                 options={[
                   { value: "awaiting", label: "Awaiting" },
@@ -183,6 +287,7 @@ const Claims = () => {
               <Select
                 placeholder="Date"
                 style={{ width: "200px" }}
+                className="select_filter"
                 onChange={(value) => setSelectedStatus(value)}
                 options={[
                   { value: "today", label: "Today" },
@@ -205,7 +310,7 @@ const Claims = () => {
                   { value: "paid", label: "Paid" },
                   { value: "rejected", label: "Rejected" },
                 ]}
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -219,6 +324,13 @@ const Claims = () => {
           totalItems={totalItems}
           onPageChange={handlePageChange}
         />
+      {isModalOpen &&   
+      (<RepairClaimModal
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+      device={selectedDevice}
+    />)}
+
       </div>
     </div>
   );

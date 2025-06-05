@@ -8,15 +8,20 @@ const { Content } = Layout;
 
 const DashboardLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
+  //  const [collapsed, setCollapsed] = useState(false);
+  const [mobileSidebarVisible, setMobileSidebarVisible] = useState(false);
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
   return (
     <Layout style={{ height: "100vh", overflow: "hidden" }}>
-      <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+      <Sidebar collapsed={collapsed} setCollapsed={setCollapsed}   mobileSidebarVisible={mobileSidebarVisible}
+  setMobileSidebarVisible={setMobileSidebarVisible} />
       <Layout>
-        <Header collapsed={collapsed} colorBgContainer={colorBgContainer} />
+        <Header collapsed={collapsed} colorBgContainer={colorBgContainer} setMobileSidebarVisible={setMobileSidebarVisible}
+  mobileSidebarVisible={mobileSidebarVisible} />
         <Content
           style={{
             margin: "16px",

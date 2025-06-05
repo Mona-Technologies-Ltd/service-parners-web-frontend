@@ -68,3 +68,13 @@
     }
   }
 }
+
+.select_filter{
+  width: 5rem;
+  height: 1rem;
+  background: #000;
+}
+/* If using CSS or a global stylesheet */
+.admin-invite-modal .ant-modal-body {
+  padding: 0;
+}

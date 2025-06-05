@@ -30,9 +30,9 @@ const router = createBrowserRouter([
   },
   {
     element: (
-      <ProtectedRoute>
+      // <ProtectedRoute>
         <DashboardLayout />
-      </ProtectedRoute>
+      // </ProtectedRoute>
     ),
     children: [
       {

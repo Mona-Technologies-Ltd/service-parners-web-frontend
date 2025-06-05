@@ -73,7 +73,11 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
+.select_filter{
+  width: 5rem;
+  height: 1rem;
+  background: #000;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

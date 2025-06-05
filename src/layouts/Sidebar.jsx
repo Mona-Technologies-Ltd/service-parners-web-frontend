@@ -9,7 +9,7 @@ import monaSingleLogo from "../assets/monaSingleLogo.png";
 
 const { Sider } = Layout;
 
-const Sidebar = ({ collapsed, setCollapsed }) => {
+const Sidebar = ({ collapsed, setCollapsed, setMobileSidebarVisible, mobileSidebarVisible }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -95,6 +95,10 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
       // Navigate to the clicked menu item's path
       navigate(e.key);
     }
+
+     if (window.innerWidth <= 768) {
+    setMobileSidebarVisible(false);
+  }
   };
 
   return (
@@ -103,7 +107,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
       collapsible
       collapsed={collapsed}
       width={250}
-      className="dashboard-sidebar"
+      className={`dashboard-sidebar ${mobileSidebarVisible ? "visible" : ""}`}
       theme="light"
     >
       <div

@@ -10,6 +10,9 @@ const QueriedApplicationsPage = () => {
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const pageSize = 10;
+  const [dateFilter, setDateFilter] = useState("");
+const [otherFilter, setOtherFilter] = useState("");
+
 
   // Mock data for queried applications
   const queriedApplicationsData = Array(120)
@@ -24,12 +27,62 @@ const QueriedApplicationsPage = () => {
       dateQueried: "2025-02-27",
       newMessages: [4, 1, 0, 0][index % 4], // Cycle through message counts
     }));
+const applyFilters = (data) => {
+  return data.filter((item) => {
+    let dateMatch = true;
+    let otherMatch = true;
+
+    // Filter by date
+    if (dateFilter) {
+      const today = new Date();
+      const itemDate = new Date(item.dateQueried);
+
+      switch (dateFilter) {
+        case "today":
+          dateMatch = itemDate.toDateString() === today.toDateString();
+          break;
+        case "yesterday":
+          const yesterday = new Date();
+          yesterday.setDate(today.getDate() - 1);
+          dateMatch = itemDate.toDateString() === yesterday.toDateString();
+          break;
+        case "last7days":
+          const last7 = new Date();
+          last7.setDate(today.getDate() - 7);
+          dateMatch = itemDate >= last7;
+          break;
+        case "last30days":
+          const last30 = new Date();
+          last30.setDate(today.getDate() - 30);
+          dateMatch = itemDate >= last30;
+          break;
+        default:
+          break;
+      }
+    }
+
+    // Filter by issue type (otherFilter)
+    if (otherFilter) {
+      otherMatch =
+        item.issueType.toLowerCase() === otherFilter.toLowerCase();
+    }
+
+    return dateMatch && otherMatch;
+  });
+};
+
+const filteredData = applyFilters(queriedApplicationsData);
+const totalItems = filteredData.length;
+
+const startIndex = (currentPage - 1) * pageSize;
+const endIndex = startIndex + pageSize;
+const currentPageData = filteredData.slice(startIndex, endIndex);
 
   // Calculate current page data
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  const currentPageData = queriedApplicationsData.slice(startIndex, endIndex);
-  const totalItems = queriedApplicationsData.length;
+  // const startIndex = (currentPage - 1) * pageSize;
+  // const endIndex = startIndex + pageSize;
+  // const currentPageData = queriedApplicationsData.slice(startIndex, endIndex);
+  // const totalItems = queriedApplicationsData.length;
 
   const handleViewClick = (application) => {
     setSelectedApplication(application);
@@ -127,6 +180,39 @@ const QueriedApplicationsPage = () => {
         <Header>
           <Title>Queried Applications</Title>
           <FilterSection>
+  <FilterLabel>Filter by:</FilterLabel>
+  <SelectWrapper>
+    <Select
+      value={dateFilter}
+      onChange={(value) => setDateFilter(value)}
+      placeholder="Date"
+      style={{ width: 150 }}
+      suffixIcon={<ArrowIcon />}
+    >
+      <Select.Option value="">All Dates</Select.Option>
+      <Select.Option value="today">Today</Select.Option>
+      <Select.Option value="yesterday">Yesterday</Select.Option>
+      <Select.Option value="last7days">Last 7 Days</Select.Option>
+      <Select.Option value="last30days">Last 30 Days</Select.Option>
+    </Select>
+  </SelectWrapper>
+  <SelectWrapper>
+    <Select
+      value={otherFilter}
+      onChange={(value) => setOtherFilter(value)}
+      placeholder="Other"
+      style={{ width: 150 }}
+      suffixIcon={<ArrowIcon />}
+    >
+      <Select.Option value="">All Issues</Select.Option>
+      <Select.Option value="Damaged Screen">Damaged Screen</Select.Option>
+      <Select.Option value="Battery Issue">Battery Issue</Select.Option>
+      <Select.Option value="Water Damage">Water Damage</Select.Option>
+    </Select>
+  </SelectWrapper>
+</FilterSection>
+
+          {/* <FilterSection>
             <FilterLabel>Filter by:</FilterLabel>
             <SelectWrapper>
               <Select
@@ -142,7 +228,7 @@ const QueriedApplicationsPage = () => {
                 suffixIcon={<ArrowIcon />}
               />
             </SelectWrapper>
-          </FilterSection>
+          </FilterSection> */}
         </Header>
 
         <div className="queried-applications-page">

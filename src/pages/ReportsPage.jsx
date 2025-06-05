@@ -3,7 +3,12 @@ import styled from "styled-components";
 import { DatePicker, Select, Input, Button, message } from "antd";
 import CustomGrid from "../components/CustomGrid/CustomGrid";
 import { generateDeviceReportPDF } from "../utils/pdfUtils";
+import dayjs from "dayjs"; // Make sure this is installed
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 
+dayjs.extend(isSameOrBefore);
+dayjs.extend(isSameOrAfter);
 const ReportsPage = () => {
   const [activeTab, setActiveTab] = useState("Premium");
   const [startDate, setStartDate] = useState(null);
@@ -39,11 +44,11 @@ const ReportsPage = () => {
     },
   ];
 
-  // Calculate total items
-  const totalItems = 120; // This would normally come from backend or full data array
+  // // Calculate total items
+  // const totalItems = 120; // This would normally come from backend or full data array
 
-  // Current page data (first 10 items for now)
-  const currentPageData = reportsData;
+  // // Current page data (first 10 items for now)
+  // const currentPageData = reportsData;
 
   const columns = [
     {
@@ -132,7 +137,7 @@ const ReportsPage = () => {
       dateRange: {
         from: startDate ? startDate.format("YYYY-MM-DD") : "2025-01-15",
         to: endDate ? endDate.format("YYYY-MM-DD") : "2025-01-30",
-      },
+      },  
       devices: currentPageData.map((device) => ({
         deviceId: device.deviceId,
         brand: device.brand,
@@ -146,7 +151,29 @@ const ReportsPage = () => {
     });
     message.success("Premium report downloaded successfully");
   };
+// Filtered data logic
+const filteredData = reportsData.filter((item) => {
+  const itemDate = dayjs(item.onboardingDate); // Convert to Dayjs object
 
+  const matchesDateRange =
+    (!startDate || itemDate.isSameOrAfter(startDate, "day")) &&
+    (!endDate || itemDate.isSameOrBefore(endDate, "day"));
+
+  const matchesStatus = !selectedStatus || item.status.toLowerCase() === selectedStatus.toLowerCase();
+
+  const matchesSearch = !searchQuery ||
+    item.deviceId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.model.toLowerCase().includes(searchQuery.toLowerCase());
+
+  return matchesDateRange && matchesStatus && matchesSearch;
+});
+
+// Pagination logic
+const startIndex = (currentPage - 1) * pageSize;
+const endIndex = startIndex + pageSize;
+const currentPageData = filteredData.slice(startIndex, endIndex);
+const totalItems = filteredData.length;
   return (
     <Container>
       <Title>Reports</Title>
@@ -305,9 +332,11 @@ const PrintButton = styled(Button)`
 
 const StatusBadge = styled.span`
   padding: 4px 8px;
-  border-radius: 4px;
+  /* border-radius: 4px; */
   font-size: 12px;
   font-weight: 500;
+  width: 10rem;
+  text-align: center;
 `;
 
 export default ReportsPage;

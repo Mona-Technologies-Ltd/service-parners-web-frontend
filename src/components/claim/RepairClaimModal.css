@@ -1,0 +1,389 @@
+/* RepairClaimModal.css */
+
+.repair-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-overlay.active {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.repair-modal {
+  background: #fff;
+  width: 95%;
+  max-width: 700px;
+  max-height: 95vh;
+  overflow-y: auto;
+  z-index: 2000;
+  /* border-radius: 8px; */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  /* padding: 1rem; */
+}
+
+.modal-header {
+  background: #0549a8;
+  color: white;
+  /* text-align: center; */
+  padding: 1rem;
+  /* border-radius: 8px 8px 0 0; */
+  font-weight: bold;
+  width: 100%;
+  height: 3.8rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-section {
+  margin-top: 1rem;
+  padding: 0.8rem;
+}
+
+.modal-section table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+  font-size: 14px;
+ 
+}
+.modal-section table th{
+  background: #F1F1F1;
+  box-shadow: 0px 0px 0px .6px #F1F1F1;
+   border: none;
+   font-size: .6rem;
+}
+.modal-section table tr{
+  background: #FFFFFF;
+   border: none;
+     box-shadow: 0px 0px 0px .6px #F1F1F1;
+}
+.modal-section table td{
+    background: #FFFFFF;
+   border: none;
+     box-shadow: 0px 0px 0px .6px #F1F1F1;
+}
+.modal-section table th,
+.modal-section table td {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  text-align: left;
+   border: none;
+}
+
+.link {
+  color: #0549a8;
+  cursor: pointer;
+}
+.totals{
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  flex-direction: column;
+}
+.totals p {
+  margin: 0.2rem 0;
+  font-size: 14px;
+}
+
+.watch-video {
+  background: #f5f5f5;
+  border: 1px solid red;
+  color: red;
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  margin-left: 0.5rem;
+  font-size: 14px;
+}
+
+.desc-box {
+  background: #e9f1ff;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+#review-box{
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  margin-top: 1rem;
+  /* background:red; */
+  align-items: start;
+  padding: 1rem;
+}
+
+.review-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  /* border-radius: 10px; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.review-card h4 {
+  margin: 0 0 0.3rem;
+}
+
+.claim-id,
+.claim-type,
+.comment,
+.rating,
+.timestamp {
+  font-size: 14px;
+}
+
+.rating {
+  font-size: 24px;
+  font-weight: bold;
+  color: green;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  gap: 1rem;
+  padding: 2.6rem;
+  padding-bottom: 1rem;
+}
+
+.approve-btn {
+  background: green;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  /* border-radius: 5px; */
+  font-size: 14px;
+}
+
+.query-btn {
+  background: red;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  /* border-radius: 5px; */
+  font-size: 14px;
+}
+
+.query-form-modal {
+  position: absolute;
+  top: 25%;
+  left: 5%;
+  width: 90%;
+  background: white;
+  padding: 1rem;
+  /* border-radius: 10px; */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+}
+
+.query-form-modal textarea {
+  width: 100%;
+  height: 100px;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  /* border-radius: 5px; */
+  resize: none;
+}
+
+.query-form-modal input[type="file"] {
+  margin: 0.5rem 0;
+}
+
+.submit-query {
+  background: #0549a8;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  float: right;
+}
+.confirm-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirm-modal {
+  background: white;
+  padding: 30px;
+  /* border-radius: 10px; */
+  width: 400px;
+  text-align: center;
+  position: relative;
+}
+
+.confirm-icon .question-circle {
+  background: #ffc107;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm-text {
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.yes-btn {
+  background-color: #0047ab;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background-color: transparent;
+  color: red;
+  padding: 10px 20px;
+  border: 1px solid red;
+  cursor: pointer;
+}
+
+thead{
+
+  border-collapse: collapse;
+  border: none;
+  
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .repair-modal {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .query-form-modal {
+    top: 20%;
+    left: 5%;
+    width: 90%;
+  }
+
+  .actions {
+    /* flex-direction: column; */
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .approve-btn,
+  .query-btn {
+    width: 40%;
+  }
+}
+.query-form-modal {
+  width: 400px;
+  padding: 20px;
+  /* border-radius: 10px; */
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  margin: auto;
+  position: absolute;
+  left: 35%;
+  right: 70%;
+}
+
+.query-form-title {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.query-input {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  /* border-radius: 5px; */
+  font-size: 1rem;
+  margin-bottom: 15px;
+  resize: none;
+}
+
+.file-upload-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.attach-file-btn {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  /* border-radius: 5px; */
+  padding: 5px 10px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.attach-file-btn:hover {
+  background-color: #e6e6e6;
+}
+
+.file-placeholder {
+  margin-left: 10px;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.submit-query-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #0056e0;
+  color: white;
+  border: none;
+  /* border-radius: 5px; */
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.submit-query-btn:hover {
+  background-color: #003da1;
+}
+.status_coloring{
+  width: 10rem;
+  text-align: center;
+  /* border-radius: 0; */
+
+}
