@@ -1,7 +1,6 @@
 .review-cards {
   position: relative;
   background: #fff;
-  /* border-radius: 8px; */
   padding: 1.2rem;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
   display: flex;

@@ -20,9 +20,9 @@ console.log(device)
         <div className="modal-header">Repair Claim Details</div>
         <div className="modal-bodys">
           {/* Claim Details */}
-          <div className="claim-details">
+          <div className="claim-details" style={{ display:'flex', flexDirection:'column' }}>
             <p>Claim ID: {device?.claimId}</p>
-            <p>Created On: 2025-01-15</p>
+            <p>Created On: {device?.dateQueried}</p>
             <p>Claim Type: Accidental Damage</p>
             <p>Total Sum Insured: #10,000</p>
             <p>Balance: #10,000</p>
@@ -43,6 +43,9 @@ console.log(device)
             <button id="btn" className="btn-green"  onClick={() => setShowResolveModal(true)}>Approve Claim</button>
           </div>)
 }
+{!device?.isClosed && (
+  <button className="Closed_btn">Closed</button>
+)}
        {/* Conditional Rendering of Response Form */}
         <RepairClaimResponse
   isOpen={showResponseModal}

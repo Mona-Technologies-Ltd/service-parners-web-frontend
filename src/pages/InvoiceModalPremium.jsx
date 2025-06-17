@@ -13,7 +13,7 @@ const InvoiceModalPremium = ({ open, onCancel }) => {
       open={open}
       onCancel={onCancel}
       footer={null}
-      width={800}
+      // width={800}
       closeIcon={<CloseOutlined />}
        className="custom-invoice-modal" // Add a custom class
       bodyStyle={{ padding: 0 }} // Remove default body padding
@@ -26,7 +26,7 @@ const InvoiceModalPremium = ({ open, onCancel }) => {
         <div className="invoice-top">
           <img src="/monaHeaderLogo.svg" alt="Logo" className="invoice-logo" />
           <div className="invoice-info">
-            <h2>Premium Report</h2>
+            <h4>Premium Report</h4>
             <p>Mona Technologies Limited</p>
             <p>613 Ahmadu Bello Way, Abuja</p>
             <p>+234 903 345 6789</p>

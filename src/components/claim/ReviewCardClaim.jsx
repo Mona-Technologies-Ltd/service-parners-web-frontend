@@ -4,9 +4,13 @@ import './ReviewCardClaim.css';
 const ReviewCardClaim = () => {
   return (
     <div className="review-cards">
+      <div>
+        <h4>John Doe</h4>
+      <a href=''>Claim ID: CL-134763 </a>
+      </div>
       <div style={{ display:'flex' }}>
         <div className="review-content">
-        <h2 className="review-title">Your Reviews</h2>
+        {/* <h2 className="review-title">Your Reviews</h2> */}
         <p className="review-text">
           Aliyu did a great job assisting us with the repairs of my Iphone 13
         </p>

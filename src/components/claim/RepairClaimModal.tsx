@@ -159,29 +159,15 @@ useEffect(() => {
 
         <div id="review-box">
           <ReviewCardClaim />
-          {/* <div className="review-card">
-            <h4>John Doe</h4>
-            <p className="claim-id">Claim ID: CL-134763</p>
-            <p className="claim-type">Accidental Damage</p>
-            <p className="comment">Alive did a great job assisting us...</p>
-            <div className="rating">4.5 ★</div>
-            <div className="timestamp">2 months ago</div>
-          </div> */}
+          
         </div>
 
         <div className="actions">
           <button className="approve-btn" onClick={() => setShowApproveConfirm(true)}>Approve Claim</button>
+          {device?.isQuery && (
           <button className="query-btn"  onClick={() => setShowResponseModal(true)}>Query Claim</button>
+          )}
         </div>
-
-        {/* {showQueryForm && (
-          <div className="query-form-modal">
-            <h3>Query Form</h3>
-            <textarea placeholder="Enter your query message here..."></textarea>
-            <input type="file" />
-            <button className="submit-query">Submit Query</button>
-          </div>
-        )} */}
         {showQueryForm && (
           <div className="query-form-modal" ref={queryRef}>
   <h3 className="query-form-title">Query Form</h3>
