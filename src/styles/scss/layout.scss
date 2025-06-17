@@ -247,6 +247,14 @@
   background: #000;
   line-height: 5;
 }
+#admin_manage_btn{
+    background-color: "#1976d2";
+          color: "#fff";
+          padding: "8px 16px";
+          border: "none";
+          cursor: "pointer";
+          font-weight: "bold";
+}
 // Responsive styles
 @media (max-width: 768px) {
   .ant-layout {
@@ -367,8 +375,13 @@
   width: 100%;
 }
 
+.generate-invoice-btn{
+  width: 4rem;
+  font-size: 0.4rem;
+}
+.admin_manage_btn{
 
-
+}
 }
 
 

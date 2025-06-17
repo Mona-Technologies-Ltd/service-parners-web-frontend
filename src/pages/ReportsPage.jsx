@@ -270,6 +270,10 @@ const FilterSection = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+
+    @media (max-width: 768px) {
+     flex-direction: column;
+    }
 `;
 
 const DateRangeWrapper = styled.div`
@@ -286,7 +290,12 @@ const DateLabel = styled.span`
 const FiltersWrapper = styled.div`
   display: flex;
   gap: 12px;
+
+
+ 
 `;
+
+
 
 const StatusSelect = styled(Select)`
   width: 140px;

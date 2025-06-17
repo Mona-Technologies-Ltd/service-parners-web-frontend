@@ -276,52 +276,26 @@ const invitationColumns = [
     onCancel={() => setShowDeactivateModal(false)}
   />
 )}
-
-<div style={{ width: '100%', display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-  <div style={{ width: '70%', display: "flex", gap: "24px", alignItems: "center" }}>
-    <div
-      style={{
-        fontWeight: activeTab === "manage" ? "bold" : "normal",
-        color: activeTab === "manage" ? "#1976d2" : "#9e9e9e",
-        cursor: "pointer",
-        borderBottom: activeTab === "manage" ? "2px solid #1976d2" : "none",
-        paddingBottom: "4px",
-      }}
+<ResponsiveHeader>
+  <TabGroup>
+    <Tab
+      active={activeTab === "manage"}
       onClick={() => setActiveTab("manage")}
     >
       Manage Admin
-    </div>
-    <div
-      style={{
-        fontWeight: activeTab === "invitation" ? "bold" : "normal",
-        color: activeTab === "invitation" ? "#1976d2" : "#9e9e9e",
-        cursor: "pointer",
-        borderBottom: activeTab === "invitation" ? "2px solid #1976d2" : "none",
-        paddingBottom: "4px",
-      }}
+    </Tab>
+    <Tab
+      active={activeTab === "invitation"}
       onClick={() => setActiveTab("invitation")}
     >
       Invitations
-    </div>
-  </div>
+    </Tab>
+  </TabGroup>
 
-  {/* Add New Admin Button (only visible on manage tab) */}
   {activeTab === "manage" && (
-    <button
-      onClick={showAddAdminModal}
-      style={{
-        backgroundColor: "#1976d2",
-        color: "#fff",
-        padding: "8px 16px",
-        border: "none",
-        cursor: "pointer",
-        fontWeight: "bold",
-      }}
-    >
-      Add New Admin
-    </button>
+    <AddButton onClick={showAddAdminModal}>Add New Admin</AddButton>
   )}
-</div>
+</ResponsiveHeader>
 
 
          {/* <div>
@@ -435,58 +409,8 @@ const Header = styled.div`
   margin-bottom: 20px;
 `;
 
-const Title = styled.h1`
-  font-size: 24px;
-  font-weight: 600;
-  margin: 0;
-`;
 
-const FilterSection = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-`;
 
-const FilterLabel = styled.span`
-  font-size: 14px;
-  color: #666;
-`;
-
-const SelectWrapper = styled.div`
-  .ant-select-selector {
-    border-radius: 4px !important;
-  }
-`;
-
-const SearchInput = styled(Input)`
-  width: 200px;
-  border-radius: 4px;
-`;
-
-const ArrowIcon = styled(Icon).attrs({
-  icon: "mdi:chevron-down",
-  width: "16",
-  height: "16",
-})``;
-
-const ActionBar = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 16px;
-`;
-
-const AddButton = styled(Button)`
-  background-color: #0066cc;
-  color: white;
-  display: flex;
-  align-items: center;
-  border: none;
-  transition: none;
-  &:hover {
-    background-color: #0066cc;
-    color: white;
-  }
-`;
 
 const StatusBadge = styled.div`
   padding: 4px 8px;
@@ -518,72 +442,53 @@ const MoreButton = styled(Button)`
   }
 `;
 
-const ModalHeader = styled.div`
-width: 100%;
-  background-color: #0066cc;
-  padding: 20px;
-  text-align: center;
-`;
 
-const ModalTitle = styled.h2`
-  color: white;
-  font-size: 24px;
-  margin: 0;
-`;
 
-const ModalBody = styled.div`
-  /* padding: 40px; */
-   padding: 0;
+const ResponsiveHeader = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 
-  form {
-    padding: 24px; /* Apply spacing only to the form itself */
+  @media (min-width: 600px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 `;
 
-const SendInviteButton = styled(Button)`
-  background-color: #0066cc;
-  color: white;
-  height: 44px;
-  font-size: 16px;
-  border: none;
-  padding: 0 32px;
-  transition: none;
-  &:hover {
-    background-color: #0066cc;
-    color: white;
+const TabGroup = styled.div`
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+
+  @media (min-width: 600px) {
+    width: 70%;
+    justify-content: flex-start;
   }
 `;
 
-const CloseIcon = styled(Icon).attrs({
-  icon: "mdi:close",
-  width: "20",
-  height: "20",
-})`
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  color: white;
+const Tab = styled.div`
+  font-weight: ${(props) => (props.active ? "bold" : "normal")};
+  color: ${(props) => (props.active ? "#1976d2" : "#9e9e9e")};
   cursor: pointer;
-  z-index: 1;
-`;
-const AdminInviteModalWrapper = styled.div`
-  .ant-modal-body {
-    padding: 0 !important;
-  }
-`;
-const HoverButton = styled(Button)`
-  && {
-    border: 1px solid #004aad;
-    background-color: transparent;
-    color: #000;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-
-  &&:hover {
-    background-color: #004aad;
-    color: #fff;
-  }
+  border-bottom: ${(props) => (props.active ? "2px solid #1976d2" : "none")};
+  padding-bottom: 4px;
 `;
 
+const AddButton = styled.button`
+  background-color: #1976d2;
+  color: #fff;
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  align-self: center;
+
+  @media (min-width: 600px) {
+    padding: 8px 16px;
+    align-self: auto;
+  }
+`;
 
 export default ManageAdminsPage;
