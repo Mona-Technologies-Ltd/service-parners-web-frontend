@@ -109,13 +109,13 @@ const AccountPage = () => {
                 <Button type="primary" className="edit-button">
                 Activate
               </Button>
-              <Button
-  type="danger"
-  className="edit-button"
-  style={{ background: '#E52626', color:'#fff' }} // Change to your desired color
->
-  Deactivate
-</Button>
+                          <Button
+              type="danger"
+              className="edit-button"
+              style={{ background: '#E52626', color:'#fff' }} // Change to your desired color
+            >
+              Deactivate
+            </Button>
 
             </div>
             </Card>
