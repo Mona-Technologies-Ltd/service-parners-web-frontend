@@ -114,7 +114,7 @@ const AccountPage = () => {
   className="edit-button"
   style={{ background: '#E52626', color:'#fff' }} // Change to your desired color
 >
-  Edit
+  Deactivate
 </Button>
 
             </div>

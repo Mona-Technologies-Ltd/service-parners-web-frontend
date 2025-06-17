@@ -10,17 +10,25 @@ import { useDispatch } from "react-redux";
 import { logout } from "../redux/slices/authSlice";
 import BreadcrumbComponent from "../components/Breadcrumb";
 import { AiOutlineCloseSquare, AiOutlineMenu } from "react-icons/ai";
-
+import NotificationsPanel from "../pages/NotificationsPanel";
+import { RxCounterClockwiseClock } from "react-icons/rx";
+import {
+  IoIosNotificationsOutline
+} from "react-icons/io";
 const { Header: AntHeader } = Layout;
 
 const Header = ({ collapsed, colorBgContainer, setMobileSidebarVisible, mobileSidebarVisible }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+  const [showNotifications, setShowNotifications] = React.useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
     navigate("/login");
+  };
+  const toggleNotifications = () => {
+    setShowNotifications((prev) => !prev);
   };
 
   // Check if we're on the dashboard page
@@ -58,6 +66,35 @@ const Header = ({ collapsed, colorBgContainer, setMobileSidebarVisible, mobileSi
           </button>
         </div>
         <BreadcrumbComponent />
+      </div>
+       <div style={{ position: "relative" }}>
+        <button
+          onClick={() => window.location.reload()}
+          style={{ padding: 12, border: "none", height: 10, background: "none" }}
+        >
+          {/* <BiRefresh /> */}
+            <RxCounterClockwiseClock />
+        </button>
+
+        <button
+          onClick={toggleNotifications}
+          style={{ padding: 12, border: "none", height: 10, background: "none" }}
+        >
+          <IoIosNotificationsOutline color="black" />
+        </button>
+
+        {showNotifications && (
+          <div
+          id="notification_modals"
+            style={{
+
+             
+            }}
+          >
+            
+            <NotificationsPanel />
+          </div>
+        )}
       </div>
     </AntHeader>
   );

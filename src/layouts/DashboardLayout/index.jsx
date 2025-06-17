@@ -17,11 +17,23 @@ const DashboardLayout = () => {
 
   return (
     <Layout style={{ height: "100vh", overflow: "hidden" }}>
-      <Sidebar collapsed={collapsed} setCollapsed={setCollapsed}   mobileSidebarVisible={mobileSidebarVisible}
-  setMobileSidebarVisible={setMobileSidebarVisible} />
+      {/* <Sidebar collapsed={collapsed} setCollapsed={setCollapsed}   mobileSidebarVisible={mobileSidebarVisible}
+  setMobileSidebarVisible={setMobileSidebarVisible} /> */}
+    <Sidebar
+  collapsed={collapsed}
+  setCollapsed={setCollapsed}
+  mobileSidebarVisible={mobileSidebarVisible}
+  setMobileSidebarVisible={setMobileSidebarVisible}
+/>
       <Layout>
-        <Header collapsed={collapsed} colorBgContainer={colorBgContainer} setMobileSidebarVisible={setMobileSidebarVisible}
-  mobileSidebarVisible={mobileSidebarVisible} />
+        {/* <Header collapsed={collapsed} colorBgContainer={colorBgContainer} setMobileSidebarVisible={setMobileSidebarVisible}
+  mobileSidebarVisible={mobileSidebarVisible} /> */}
+        <Header
+  collapsed={collapsed}
+  colorBgContainer={colorBgContainer}
+  setMobileSidebarVisible={setMobileSidebarVisible}
+  mobileSidebarVisible={mobileSidebarVisible}
+/>
         <Content
           style={{
             margin: "16px",
