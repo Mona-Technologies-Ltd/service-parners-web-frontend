@@ -6,6 +6,7 @@ import { logout } from "../redux/slices/authSlice";
 import { Icon } from "@iconify/react";
 import monaHeaderLogo from "../assets/monaHeaderLogo.svg";
 import monaSingleLogo from "../assets/monaSingleLogo.png";
+import { AiOutlineSetting } from "react-icons/ai";
 
 const { Sider } = Layout;
 
@@ -76,6 +77,11 @@ const Sidebar = ({ collapsed, setCollapsed, setMobileSidebarVisible, mobileSideb
       key: "/manage-admins",
       icon: <Icon icon="mdi:account-cog" width="20" height="20" />,
       label: "Manage Admins",
+    },
+    {
+      key: "/support",
+      icon:<AiOutlineSetting size={20} /> ,//<Icon icon="mdi:headset" width="20" height="20" />,
+      label: "Support",
     },
     {
       key: "/account",

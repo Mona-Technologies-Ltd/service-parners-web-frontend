@@ -79,6 +79,10 @@ const router = createBrowserRouter([
         path: "/manage-admins",
         element: <ManageAdminsPage />,
       },
+       {
+        path: "/support",
+        element: <SupportPage />,
+      },
     ],
   },
   {
@@ -86,5 +90,5 @@ const router = createBrowserRouter([
     element: <Navigate to="/login" replace />,
   },
 ]);
-
+// SupportPage
 export default router;

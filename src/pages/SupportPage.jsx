@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import ActiveChat from "../components/ActiveChat";
 import ChatHistory from "../components/ChatHistory";
+import ChatInterface from "./ChatInterface";
 
 // Chat Component
 const ChatComponent = ({ onClose }) => {
@@ -84,15 +85,15 @@ const ChatComponent = ({ onClose }) => {
       >
         <h3 className="mb-4">Chats</h3>
         {/* Tabs */}
-        <div style={{ display: "flex", marginTop: "10px" }}>
+        <div style={{ width:'100%', display: "flex", justifyContent:'space-between' , marginTop: "10px" }}>
           <div
             onClick={() => setActiveTab("active")}
             style={{
               marginRight: "30px",
               paddingBottom: "10px",
               borderBottom:
-                activeTab === "active" ? "2px solid #0057B8" : "none",
-              color: activeTab === "active" ? "#0057B8" : "#888",
+                activeTab === "active" ? "2px solid #004AAD" : "none",
+              color: activeTab === "active" ? "#004AAD" : "#888",
               fontWeight: activeTab === "active" ? "500" : "normal",
               cursor: "pointer",
             }}
@@ -104,8 +105,8 @@ const ChatComponent = ({ onClose }) => {
             style={{
               paddingBottom: "10px",
               borderBottom:
-                activeTab === "history" ? "2px solid #0057B8" : "none",
-              color: activeTab === "history" ? "#0057B8" : "#888",
+                activeTab === "history" ? "2px solid #004AAD" : "none",
+              color: activeTab === "history" ? "#004AAD" : "#888",
               fontWeight: activeTab === "history" ? "500" : "normal",
               cursor: "pointer",
             }}
@@ -123,7 +124,7 @@ const ChatComponent = ({ onClose }) => {
           sendMessage={sendMessage}
         />
       ) : (
-        <ChatHistory />
+        <ChatInterface />
       )}
     </>
   );
@@ -295,11 +296,15 @@ const SupportPage = () => {
         {/* Chat Bubble */}
         <div
           style={{
-            backgroundColor: "#0057B8",
+            backgroundColor: "#004AAD",
             color: "white",
             padding: "12px 24px",
             borderRadius: "20px",
+            borderBottomLeftRadius:0,
             boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+            position:'relative',
+            top:'-2rem'
+
           }}
         >
           <p style={{ margin: 0 }}>Hello, how can we help?</p>
@@ -316,6 +321,7 @@ const SupportPage = () => {
             justifyContent: "center",
             alignItems: "center",
             cursor: "pointer",
+            top:'2rem'
           }}
         >
           {/* Hexagon Background */}
