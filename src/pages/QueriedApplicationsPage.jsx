@@ -4,6 +4,7 @@ import { Select, Button } from "antd";
 import CustomGrid from "../components/CustomGrid/CustomGrid";
 import { Icon } from "@iconify/react";
 import QueriedApplicationDetailsModal from "../components/QueriedApplicationDetailsModal";
+import RepairClaimModal from "./RepairClaimModal";
 
 const QueriedApplicationsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -12,21 +13,167 @@ const QueriedApplicationsPage = () => {
   const pageSize = 10;
   const [dateFilter, setDateFilter] = useState("");
 const [otherFilter, setOtherFilter] = useState("");
+const [isOpen, setIsOpen] = useState(true);
+if (!isOpen) return null;
 
 
   // Mock data for queried applications
-  const queriedApplicationsData = Array(120)
-    .fill(null)
-    .map((_, index) => ({
-      id: index + 1,
-      claimId: "#0001",
-      deviceBrand: "iPhone",
-      model: "iPhone 13 Pro MAX 1",
-      issueType: "Damaged Screen",
-      amount: "#23,345",
-      dateQueried: "2025-02-27",
-      newMessages: [4, 1, 0, 0][index % 4], // Cycle through message counts
-    }));
+  // const queriedApplicationsData = Array(120)
+  //   .fill(null)
+  //   .map((_, index) => ({
+  //     id: index + 1,
+  //     claimId: "#0001",
+  //     deviceBrand: "iPhone",
+  //     model: "iPhone 13 Pro MAX 1",
+  //     issueType: "Damaged Screen",
+  //     amount: "#23,345",
+  //     dateQueried: "2025-02-27",
+  //     newMessages: [4, 1, 0, 0][index % 4], // Cycle through message counts
+  //   }));
+const queriedApplicationsData = [
+  {
+    id: 1,
+    claimId: "#0001",
+    deviceBrand: "iPhone",
+    model: "iPhone 13 Pro MAX",
+    issueType: "Damaged Screen",
+    amount: "#23,345",
+    dateQueried: "2025-06-10",
+    newMessages: 4,
+    isExcess: true,
+
+isClosed:false,
+    excess: "#3,000",
+  },
+  {
+    id: 2,
+    claimId: "#0002",
+    deviceBrand: "Samsung",
+    model: "Galaxy S21 Ultra",
+    issueType: "Battery Issue",
+    amount: "#18,500",
+    dateQueried: "2025-06-08",
+    newMessages: 1,
+    isExcess: false,
+    isClosed:true,
+    
+    excess: "#0",
+  },
+  {
+    id: 3,
+    claimId: "#0003",
+    deviceBrand: "Tecno",
+    model: "Camon 18",
+    issueType: "Water Damage",
+    amount: "#12,000",
+    dateQueried: "2025-06-05",
+    newMessages: 0,
+    isExcess: true,
+
+isClosed:true,
+    excess: "#1,500",
+  },
+  {
+    id: 4,
+    claimId: "#0004",
+    deviceBrand: "Infinix",
+    model: "Note 12",
+    issueType: "Cracked Body",
+    amount: "#9,700",
+    dateQueried: "2025-06-01",
+    newMessages: 2,
+    isExcess: false,
+    isClosed:true,
+    
+    excess: "#0",
+  },
+  {
+    id: 5,
+    claimId: "#0005",
+    deviceBrand: "Xiaomi",
+    model: "Redmi Note 11",
+    issueType: "Damaged Screen",
+    amount: "#15,600",
+    dateQueried: "2025-05-29",
+    newMessages: 1,
+ 
+
+isClosed:false,
+   isExcess: true,
+    excess: "#2,000",
+  },
+  {
+    id: 6,
+    claimId: "#0006",
+    deviceBrand: "iPhone",
+    model: "iPhone 12 Mini",
+    issueType: "Battery Issue",
+    amount: "#20,000",
+    dateQueried: "2025-06-13",
+    newMessages: 0,
+    isExcess: false,
+    isClosed:true,
+    
+    excess: "#0",
+  },
+  {
+    id: 7,
+    claimId: "#0007",
+    deviceBrand: "Samsung",
+    model: "Galaxy A53",
+    issueType: "Water Damage",
+    amount: "#14,300",
+    dateQueried: "2025-06-12",
+    newMessages: 3,
+    isExcess: true,
+
+isClosed:false,
+    excess: "#1,800",
+  },
+  {
+    id: 8,
+    claimId: "#0008",
+    deviceBrand: "Nokia",
+    model: "G21",
+    issueType: "Cracked Body",
+    amount: "#8,900",
+    dateQueried: "2025-06-11",
+    newMessages: 0,
+    isExcess: false,
+    isClosed:true,
+    
+    excess: "#0",
+  },
+  {
+    id: 9,
+    claimId: "#0009",
+    deviceBrand: "iPhone",
+    model: "iPhone SE (2020)",
+    issueType: "Battery Issue",
+    amount: "#13,500",
+    dateQueried: "2025-06-09",
+    newMessages: 2,
+    isExcess: true,
+
+isClosed:true,
+    excess: "#1,000",
+  },
+  {
+    id: 10,
+    claimId: "#0010",
+    deviceBrand: "Samsung",
+    model: "Galaxy Note 10",
+    issueType: "Damaged Screen",
+    amount: "#19,200",
+    dateQueried: "2025-06-07",
+    newMessages: 1,
+    isExcess: false,
+    isClosed:false,
+    
+    excess: "#0",
+  },
+];
+
 const applyFilters = (data) => {
   return data.filter((item) => {
     let dateMatch = true;
@@ -152,12 +299,12 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
       key: "action",
       dataIndex: "action",
       render: (_, record) => (
-        <ActionButton
-          className="action-button"
+        <button
+          className="action-button-queried"
           onClick={() => handleViewClick(record)}
         >
           View
-        </ActionButton>
+        </button>
       ),
     },
   ];
@@ -175,7 +322,7 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
         padding: "16px",
       }}
     >
-      <ButtonStyleOverrides />
+      {/* <ButtonStyleOverrides /> */}
       <Container>
         <Header>
           <Title>Queried Applications</Title>
@@ -230,6 +377,14 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
             </SelectWrapper>
           </FilterSection> */}
         </Header>
+{/* <RepairClaimModal /> */}
+{showModal && (
+  <RepairClaimModal
+    isOpen={showModal}
+    onClose={handleCloseModal}
+    device={selectedApplication}
+  />
+)}
 
         <div className="queried-applications-page">
           <CustomGrid
@@ -242,11 +397,11 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
           />
         </div>
 
-        <QueriedApplicationDetailsModal
+        {/* <QueriedApplicationDetailsModal
           visible={showModal}
           onClose={handleCloseModal}
           application={selectedApplication}
-        />
+        /> */}
       </Container>
     </div>
   );
@@ -323,20 +478,18 @@ const ActionButton = styled(Button)`
   height: 32px;
   padding: 0 16px;
   font-weight: 500;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: none !important;
+  transition: none !important;
 
   &:hover,
-  &:focus {
-    background: #0052a3 !important;
-    color: white !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
+  &:focus,
   &:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #0066cc !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+    outline: none !important;
   }
 `;
 

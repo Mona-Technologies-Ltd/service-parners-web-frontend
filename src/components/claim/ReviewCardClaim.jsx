@@ -3,7 +3,7 @@ import './ReviewCardClaim.css';
 
 const ReviewCardClaim = () => {
   return (
-    <div className="review-card">
+    <div className="review-cards">
       <div style={{ display:'flex' }}>
         <div className="review-content">
         <h2 className="review-title">Your Reviews</h2>

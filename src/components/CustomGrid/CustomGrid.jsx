@@ -87,7 +87,7 @@ const CustomGrid = ({
     //     flexBasis: "130px",
     //   };
 
-      
+      // Approved Claims
     // }
 if (column.key === "status") {
   return {
@@ -98,16 +98,32 @@ if (column.key === "status") {
     maxWidth: "130px",
     minWidth: "130px",
   };
-}
 
+  
+}
+if (column.key === "approvedClaims") {
+  return {
+    flexGrow: 0,
+    flexShrink: 0,
+    flexBasis: "100px",
+    // fontSize: "10px",
+    whiteSpace: "normal",
+    wordBreak: "break-word",
+    overflowWrap: "anywhere",
+  };
+}
 
     // Default flexible width with min/max constraints
     return {
       flexGrow: 1,
       flexShrink: 1,
-      flexBasis: "120px",
-      minWidth: "120px",
-      maxWidth: "300px",
+      flexBasis: "200px",
+      minWidth: "100px",
+      maxWidth: "250px",
+     fontSize:"12px",
+       whiteSpace: "normal",
+    wordBreak: "break-word",
+    overflowWrap: "anywhere",
     };
   };
 
@@ -218,7 +234,7 @@ const GridContainer = styled.div`
     /* margin-bottom: 8px; */
 
     &:hover {
-      background-color: #f9f9f9;
+      /* background-color: #f9f9f9; */
     }
   }
 
@@ -285,93 +301,6 @@ const GridContainer = styled.div`
 }
 
 `;
-
-// Styled component integrated into the CustomGrid
-// const GridContainer = styled.div`
-//   background-color: white;
-//   overflow-x: auto;
-//   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-//   width: 100%;
-
-//   .grid-table {
-//     display: table;
-//     width: 100%;
-//     table-layout: fixed;
-//     min-width: fit-content;
-//   }
-
-//   .grid-header {
-//     display: flex;
-//     background-color: #f5f5f5;
-//     border-bottom: 1px solid #e0e0e0;
-//     min-width: fit-content;
-//   }
-
-//   .grid-body {
-//     background-color: white;
-//   }
-
-//   .grid-row {
-//     display: flex;
-//     border-bottom: 1px solid #e0e0e0;
-//     min-width: fit-content;
-//     margin-bottom: 8px;
-//     &:hover {
-//       background-color: #f9f9f9;
-//     }
-//   }
-
-//   .grid-cell {
-//     padding: 12px 16px;
-//     display: flex;
-//     align-items: center;
-//     white-space: nowrap;
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-//     box-sizing: border-box;
-//   }
-
-//   .grid-footer {
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     padding: 12px 16px;
-//     background-color: #f9f9f9;
-//   }
-
-//   .pagination-info {
-//     font-size: 14px;
-//     color: #666;
-//   }
-
-//   .pagination-controls {
-//     display: flex;
-//     gap: 8px;
-//   }
-
-//   .pagination-button {
-//     width: 32px;
-//     height: 32px;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     cursor: pointer;
-//     background: #fff;
-//     color: #666;
-//     border: 1px solid #d9d9d9;
-
-//     &.active {
-//       background: #0066cc;
-//       color: #fff;
-//       border: 1px solid #0066cc;
-//     }
-
-//     &:disabled {
-//       cursor: not-allowed;
-//       opacity: 0.5;
-//     }
-//   }
-// `;
 
 CustomGrid.propTypes = {
   columns: PropTypes.arrayOf(

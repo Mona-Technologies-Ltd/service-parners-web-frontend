@@ -34,6 +34,16 @@ const cards = [
     trendIcon: <FiTrendingUp />,
     trendColor: "green",
   },
+    {
+    title: "Discharge Voucher",
+    count: '30 Unsigned Voucher',
+    amount: "30 Unsigned Voucher",
+    percent: "",
+    icon: <FaShoppingBag />,
+    iconColor: "green",
+    trendIcon: '',
+    trendColor: "",
+  },
 ];
 
 const DashboardCards = () => {
@@ -44,12 +54,14 @@ const DashboardCards = () => {
           <div className="card-header">
             <div>
               <p className="card-title_pay">{card.title}</p>
-              <p className="card-count_pay">{card.count}</p>
+              <p className={card.count === "30 Unsigned Voucher" ? "count_new_name" :"card-count_pay"}>{card.count}</p>
             </div>
             <div className={`icon_pay ${card.iconColor}`}>{card.icon}</div>
           </div>
           <div className="card-footer_pay">
-            <p className="card-amount_pay">{card.amount}</p>
+<p className={card.amount === "30 Unsigned Voucher" ? "voucher_new_name" : "card-amount_pay"}>
+  {card.amount}
+</p>
             <div className={`card-percent_pay ${card.trendColor}`}>
               {card.trendIcon} <span>{card.percent}</span>
             </div>

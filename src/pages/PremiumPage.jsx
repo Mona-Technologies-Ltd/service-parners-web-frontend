@@ -20,6 +20,8 @@ import styled from "styled-components";
 import StatCard from "../components/Dashboard/StatCard";
 import CustomGrid from "../components/CustomGrid/CustomGrid";
 import { generatePremiumReportPDF } from "../utils/pdfUtils";
+import InvoiceModalPremium from "./InvoiceModalPremium";
+// import InvoiceModalPremium from "./InvoiceModal";
 
 const { TabPane } = Tabs;
 const { Search } = Input;
@@ -33,6 +35,13 @@ const [dateFilter, setDateFilter] = useState("");
 const [brandFilter, setBrandFilter] = useState("");
 const [statusFilter, setStatusFilter] = useState("");
 const [searchText, setSearchText] = useState("");
+const [showInvoiceModal, setShowInvoiceModal] = useState(false);
+const [invoiceData, setInvoiceData] = useState(null);
+
+const handleViewDetails = (record) => {
+  setInvoiceData(record); // or transform the record as needed for invoiceData
+  setShowInvoiceModal(true);
+};
 
   // Data for stat cards
   const premiumStats = {
@@ -224,20 +233,24 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
       title: "Action",
       key: "action",
       render: (_, record) => (
-        <ActionDropdown
-          overlay={
-            <Menu onClick={(e) => handleMenuClick(e, record)}>
-              <Menu.Item key="1">View Details</Menu.Item>
-              <Menu.Item key="2">Edit Premium</Menu.Item>
-              <Menu.Item key="3">Cancel Subscription</Menu.Item>
-            </Menu>
-          }
-          trigger={["click"]}
-        >
-          <ViewButton>
-            View Details <CaretDownOutlined />
-          </ViewButton>
-        </ActionDropdown>
+<ViewButton onClick={() => handleViewDetails(record)}>
+  View Details
+</ViewButton>
+
+        // <ActionDropdown
+        //   overlay={
+        //     <Menu onClick={(e) => handleMenuClick(e, record)}>
+        //       <Menu.Item key="1">View Details</Menu.Item>
+        //       <Menu.Item key="2">Edit Premium</Menu.Item>
+        //       <Menu.Item key="3">Cancel Subscription</Menu.Item>
+        //     </Menu>
+        //   }
+        //   trigger={["click"]}
+        // >
+        //   <ViewButton>
+        //     View Details 
+        //   </ViewButton>
+        // </ActionDropdown>
       ),
     },
   ];
@@ -284,7 +297,7 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
         <ActionDropdown
           overlay={
             <Menu onClick={(e) => handleRemittedMenuClick(e, record)}>
-              <Menu.Item key="1">Download Report</Menu.Item>
+              <Menu.Item key="1">View Report</Menu.Item>
               <Menu.Item key="2">View Proof of Payment</Menu.Item>
             </Menu>
           }
@@ -393,6 +406,11 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
           />
         </Col>
       </Row>
+<InvoiceModalPremium
+  open={showInvoiceModal}
+  onCancel={() => setShowInvoiceModal(false)}
+  invoiceData={invoiceData}
+/>
 
       {/* Tabs and Table */}
       <PremiumTabsSection>

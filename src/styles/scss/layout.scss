@@ -288,6 +288,17 @@
               z-index: 1001;
               box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
   }
+  .unsigned_h{
+    font-size: .6rem;
+  }
+
+  .action-button-queried{
+    background-color: #004AAD;
+    color: #fff;
+    border: none;
+    padding: .4rem;
+    width: 50%;
+  }
 // Responsive styles
 @media (max-width: 768px) {
     // .ant-layout-sider {
@@ -305,6 +316,9 @@
       z-index: 999;
       //  display: none;
     }
+  }
+    .unsigned_h{
+    font-size: .4rem;
   }
 }
 

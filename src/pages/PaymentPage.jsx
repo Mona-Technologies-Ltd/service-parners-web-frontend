@@ -28,6 +28,7 @@ import CustomGrid from "../components/CustomGrid/CustomGrid";
 import { generateInvoicePDF } from "../utils/pdfUtils";
 import DashboardCards from "./PaymentDashboardCards";
 import InvoiceModal from "./InvoiceModal";
+import FileUploadModal from "./FileUploadModal";
 
 const { TabPane } = Tabs;
 const { Search } = Input;
@@ -43,13 +44,29 @@ const PaymentPage = () => {
   const [uploadedFile, setUploadedFile] = useState(null);
   const [invoiceType, setInvoiceType] = useState(null); // 'single' or 'all'
   const pageSize = 10;
-const [show, setShow] = useState(true);
 const [showInvoiceModal, setShowInvoiceModal] = useState(false);
 const [invoiceData, setInvoiceData] = useState(null); // holds the invoice payload
-
+const [showGenerateButton, setShowGenerateButton] = useState(true);
+const [hasGeneratedInvoice, setHasGeneratedInvoice] = useState(false);
+const [isProofUploadModalVisible, setIsProofUploadModalVisible] = useState(false);
+const [uploadedProofFile, setUploadedProofFile] = useState(null);
   const [selectedDateRange, setSelectedDateRange] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+    // Sample data for payouts
+  const payoutsData = Array(3)
+    .fill(null)
+    .map((_, index) => ({
+      id: index + 1,
+      sn: `0${index + 1}`,
+      reference: "DWERTHY908",
+      approvedClaims: 5,
+      amount: "₦23,345",
+      dv: index === 0 ? "Upload" : index === 1 ? "Signed" : "Unsigned",
+      paymentStatus: index === 0 ? "Pending" : "Paid",
+      createdBy: "Admin 1",
+      date: "2025-01-15",
+    }));
 const filterPayouts = () => {
   return payoutsData.filter((item) => {
     // Filter by status
@@ -87,6 +104,7 @@ const filterPayouts = () => {
     return matchesStatus && matchesSearch && matchesDate;
   });
 };
+const [claimsPayout, setClaimsPayout] = useState(() => filterPayouts());
 
   // Data for stat cards
   const paymentStats = {
@@ -122,26 +140,26 @@ const filterPayouts = () => {
     }));
 
   // Sample data for payouts
-  const payoutsData = Array(3)
-    .fill(null)
-    .map((_, index) => ({
-      id: index + 1,
-      sn: `0${index + 1}`,
-      reference: "DWERTHY908",
-      approvedClaims: 5,
-      amount: "₦23,345",
-      dv: index === 0 ? "Upload" : index === 1 ? "Signed" : "Unsigned",
-      paymentStatus: index === 0 ? "Pending" : "Paid",
-      createdBy: "Admin 1",
-      date: "2025-01-15",
-    }));
+  // const payoutsData = Array(3)
+  //   .fill(null)
+  //   .map((_, index) => ({
+  //     id: index + 1,
+  //     sn: `0${index + 1}`,
+  //     reference: "DWERTHY908",
+  //     approvedClaims: 5,
+  //     amount: "₦23,345",
+  //     dv: index === 0 ? "Upload" : index === 1 ? "Signed" : "Unsigned",
+  //     paymentStatus: index === 0 ? "Pending" : "Paid",
+  //     createdBy: "Admin 1",
+  //     date: "2025-01-15",
+  //   }));
 
   // Calculate current page data for claims
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
   const currentPageClaimsData = claimsData.slice(startIndex, endIndex);
   const totalClaimsItems = claimsData.length;
-
+const [claimsInfo, setClaimsInfo] = useState(currentPageClaimsData)
   // Calculate current page data for payouts
   const currentPagePayoutsData = payoutsData.slice(startIndex, endIndex);
   const totalPayoutsItems = payoutsData.length;
@@ -230,17 +248,21 @@ const handleMenuClick = (e, record) => {
       break;
 
     case "2": // Print Receipt
+  //    setCurrentPayoutRecord(record);
+  // setIsUploadDVModalVisible(true);
       console.log("Print Receipt for", record);
       break;
 
-    case "3": // Upload Proof of Payment
-      console.log("Upload Proof of Payment for", record);
-      break;
+   case "3": // Upload Proof of Payment
+  setCurrentPayoutRecord(record);
+  setIsProofUploadModalVisible(true);
+  break;
 
-    case "4": // Upload DV
-      setCurrentPayoutRecord(record);
-      setIsUploadDVModalVisible(true);
-      break;
+case "4": // Upload Unsigned DV
+  setCurrentPayoutRecord(record);
+  setIsUploadDVModalVisible(true);
+  break;
+
 
     case "5": // Download Signed DV
       console.log("Download Signed DV for", record);
@@ -276,7 +298,26 @@ const handleMenuClick = (e, record) => {
     setUploadedFile(null);
     setCurrentPayoutRecord(null);
   };
+const handleProofFileUpload = (info) => {
+  if (info.file.status !== "removed") {
+    setUploadedProofFile(info.file.originFileObj);
+  }
+};
 
+const handleProofOfPaymentSubmit = () => {
+  if (!uploadedProofFile) {
+    message.error("Please upload a proof of payment file first");
+    return;
+  }
+
+  // Process the proof file here...
+  message.success("Proof of payment uploaded successfully");
+
+  // Reset state
+  setIsProofUploadModalVisible(false);
+  setUploadedProofFile(null);
+  setCurrentPayoutRecord(null);
+};
   // Columns for approved claims tab
   const claimsColumns = [
     {
@@ -314,36 +355,7 @@ const handleMenuClick = (e, record) => {
       dataIndex: "date",
       key: "date",
     },
-        {
-      title: "Device ID",
-      dataIndex: "deviceId",
-      key: "deviceId",
-    },
-    {
-      title: "Brand",
-      dataIndex: "brand",
-      key: "brand",
-    },
-    {
-      title: "Model",
-      dataIndex: "model",
-      key: "model",
-    },
-    {
-      title: "Amount",
-      dataIndex: "amount",
-      key: "amount",
-    },
-    {
-      title: "Approved by",
-      dataIndex: "approvedBy",
-      key: "approvedBy",
-    },
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-    },
+      
   ];
 
   // Columns for payouts tab
@@ -414,10 +426,9 @@ const handleMenuClick = (e, record) => {
           overlay={
             <Menu onClick={(e) => handleMenuClick(e, record)}>
               <Menu.Item key="1">View Invoice</Menu.Item>
-              <Menu.Item key="2">Print Receipt</Menu.Item>
+              <Menu.Item key="4">Upload Unsigned DV</Menu.Item>
+              <Menu.Item key="5">View Signed DV</Menu.Item>
               <Menu.Item key="3">Upload Proof of Payment</Menu.Item>
-              <Menu.Item key="4">Upload DV</Menu.Item>
-              <Menu.Item key="5">Download Signed DV</Menu.Item>
             </Menu>
           }
           trigger={["click"]}
@@ -434,10 +445,19 @@ const handleMenuClick = (e, record) => {
     setCurrentPage(page);
   };
 
-  const handleTabChange = (key) => {
-    setActiveTab(key);
-    setCurrentPage(1);
-  };
+const handleTabChange = (key) => {
+  // if (key === "payouts" && !hasGeneratedInvoice) {
+  //   message.warning("Please generate a payment invoice before accessing the Payouts tab.");
+  //   return;
+  // }
+setActiveTab("payouts");
+  setActiveTab(key);
+  setCurrentPage(1);
+  setIsInvoiceConfirmModalVisible(false);
+  setCurrentPayoutRecord(null);
+  setInvoiceType(null);
+
+};
 
   // Handle Generate Invoice button click
   const handleGenerateInvoice = () => {
@@ -445,39 +465,38 @@ const handleMenuClick = (e, record) => {
     setIsInvoiceConfirmModalVisible(true);
   };
 
-  // Confirmed generation of all invoices
-  const handleConfirmedGenerateAllInvoices = async() => {
-    try {
-      // Create an invoice with all the current approved claims
-      const invoiceData = {
-        reportId: `RPT${Math.floor(100000 + Math.random() * 900000)}`,
-        generatedBy: "Admin 1/Michael James",
-        generatedOn: new Date().toISOString().slice(0, 16).replace("T", " "),
-        version: "1.0",
-        totalClaims: totalClaimsItems,
-        totalAmount: "₦" + (totalClaimsItems * 23345).toLocaleString(),
-        claims: claimsData.map((claim) => ({
-          id: claim.deviceId,
-          brand: claim.brand,
-          model: claim.model,
-          sumInsured: "₦723,345",
-          claimAmount: claim.amount,
-          approvedBy: claim.approvedBy,
-          date: claim.date,
-        })),
-      };
+const handleConfirmedGenerateAllInvoices = async () => {
+  try {
+    const invoiceData = {
+      reportId: `RPT${Math.floor(100000 + Math.random() * 900000)}`,
+      generatedBy: "Admin 1/Michael James",
+      generatedOn: new Date().toISOString().slice(0, 16).replace("T", " "),
+      version: "1.0",
+      totalClaims: totalClaimsItems,
+      totalAmount: "₦" + (totalClaimsItems * 23345).toLocaleString(),
+      claims: claimsData.map((claim) => ({
+        id: claim.deviceId,
+        brand: claim.brand,
+        model: claim.model,
+        sumInsured: "₦723,345",
+        claimAmount: claim.amount,
+        approvedBy: claim.approvedBy,
+        date: claim.date,
+      })),
+    };
 
-      // Generate and download the PDF
-      await generateInvoicePDF(invoiceData);
+    await generateInvoicePDF(invoiceData);
 
-      // Close modal and reset state
-      setIsInvoiceConfirmModalVisible(false);
-      setInvoiceType(null);
-    } catch (error) {
-      message.error("Error generating invoice. Please try again later.");
-      console.error("PDF generation error:", error);
-    }
-  };
+    // Success actions
+    setIsInvoiceConfirmModalVisible(false);
+    setInvoiceType(null);
+    setShowGenerateButton(false); // hide button
+     // switch tab only after successful generation
+  } catch (error) {
+    message.error("Error generating invoice. Please try again later.");
+    console.error("PDF generation error:", error);
+  }
+};
 
   return (
     <PaymentPageContainer>
@@ -496,20 +515,23 @@ const handleMenuClick = (e, record) => {
             <TabPane tab="Approved Claims" key="approved" />
             <TabPane tab="Payouts" key="payouts" />
           </Tabs>
-          <Button
-            type="primary"
-            className="generate-invoice-btn"
-            onClick={handleGenerateInvoice}
-          >
-            Generate Invoice
-          </Button>
-        </div>
+         {activeTab === "approved" && claimsInfo.length > 0 && (
+  <Button
+    type="primary"
+    className="generate-invoice-btn"
+    onClick={handleGenerateInvoice}
+  >
+    Generate Invoice
+  </Button>
+)}
 
+         
+        </div>
         {activeTab === "approved" ? (
           /* Approved Claims Grid */
           <CustomGrid
             columns={claimsColumns}
-            data={currentPageClaimsData}
+            data={claimsInfo}
             currentPage={currentPage}
             pageSize={pageSize}
             totalItems={totalClaimsItems}
@@ -560,7 +582,7 @@ const handleMenuClick = (e, record) => {
             <CustomGrid
               columns={payoutsColumns}
               // data={currentPagePayoutsData}
-                data={filterPayouts().slice(startIndex, endIndex)}
+                data={claimsPayout.slice(startIndex, endIndex)}
               currentPage={currentPage}
               pageSize={pageSize}
               totalItems={totalPayoutsItems}
@@ -570,9 +592,21 @@ const handleMenuClick = (e, record) => {
         )}
       </PaymentTabsSection>
 
+<FileUploadModal
+  visible={isProofUploadModalVisible}
+  onCancel={() => setIsProofUploadModalVisible(false)}
+  onSubmit={handleProofOfPaymentSubmit}
+  onFileChange={handleProofFileUpload}
+  title="Upload Proof of Payment"
+  subtitle="Kindly upload your proof of payment"
+  uploadText="Upload proof of payment or drag and drop"
+/>
+
+
+
       {/* Upload DV Modal */}
       <Modal
-        title="Upload DV"
+  title={<div style={{ textAlign: 'center', width: '100%' }}>Upload Unsigned DV</div>}
         open={isUploadDVModalVisible}
         onCancel={() => setIsUploadDVModalVisible(false)}
         footer={null}
@@ -580,7 +614,7 @@ const handleMenuClick = (e, record) => {
         width={500}
         closeIcon={<CloseOutlined />}
       >
-        <p>Lorem ipsum dolor sit amet</p>
+        <p style={{ textAlign:'center' }} className="unsigned_h">Kindly upload your unsigned DV</p>
 
         <UploadContainer>
           <Upload.Dragger
@@ -632,22 +666,36 @@ const handleMenuClick = (e, record) => {
             claims by AXA Mansard Insurance?
           </h2>
 
+         
           <ConfirmModalButtons>
-            <YesButton
-              onClick={
-                invoiceType === "single"
-                  ? handleConfirmedDownloadInvoice
-                  : handleConfirmedGenerateAllInvoices
-              }
-            >
-              Yes, generate
-            </YesButton>
-            <CancelButton
-              onClick={() => setIsInvoiceConfirmModalVisible(false)}
-            >
-              Cancel
-            </CancelButton>
-          </ConfirmModalButtons>
+ <YesButton
+  onClick={async () => {
+    try {
+      // await handleConfirmedDownloadInvoice(); // or your actual invoice generation function
+      
+      setHasGeneratedInvoice(true); // allow switching to payout tab
+      setActiveTab("payouts"); // switch tab only after successful generation
+      setClaimsInfo([])
+        setIsUploadDVModalVisible(false);
+    setUploadedFile(null);
+    setCurrentPayoutRecord(null);
+     setIsInvoiceConfirmModalVisible(false)
+      setShowGenerateButton(false); // hide button
+
+    } catch (error) {
+      console.error("Invoice generation failed:", error);
+      // Optionally show an error message to the user
+    }
+  }}
+>
+  Yes, generate
+</YesButton>
+
+  <CancelButton onClick={() => setIsInvoiceConfirmModalVisible(false)}>
+    Cancel
+  </CancelButton>
+</ConfirmModalButtons>
+
         </ConfirmModalContent>
       </Modal>
     </PaymentPageContainer>

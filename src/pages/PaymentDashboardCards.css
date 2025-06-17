@@ -1,4 +1,5 @@
 .card-container_pay {
+  width: 100%;
   display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
@@ -11,7 +12,8 @@
   background: #ffffff;
   /* border-radius: 12px; */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-  width: 280px;
+  /* width: 280px; */
+  width: 22%;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -97,7 +99,15 @@
   stroke-width: 3px;
   transform: translateY(1px);
 }
-
+.voucher_new_name{
+  font-weight: normal;
+  margin-top: 0;
+  color: #8A8894;
+}
+.count_new_name{
+  margin-top: 3rem;
+    color: #8A8894;
+}
 @media screen and (max-width: 768px) {
   .card_pay {
     width: 100%;

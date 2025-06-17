@@ -105,14 +105,24 @@ const AccountPage = () => {
                   </div>
                 </Col>
               </Row>
-              <Button type="primary" className="edit-button">
-                Edit
+            <div className="btnAcc" >
+                <Button type="primary" className="edit-button">
+                Activate
               </Button>
+              <Button
+  type="danger"
+  className="edit-button"
+  style={{ background: '#E52626', color:'#fff' }} // Change to your desired color
+>
+  Edit
+</Button>
+
+            </div>
             </Card>
           </div>
         </TabPane>
 
-        <TabPane tab="Password & security" key="2">
+        <TabPane tab="Password Management" key="2" >
           <div className="tab-content">
             <div className="password-header">
               <Title level={4} className="password-title">

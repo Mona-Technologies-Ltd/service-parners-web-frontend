@@ -4,7 +4,9 @@ import { Select, Input, Button, message, Modal, Form, Dropdown } from "antd";
 import CustomGrid from "../components/CustomGrid/CustomGrid";
 import { Icon } from "@iconify/react";
 import AdminInviteModal from "./AdminInviteModal";
-
+import { Table, Menu } from "antd";
+import ResolveClaimModalDeactivate from "./ResolveClaimModalDeactivate";
+// import "antd/dist/antd.css";
 const ManageAdminsPage = () => {
   const [selectedRole, setSelectedRole] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState(null);
@@ -13,87 +15,13 @@ const ManageAdminsPage = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [form] = Form.useForm();
   const [showModal, setShowModal] = useState(false);
-// const [selectedRole, setSelectedRole] = useState(null);
-// const [selectedStatus, setSelectedStatus] = useState(null);
-// const [searchQuery, setSearchQuery] = useState("");
-// const [currentPage, setCurrentPage] = useState(1);
-
-
-// const totalItems = filteredData.length;
-// const currentPageData = filteredData.slice(startIndex, endIndex);
+const [activeTab, setActiveTab] = useState("manage");
+const [showDeactivateModal, setShowDeactivateModal] = useState(false);
+const [selectedAdmin, setSelectedAdmin] = useState(null);
 
   const pageSize = 10;
 
-  // Mock data for the admins table
-  // const allAdminsData = Array(50)
-  //   .fill(null)
-  //   .map((_, index) => ({
-  //     id: index + 1,
-  //     adminId: `#AD${String(index + 1001).padStart(4, "0")}`,
-  //     name: [
-  //       "John Doe",
-  //       "Jane Smith",
-  //       "Robert Johnson",
-  //       "Maria Garcia",
-  //       "David Chen",
-  //     ][index % 5],
-  //     email: [
-  //       "john.doe@example.com",
-  //       "jane.smith@example.com",
-  //       "robert.j@example.com",
-  //       "maria.garcia@example.com",
-  //       "david.chen@example.com",
-  //     ][index % 5],
-  //     role: ["Super Admin", "Admin", "Support", "Claims Manager", "Viewer"][
-  //       index % 5
-  //     ],
-  //     department: ["IT", "Claims", "Customer Support", "Finance", "Management"][
-  //       index % 5
-  //     ],
-  //     dateAdded: new Date(
-  //       Date.now() - Math.floor(Math.random() * 10000000000)
-  //     ).toLocaleDateString(),
-  //     status:
-  //       index % 3 === 0 ? "Active" : index % 3 === 1 ? "Inactive" : "Suspended",
-  //   }));
 
-  // Calculate current page data
-  // const startIndex = (currentPage - 1) * pageSize;
-  // const endIndex = startIndex + pageSize;
-  // const currentPageData = allAdminsData.slice(startIndex, endIndex);
-  // const totalItems = allAdminsData.length;
-
-  // const allAdminsData = Array(50)
-  // .fill(null)
-  // .map((_, index) => ({
-  //   id: index + 1,
-  //   adminId: `#AD${String(index + 1001).padStart(4, "0")}`,
-  //   name: [
-  //     "John Doe",
-  //     "Jane Smith",
-  //     "Robert Johnson",
-  //     "Maria Garcia",
-  //     "David Chen",
-  //   ][index % 5],
-  //   email: [
-  //     "john.doe@example.com",
-  //     "jane.smith@example.com",
-  //     "robert.j@example.com",
-  //     "maria.garcia@example.com",
-  //     "david.chen@example.com",
-  //   ][index % 5],
-  //   role: ["Super Admin", "Admin", "Support", "Claims Manager", "Viewer"][
-  //     index % 5
-  //   ],
-  //   department: ["IT", "Claims", "Customer Support", "Finance", "Management"][
-  //     index % 5
-  //   ],
-  //   dateAdded: new Date(
-  //     Date.now() - Math.floor(Math.random() * 10000000000)
-  //   ).toLocaleDateString(),
-  //   status:
-  //     index % 3 === 0 ? "Active" : index % 3 === 1 ? "Inactive" : "Suspended",
-  // }));
 const allAdminsData = Array(50)
   .fill(null)
   .map((_, index) => ({
@@ -106,6 +34,15 @@ const allAdminsData = Array(50)
     dateAdded: new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toLocaleDateString(),
     status: index % 3 === 0 ? "Active" : index % 3 === 1 ? "Inactive" : "Suspended",
   }));
+ const allInvitationsData = Array(50)
+    .fill(null)
+    .map((_, index) => ({
+      id: index + 1,
+      sn: `#${String(index + 1).padStart(4, "0")}`,
+      email: `johnjosephdoe@gmail.com`,
+      invitedBy: "John Joseph Doe",
+      dateInvited: "2025-02-27",
+    }));
 
 const startIndex = (currentPage - 1) * pageSize;
 const endIndex = startIndex + pageSize;
@@ -123,14 +60,83 @@ const filteredData = allAdminsData.filter((admin) => {
 
   return roleMatch && statusMatch && searchMatch;
 });
+const invitationPageData = allInvitationsData.slice(startIndex, endIndex);
+const totalInvitations = allInvitationsData.length;
 
   const handleActivateAdmin = (record) => {
     message.success(`Admin ${record.name} activated successfully`);
   };
 
+  // const handleDeactivateAdmin = (record) => {
+  //   message.success(`Admin ${record.name} deactivated successfully`);
+  // };
   const handleDeactivateAdmin = (record) => {
-    message.success(`Admin ${record.name} deactivated successfully`);
-  };
+  setSelectedAdmin(record);
+  setShowDeactivateModal(true);
+      message.success(`Admin ${record.name} deactivated successfully`);
+
+};
+const handleConfirmDeactivate = () => {
+  message.success(`Admin ${selectedAdmin?.name} deactivated successfully`);
+  setShowDeactivateModal(false);
+  setSelectedAdmin(null);
+};
+
+const invitationColumns = [
+   {
+      title: "S/N",
+      dataIndex: "sn",
+      key: "sn",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "Invited by",
+      dataIndex: "invitedBy",
+      key: "invitedBy",
+    },
+    {
+      title: "Date Invited",
+      dataIndex: "dateInvited",
+      key: "dateInvited",
+    },
+    {
+      title: "Action",
+      key: "action",
+      render: (_, record) => (
+        <Dropdown
+          menu={{
+            items: [
+              {
+                key: "Resend",
+                label: "Resend",
+                style: { backgroundColor: "#e6f7ff" },
+                disabled: record.status === "Resend",
+              },
+              {
+                key: "Cancel",
+                label: "Cancel",
+                disabled: record.status === "Cancel",
+              },
+            ],
+          }}
+          placement="bottomRight"
+          trigger={["click"]}
+          overlayStyle={{
+            minWidth: "150px",
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+          }}
+        >
+          <MoreButton>
+            More <Icon icon="mdi:chevron-down" width="16" height="16" />
+          </MoreButton>
+        </Dropdown>
+      ),
+    },
+];
 
   const columns = [
     {
@@ -247,16 +253,7 @@ const filteredData = allAdminsData.filter((admin) => {
 
   const handleAddAdmin = () => {
       setShowModal(false);
-    // form
-    //   .validateFields()
-    //   .then((values) => {
-    //     message.success(`Invitation sent to ${values.email}`);
-    //     form.resetFields();
-    //     setIsModalVisible(false);
-    //   })
-    //   .catch((info) => {
-    //     console.log("Validate Failed:", info);
-    //   });
+   
   };
 
   return (
@@ -269,9 +266,66 @@ const filteredData = allAdminsData.filter((admin) => {
       }}
     >
       <Container>
-        <Header>
-          <Title>Manage Admins</Title>
-          <FilterSection>
+        {/* <Header>
+          <Title>Manage Admins</Title> */}
+          <Header style={{ width:'100%',display: "flex", flexDirection:'column' , justifyContent: "space-between", alignItems: "center" }}>
+  {/* Tabs */}
+  {showDeactivateModal && (
+  <ResolveClaimModalDeactivate
+    onResolve={handleConfirmDeactivate}
+    onCancel={() => setShowDeactivateModal(false)}
+  />
+)}
+
+<div style={{ width: '100%', display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+  <div style={{ width: '70%', display: "flex", gap: "24px", alignItems: "center" }}>
+    <div
+      style={{
+        fontWeight: activeTab === "manage" ? "bold" : "normal",
+        color: activeTab === "manage" ? "#1976d2" : "#9e9e9e",
+        cursor: "pointer",
+        borderBottom: activeTab === "manage" ? "2px solid #1976d2" : "none",
+        paddingBottom: "4px",
+      }}
+      onClick={() => setActiveTab("manage")}
+    >
+      Manage Admin
+    </div>
+    <div
+      style={{
+        fontWeight: activeTab === "invitation" ? "bold" : "normal",
+        color: activeTab === "invitation" ? "#1976d2" : "#9e9e9e",
+        cursor: "pointer",
+        borderBottom: activeTab === "invitation" ? "2px solid #1976d2" : "none",
+        paddingBottom: "4px",
+      }}
+      onClick={() => setActiveTab("invitation")}
+    >
+      Invitations
+    </div>
+  </div>
+
+  {/* Add New Admin Button (only visible on manage tab) */}
+  {activeTab === "manage" && (
+    <button
+      onClick={showAddAdminModal}
+      style={{
+        backgroundColor: "#1976d2",
+        color: "#fff",
+        padding: "8px 16px",
+        border: "none",
+        cursor: "pointer",
+        fontWeight: "bold",
+      }}
+    >
+      Add New Admin
+    </button>
+  )}
+</div>
+
+
+         {/* <div>
+           <FilterSection>
             <FilterLabel>Filter by:</FilterLabel>
             <SelectWrapper>
               <Select
@@ -307,9 +361,11 @@ const filteredData = allAdminsData.filter((admin) => {
               prefix={<Icon icon="mdi:magnify" width="16" height="16" />}
             />
           </FilterSection>
+         </div> */}
+
         </Header>
 
-        <ActionBar>
+        {/* <ActionBar>
           <AddButton onClick={showAddAdminModal}>
             <Icon
               icon="mdi:plus"
@@ -319,17 +375,42 @@ const filteredData = allAdminsData.filter((admin) => {
             />
             Add New Admin
           </AddButton>
-        </ActionBar>
+        </ActionBar> */}
 
         <div className="admins-grid">
-          <CustomGrid
+          {/* <CustomGrid
             columns={columns}
             data={currentPageData}
             currentPage={currentPage}
             pageSize={pageSize}
             totalItems={totalItems}
             onPageChange={handlePageChange}
-          />
+          /> */}
+          {activeTab === "manage" ? (
+  <div className="admins-grid">
+    <CustomGrid
+      columns={columns}
+      data={currentPageData}
+      currentPage={currentPage}
+      pageSize={pageSize}
+      totalItems={totalItems}
+      onPageChange={handlePageChange}
+    />
+    {showModal && <AdminInviteModal onClose={() => setShowModal(false)} />}
+  </div>
+) : (
+  <div className="invitations-grid">
+    <CustomGrid
+      columns={invitationColumns}
+      data={invitationPageData}
+      currentPage={currentPage}
+      pageSize={pageSize}
+      totalItems={totalInvitations}
+      onPageChange={handlePageChange}
+    />
+  </div>
+)}
+
         </div>
       </Container>
 
@@ -488,6 +569,19 @@ const CloseIcon = styled(Icon).attrs({
 const AdminInviteModalWrapper = styled.div`
   .ant-modal-body {
     padding: 0 !important;
+  }
+`;
+const HoverButton = styled(Button)`
+  && {
+    border: 1px solid #004aad;
+    background-color: transparent;
+    color: #000;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  &&:hover {
+    background-color: #004aad;
+    color: #fff;
   }
 `;
 

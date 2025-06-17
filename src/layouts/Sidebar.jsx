@@ -43,7 +43,7 @@ const Sidebar = ({ collapsed, setCollapsed, setMobileSidebarVisible, mobileSideb
           height="20"
         />
       ),
-      label: "Payments",
+      label: "Payouts",
     },
     {
       key: "/premium",

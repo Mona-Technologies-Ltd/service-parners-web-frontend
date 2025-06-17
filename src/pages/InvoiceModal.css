@@ -19,11 +19,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 24px;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 
 .invoice-logo {
   max-width: 150px;
+  /* position: absolute; */
+  /* top: -10px; */
+  margin-top: -100px;
 }
 
 .invoice-info {
@@ -36,10 +39,21 @@
   padding: 24px;
   font-size: 14px;
 }
-
+.i_m_2{
+  width: 100%;
+  border: none;
+  position: absolute;
+  top: 190px;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: start;
+  align-items: center;
+  gap: -1px;
+  /* margin-bottom: 4rem; */
+}
 .invoice-section {
-  background-color: #f5f5f5;
-  padding: 24px;
+  /* background-color: #f5f5f5; */
+  padding: 1px 24px;
   font-size: 14px;
 }
 
@@ -61,7 +75,16 @@ font-size: 0.7rem;
   padding: 8px;
   text-align: left;
 }
-
+.invoice-table-2 th,
+.invoice-table-2 td, .invoice-table-2 tr {
+  border: none;
+  padding: 14px;
+  text-align: left;
+}
+.invoice-table-2 tr {
+  /* box-shadow: 1px 1px 2px 1px gray; */
+  
+}
 .invoice-table thead {
   background-color: #f5f5f5;
 }
@@ -70,7 +93,7 @@ font-size: 0.7rem;
   display: flex;
   justify-content: space-between;
   padding: 24px;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   font-size: 14px;
   gap: 20px;
 }
@@ -90,8 +113,59 @@ font-size: 0.7rem;
   font-size: 12px;
   color: #666;
   padding: 12px 24px;
+
 }
 
 .confidential {
   font-style: italic;
+}
+
+.custom-invoice-modal .ant-modal-content {
+  padding: 0 !important;
+}
+
+.custom-invoice-modal .ant-modal-body {
+  padding: 0 !important;
+}
+@media screen and (max-width: 768px) {
+.invoice-logo {
+  max-width: 150px;
+  /* position: absolute; */
+  /* top: -10px; */
+  margin-top: -50px;
+}
+.invoice-info {
+  text-align: right;
+  font-size: 9px;
+}
+.invoice-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px;
+  /* flex-wrap: wrap; */
+  font-size: 8px;
+  gap: 10px;
+}
+
+
+.invoice-table-section {
+  padding: 24px;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9px;
+}
+.invoice-table th{
+font-size: 0.4rem;
+font-weight: normal;
+}
+.invoice-table th,
+.invoice-table td {
+  border: .7px solid #ccc;
+  padding: 5px;
+  text-align: left;
+}
+
 }

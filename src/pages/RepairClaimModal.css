@@ -1,0 +1,197 @@
+/* RepairClaimModal.css */
+
+.modal-overlays {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999; /* Ensure it appears above everything */
+  width: 100%;
+
+  background-color: rgba(0, 0, 0,.5);
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertically center modal */
+  padding: 40px 16px; /* Space for scroll on small screens */
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.modal-containers {
+  background-color: #fff;
+  width: 50%;
+  /* max-width: 800px; */
+  /* border-radius: 8px; */
+/* height: 100vh; */
+  overflow: hidden;
+  height: 100vh;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Fade-in animation for smooth appearance */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  background-color: #004ba0;
+  color: #fff;
+  padding: 16px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.modal-bodys {
+  padding: 16px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.claim-details,
+.admin-updates,
+.info-section {
+  margin-bottom: 16px;
+}
+.admin-updates{
+    overflow-y: scroll;
+    height: 5rem;
+}
+.info-section h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.info-table {
+  width: 100%;
+      border: none;
+  border-collapse: collapse;
+}
+
+.info-table th,
+.info-table td {
+  padding: 8px;
+  text-align: left;
+  border: .5px solid #ddd;
+      /* border: none; */
+  /* box-shadow: 1px 1px .2px 1px red; */
+}
+
+.info-table tr{
+    border: none;
+    
+}
+.info-table th {
+  background-color: #f8f5f5;
+  font-weight: bold;
+}
+
+.totals p {
+  font-weight: bold;
+}
+
+#action-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+#btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  /* border-radius: 4px; */
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-blue {
+  background-color: #004ba0;
+  color: #fff;
+  border: none;
+}
+
+.btn-green {
+  background-color: #fff;
+  color: #004ba0;
+  border: 1px solid #004ba0;
+}
+
+.btn-red {
+  background-color: #fff;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.btn-gray {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+}
+
+.link {
+  color: #004ba0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.description {
+  background-color: #f4f4f4;
+  padding: 8px;
+  /* border-radius: 4px; */
+  margin-bottom: 8px;
+}
+
+.reviewer-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: #f9f9f9;
+  /* border-radius: 8px; */
+  border: 1px solid #ddd;
+}
+
+.reviewer-card .avatar {
+  background-color: #004ba0;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.green {
+  color: #28a745;
+}
+
+.yellow {
+  color: #ffc107;
+}
+
+.modal-footer {
+  padding: 16px;
+  display: flex;
+  justify-content: flex-end;
+  background-color: #f9f9f9;
+}
+@media (max-width: 768px) {
+  .modal-containers {
+  width: 100%;}
+}

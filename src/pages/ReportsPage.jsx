@@ -6,6 +6,7 @@ import { generateDeviceReportPDF } from "../utils/pdfUtils";
 import dayjs from "dayjs"; // Make sure this is installed
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+import InvoiceModalPremium from "./InvoiceModalPremium";
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
@@ -16,6 +17,9 @@ const ReportsPage = () => {
   const [selectedStatus, setSelectedStatus] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+   const [showInvoiceModal, setShowInvoiceModal] = useState(false); // modal control
+  const [invoiceData, setInvoiceData] = useState(null); // invoice data
+
   const pageSize = 10;
 
   // Sample data for reports
@@ -83,8 +87,8 @@ const ReportsPage = () => {
       render: (status) => {
         const statusStyle = {
           Unpaid: {
-            background: "#FFF8E1",
-            color: "#F57C00",
+            background: "#FFE5DB",
+            color: "#FF4602",
           },
           Paid: {
             background: "#E8F5E9",
@@ -125,31 +129,32 @@ const ReportsPage = () => {
 
   const handlePrint = () => {
     // Generate and download a PDF report
-    generateDeviceReportPDF({
-      reportId: `RPT${Math.floor(100000 + Math.random() * 900000)}`,
-      generatedBy: "Admin 1/Michael James",
-      generatedOn: new Date().toISOString().replace("T", " ").substring(0, 16),
-      version: "1.0",
-      totalDevices: totalItems.toString(),
-      totalPremium: "#100,000",
-      totalSumInsured: "#200,000",
-      statusType: "Paid, Unpaid Premium",
-      dateRange: {
-        from: startDate ? startDate.format("YYYY-MM-DD") : "2025-01-15",
-        to: endDate ? endDate.format("YYYY-MM-DD") : "2025-01-30",
-      },  
-      devices: currentPageData.map((device) => ({
-        deviceId: device.deviceId,
-        brand: device.brand,
-        model: device.model,
-        imei: "12345723170345",
-        totalSumInsured: device.totalSumInsured,
-        premium: device.premium,
-        onboardingDate: device.onboardingDate,
-        expiryDate: device.expiryDate,
-      })),
-    });
+    // generateDeviceReportPDF({
+    //   reportId: `RPT${Math.floor(100000 + Math.random() * 900000)}`,
+    //   generatedBy: "Admin 1/Michael James",
+    //   generatedOn: new Date().toISOString().replace("T", " ").substring(0, 16),
+    //   version: "1.0",
+    //   totalDevices: totalItems.toString(),
+    //   totalPremium: "#100,000",
+    //   totalSumInsured: "#200,000",
+    //   statusType: "Paid, Unpaid Premium",
+    //   dateRange: {
+    //     from: startDate ? startDate.format("YYYY-MM-DD") : "2025-01-15",
+    //     to: endDate ? endDate.format("YYYY-MM-DD") : "2025-01-30",
+    //   },  
+    //   devices: currentPageData.map((device) => ({
+    //     deviceId: device.deviceId,
+    //     brand: device.brand,
+    //     model: device.model,
+    //     imei: "12345723170345",
+    //     totalSumInsured: device.totalSumInsured,
+    //     premium: device.premium,
+    //     onboardingDate: device.onboardingDate,
+    //     expiryDate: device.expiryDate,
+    //   })),
+    // });
     message.success("Premium report downloaded successfully");
+        setShowInvoiceModal(true);
   };
 // Filtered data logic
 const filteredData = reportsData.filter((item) => {
@@ -233,6 +238,12 @@ const totalItems = filteredData.length;
         pageSize={pageSize}
         totalItems={totalItems}
         onPageChange={handlePageChange}
+      />
+       {/* Modal appears here */}
+      <InvoiceModalPremium
+        open={showInvoiceModal}
+        onCancel={() => setShowInvoiceModal(false)}
+        invoiceData={invoiceData}
       />
     </Container>
   );

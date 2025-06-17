@@ -3,12 +3,16 @@ import React, { useEffect, useRef, useState } from 'react';
 import './RepairClaimModal.css';
 import ReviewCardClaim from './ReviewCardClaim';
 import { toast } from 'react-toastify';
+import RepairClaimResponse from "../../pages/RepairClaimResponse";
 
 const RepairClaimModal = ({ isOpen, onClose, device }) => {
   const [showQueryForm, setShowQueryForm] = useState(false);
   const [showApproveConfirm, setShowApproveConfirm] = useState(false);
 const [selectedFileName, setSelectedFileName] = React.useState('');
-
+ const [showResolveModal, setShowResolveModal] = React.useState(false);
+  const [showClaimVideos, setShowClaimVideos] = React.useState(false); // new state
+  const [showResponseForm, setShowResponseForm] = React.useState(false); // New state for Add Response
+const [showResponseModal, setShowResponseModal] = React.useState(false);
 const handleFileChange = (e) => {
   if (e.target.files.length > 0) {
     setSelectedFileName(e.target.files[0].name);
@@ -84,6 +88,11 @@ useEffect(() => {
           <p><strong>Balance:</strong> ₦100,000</p>
         </div>
 
+       {/* Conditional Rendering of Response Form */}
+        <RepairClaimResponse
+  isOpen={showResponseModal}
+  onClose={() => setShowResponseModal(false)}
+/>
         <div className="modal-section">
           <h5>User Information</h5>
           <table>
@@ -128,6 +137,7 @@ useEffect(() => {
           </table>
           <div className="totals">
             <p>Total: <strong>₦120,000</strong></p>
+            {device?.isExcess && (<p><strong>Excess:</strong> {device?.excess}</p>)}
             <p>Amount Payable: <strong>₦120,000</strong></p>
             <p>Device Balance: <strong>₦120,000</strong></p>
           </div>
@@ -161,7 +171,7 @@ useEffect(() => {
 
         <div className="actions">
           <button className="approve-btn" onClick={() => setShowApproveConfirm(true)}>Approve Claim</button>
-          <button className="query-btn" onClick={() => setShowQueryForm(true)}>Query Claim</button>
+          <button className="query-btn"  onClick={() => setShowResponseModal(true)}>Query Claim</button>
         </div>
 
         {/* {showQueryForm && (
@@ -177,6 +187,7 @@ useEffect(() => {
   <h3 className="query-form-title">Query Form</h3>
   <textarea
     className="query-input"
+
     placeholder="Enter your query message here..."
   ></textarea>
 <div className="file-upload-section">
