@@ -333,7 +333,7 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
       value={dateFilter}
       onChange={(value) => setDateFilter(value)}
       placeholder="Date"
-      style={{ width: 150 }}
+      // style={{ width: 150 }}
       suffixIcon={<ArrowIcon />}
     >
       <Select.Option value="">All Dates</Select.Option>
@@ -348,7 +348,7 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
       value={otherFilter}
       onChange={(value) => setOtherFilter(value)}
       placeholder="Other"
-      style={{ width: 150 }}
+      // style={{ width: 150 }}
       suffixIcon={<ArrowIcon />}
     >
       <Select.Option value="">All Issues</Select.Option>
@@ -417,10 +417,14 @@ const ButtonStyleOverrides = createGlobalStyle`
   }
 `;
 
+
 // Styled Components
 const Container = styled.div`
   padding: 20px;
   width: 100%;
+
+    @media (max-width: 768px) {
+  padding: 5px;  }
 `;
 
 const Header = styled.div`
@@ -433,21 +437,41 @@ const Header = styled.div`
 const Title = styled.h1`
   font-size: 24px;
   font-weight: 600;
+
+   @media (max-width: 768px) {
+    font-size: 5px; /* Smaller font for mobile */
+  }
 `;
 
 const FilterSection = styled.div`
   display: flex;
   align-items: center;
+
+  
 `;
 
 const FilterLabel = styled.span`
   margin-right: 12px;
   font-weight: 600;
+
+    @media (max-width: 768px) {
+    font-size: 5px; /* Smaller font for mobile */
+    /* font-weight: 400; */
+  }
 `;
 
 const SelectWrapper = styled.div`
   margin-right: 12px;
+
+  .ant-select {
+    width: 70px;
+
+    @media (max-width: 768px) {
+      width: 120px; /* Reduced width on mobile */
+    }
+  }
 `;
+
 
 const ArrowIcon = styled(Icon).attrs({
   icon: "mdi:chevron-down",
