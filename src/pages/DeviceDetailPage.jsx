@@ -385,8 +385,8 @@ const PlayText = styled.span`
 
 const DownloadVideoButton = styled.button`
   background-color: white;
-  color: #0056b3;
-  border: 1px solid #0056b3;
+  color: #004AAD;
+  border: 1px solid #004AAD;
   padding: 12px 20px;
   cursor: pointer;
   font-weight: 500;
@@ -440,7 +440,7 @@ const PolicyNumber = styled.span`
 `;
 
 const UploadPolicyButton = styled.button`
-  background-color: #0056b3;
+  background-color: #004AAD;
   color: white;
   border: none;
   padding: 12px 20px;
@@ -636,7 +636,7 @@ const ClaimsHeader = styled.div`
   font-size: 18px;
   display: flex;
   align-items: center;
-  color: #0056b3;
+  color: #004AAD;
   margin-bottom: 0;
 
 
@@ -651,7 +651,7 @@ const ClaimsHeader = styled.div`
 
 const ClaimsCount = styled.span`
   margin-left: 8px;
-  color: #0056b3;
+  color: #004AAD;
 `;
 
 const ClaimsList = styled.div`
@@ -722,7 +722,7 @@ const ClaimLabel = styled.span`
 `;
 
 const ClaimValue = styled.span`
-  color: #0056b3;
+  color: #004AAD;
   font-weight: 500;
 
     @media (max-width: 768px) {
@@ -754,7 +754,7 @@ const StatusBadge = styled.span`
 `;
 
 const ViewMoreButton = styled.button`
-  background-color: #0056b3;
+  background-color: #004AAD;
   color: white;
   border: none;
   padding: 5px 16px;

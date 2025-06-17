@@ -64,7 +64,7 @@
 
 /* Header */
 .header {
-  background-color: #004ba0;
+  background-color: #004AAD;
   color: white;
   padding: 16px;
   text-align: center;
@@ -131,9 +131,9 @@
   gap: 4px;
   padding: 8px 12px;
   font-size: 14px;
-  color: #004ba0;
+  color: #004AAD;
   background-color: #eaf3ff;
-  border: 1px solid #004ba0;
+  border: 1px solid #004AAD;
   /* border-radius: 4px; */
   cursor: pointer;
 }
@@ -153,7 +153,7 @@
   padding: 12px;
   font-size: 16px;
   color: white;
-  background-color: #004ba0;
+  background-color: #004AAD;
   border: none;
   border-radius: 4px;
   cursor: pointer;

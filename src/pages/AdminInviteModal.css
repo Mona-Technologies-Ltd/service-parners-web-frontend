@@ -23,7 +23,7 @@
 
 /* Blue Header */
 .modal-header {
-  background-color: #0052cc;
+  background-color: #004AAD;
   padding: 20px;
   text-align: center;
 }
@@ -68,7 +68,7 @@
 
 /* Invite Button */
 .invite-button {
-  background-color: #0052cc;
+  background-color: #004AAD;
   color: white;
   padding: 10px 24px;
   font-size: 14px;
@@ -78,7 +78,7 @@
 }
 
 .invite-button:hover {
-  background-color: #0045b3;
+  background-color: #004AAD;
 }
 .close-btn {
   position: absolute;

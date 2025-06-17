@@ -19,14 +19,14 @@ const StyledModalBody = styled.div`
     width: 100%;
     height: 48px;
     font-weight: 600;
-    background-color: #0052cc;
+    background-color: #004AAD;
     border: none;
     color: #fff;
     font-size: 16px;
   }
 
   .ant-btn:hover {
-    background-color: #003e99;
+    background-color: #004AAD;
   }
 
   .ant-upload-drag {

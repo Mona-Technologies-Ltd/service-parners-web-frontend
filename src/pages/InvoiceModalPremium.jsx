@@ -89,58 +89,7 @@ const InvoiceModalPremium = ({ open, onCancel }) => {
           </table>
         </div>
 
-        {/* <div className="invoice-table-section">
-          <h3>Claims Information</h3>
-          <table className="invoice-table">
-            <thead>
-              <tr>
-                <th>Claim ID</th>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Sum Insured Balance</th>
-                <th>Claim Amount</th>
-                <th>Approved by</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>#0001</td>
-                <td>Samsung</td>
-                <td>Galaxy S20</td>
-                <td>#723,345</td>
-                <td>#123,345</td>
-                <td>Admin 1</td>
-                <td>2025–01–15</td>
-              </tr>
-              <tr>
-                <td>#0001</td>
-                <td>Samsung</td>
-                <td>Galaxy S20</td>
-                <td>#723,345</td>
-                <td>#123,345</td>
-                <td>Admin 1</td>
-                <td>2025–01–15</td>
-              </tr>
-            </tbody>
-          </table>
-        </div> */}
-
-        {/* <div className="invoice-footer">
-          <div className="invoice-payment-details">
-            <h3>Payment Details</h3>
-            <p>Please remit payment to the following account:</p>
-            <p><strong>Account Name:</strong> Mona Protect Limited</p>
-            <p><strong>Bank Name:</strong> Commonwealth Bank</p>
-            <p><strong>Acc #:</strong> 12345678</p>
-            <p><strong>Payment Due Date:</strong> 2024–02–01</p>
-          </div>
-          <div className="invoice-qr">
-            <p><strong>QR Code payment</strong></p>
-            <QRCodeSVG value="https://monaprotect.com/payment-details" size={70} />
-            <p className="qr-note">Scan to verify payment details</p>
-          </div>
-        </div> */}
+   
 <hr />
         <div className="invoice-bottom">
           Generated on: 2025–01–15 16:30 | Page 1 of 1 | Report ID: RPT123456 | Mona Protect<br />

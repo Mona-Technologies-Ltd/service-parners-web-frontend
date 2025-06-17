@@ -36,7 +36,7 @@
 }
 
 .modal-header {
-  background: #0549a8;
+  background: #004AAD;
   color: white;
   /* text-align: center; */
   padding: 1rem;
@@ -87,7 +87,7 @@
 }
 
 .link {
-  color: #0549a8;
+  color: #004AAD;
   cursor: pointer;
 }
 .totals{
@@ -215,7 +215,7 @@
 }
 
 .submit-query {
-  background: #0549a8;
+  background: #004AAD;
   color: white;
   padding: 0.5rem 1rem;
   border: none;
@@ -272,7 +272,7 @@
 }
 
 .yes-btn {
-  background-color: #0047ab;
+  background-color: #004AAD;
   color: white;
   padding: 10px 20px;
   border: none;

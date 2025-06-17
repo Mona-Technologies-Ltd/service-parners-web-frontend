@@ -31,7 +31,7 @@
   align-items: center;
   gap: 12px;
   padding: 24px;
-  border: 1px solid #004aad;
+  border: 1px solid #004AAD;
 }
 
 .brand-logo img {
@@ -84,8 +84,8 @@
 
 .file-claim-btn {
   background: #d7f0ff;
-  color: #004aad;
-  border: 1px solid #004aad;
+  color: #004AAD;
+  border: 1px solid #004AAD;
   padding: 12px 24px;
   font-weight: 500;
   cursor: pointer;
@@ -137,9 +137,9 @@
 }
 
 .view-all-btn {
-  color: #007bff;
+  color: #004AAD;
   background: none;
-  border: 1px solid #007bff;
+  border: 1px solid #004AAD;
   font-weight: 500;
   cursor: pointer;
   padding: 6px 12px;
@@ -166,7 +166,7 @@
 
 .claim-header h3 {
   margin: 0;
-  color: #007bff;
+  color: #004AAD;
 }
 
 .status {
@@ -236,7 +236,7 @@
 }
 
 .user-info span {
-  color: #007bff;
+  color: #004AAD;
   font-size: 14px;
 }
 
@@ -298,7 +298,7 @@
 .alert-icon {
   width: 32px;
   height: 32px;
-  background: #007bff;
+  background: #004AAD;
   border-radius: 50%;
   position: relative;
 }
@@ -325,7 +325,7 @@
 }
 
 .alert-action {
-  color: #007bff;
+  color: #004AAD;
   text-decoration: none;
   font-size: 14px;
   margin-top: 8px;
@@ -1073,20 +1073,20 @@
   }
 
   .view-details-btn {
-    color: #004aad;
-    border-color: #004aad;
+    color: #004AAD;
+    border-color: #004AAD;
     height: 32px;
     padding: 4px 15px;
 
     &:hover {
       color: #fff;
-      background-color: #004aad;
-      border-color: #004aad;
+      background-color: #004AAD;
+      border-color: #004AAD;
     }
   }
 
   .print-btn {
-    background-color: #004aad;
+    background-color: #004AAD;
     height: 32px;
     padding: 4px 15px;
 

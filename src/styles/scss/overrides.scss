@@ -1,14 +1,14 @@
 // Button overrides for QueriedApplicationsPage
 .queried-applications-page {
   .ant-btn.action-button {
-    background-color: #0066cc !important;
+    background-color: #004AAD !important;
     color: white !important;
     border: none !important;
     transition: all 0.3s ease !important;
 
     &:hover,
     &:focus {
-      background-color: #0052a3 !important;
+      background-color: #004AAD !important;
       color: white !important;
       transform: translateY(-2px) !important;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
@@ -24,14 +24,14 @@
 // Button overrides for QueriedApplicationDetailsModal
 .ant-modal {
   .add-response-button {
-    background-color: #0066cc !important;
+    background-color: #004AAD !important;
     color: white !important;
     border: none !important;
     transition: all 0.3s ease !important;
 
     &:hover,
     &:focus {
-      background-color: #005bb5 !important;
+      background-color: #004AAD !important;
       color: white !important;
       transform: translateY(-2px) !important;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
@@ -40,14 +40,14 @@
 
   .approve-button {
     background-color: white !important;
-    color: #0066cc !important;
-    border: 1px solid #0066cc !important;
+    color: #004AAD !important;
+    border: 1px solid #004AAD !important;
     transition: all 0.3s ease !important;
 
     &:hover,
     &:focus {
-      border-color: #005bb5 !important;
-      color: #005bb5 !important;
+      border-color: #004AAD !important;
+      color: #004AAD !important;
       background-color: #f0f7ff !important;
       transform: translateY(-2px) !important;
     }

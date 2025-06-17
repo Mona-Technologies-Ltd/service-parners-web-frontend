@@ -81,21 +81,21 @@
   position: absolute;
   height: 5px;
   width: 100px;
-  background-color: #1277e1; /* Darker Blue */
+  background-color: #004AAD; /* Darker Blue */
 }
 
 .corner-stripes .stripe-1 {
   top: 10px;
   right: -30px;
   transform: rotate(45deg);
-  background-color: #3a90ff; /* Light Blue */
+  background-color: #004AAD; /* Light Blue */
 }
 
 .corner-stripes .stripe-2 {
   top: 25px;
   right: -30px;
   transform: rotate(45deg);
-  background-color: #1277e1; /* Darker Blue */
+  background-color: #004AAD; /* Darker Blue */
 }
 
 

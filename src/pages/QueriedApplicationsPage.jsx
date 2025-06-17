@@ -495,7 +495,7 @@ const NotificationBadge = styled.div`
 `;
 
 const ActionButton = styled(Button)`
-  background: #0066cc !important;
+  background: #004AAD !important;
   color: white !important;
   border: none !important;
   border-radius: 4px;
@@ -508,7 +508,7 @@ const ActionButton = styled(Button)`
   &:hover,
   &:focus,
   &:active {
-    background: #0066cc !important;
+    background: #004AAD !important;
     color: white !important;
     border: none !important;
     box-shadow: none !important;

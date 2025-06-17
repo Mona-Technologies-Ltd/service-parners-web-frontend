@@ -41,7 +41,7 @@
 }
 
 .modal-header {
-  background-color: #004ba0;
+  background-color: #004AAD;
   color: #fff;
   padding: 16px;
   font-size: 20px;
@@ -114,15 +114,15 @@
 }
 
 .btn-blue {
-  background-color: #004ba0;
+  background-color: #004AAD;
   color: #fff;
   border: none;
 }
 
 .btn-green {
   background-color: #fff;
-  color: #004ba0;
-  border: 1px solid #004ba0;
+  color: #004AAD;
+  border: 1px solid #004AAD;
 }
 
 .btn-red {
@@ -138,7 +138,7 @@
 }
 
 .link {
-  color: #004ba0;
+  color: #004AAD;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -161,7 +161,7 @@
 }
 
 .reviewer-card .avatar {
-  background-color: #004ba0;
+  background-color: #004AAD;
   color: #fff;
   width: 40px;
   height: 40px;

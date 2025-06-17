@@ -609,7 +609,7 @@ const ViewButton = styled.button`
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: #0056b3;
+  background-color: #004AAD;
   color: white;
   border: none;
   padding: 5px 15px;

@@ -429,15 +429,15 @@ const MoreButton = styled(Button)`
   gap: 4px;
   padding: 4px 12px;
   height: 32px;
-  color: #0066cc;
-  border: 1px solid #0066cc;
+  color: #004AAD;
+  border: 1px solid #004AAD;
   background: white;
   border-radius: 2px;
   font-size: 14px;
   transition: none;
   &:hover {
-    color: #0066cc;
-    border-color: #0066cc;
+    color: #004AAD;
+    border-color: #004AAD;
     background-color: white;
   }
 `;

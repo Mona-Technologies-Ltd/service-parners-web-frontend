@@ -252,7 +252,7 @@ const SupportPage = () => {
                   fontSize: "16px",
                   color:
                     expandedItem === index || expandedItem === "all"
-                      ? "#00A3FF"
+                      ? "#004AAD"
                       : "#1A2E35",
                 }}
               >
@@ -369,7 +369,7 @@ const SupportPage = () => {
                 {/* Inner circle with icon */}
                 <div
                   style={{
-                    backgroundColor: "#00A3FF",
+                    backgroundColor: "#004AAD",
                     width: "75px",
                     height: "75px",
                     borderRadius: "50%",

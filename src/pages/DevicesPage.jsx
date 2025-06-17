@@ -364,8 +364,8 @@ const PrintButton = styled(Button)`
   &&.ant-btn:focus,
   &&.ant-btn:active {
     color: white !important;
-    background-color: #004aad !important;
-    border-color: #004aad !important;
+    background-color: #004AAD !important;
+    border-color: #004AAD !important;
     box-shadow: none !important;
     opacity: 1 !important;
     transform: none !important;
@@ -395,13 +395,13 @@ const SubscriptionBadge = styled.div`
   border-radius: 4px;
   font-size: 14px;
   background-color: #e3f2fd;
-  color: #1976d2;
+  color: #004AAD;
   text-align: center;
 `;
 
 const ActionButton = styled(Button)`
-  border: 1px solid #0066cc !important;
-  color: #0066cc !important;
+  border: 1px solid #004AAD !important;
+  color: #004AAD !important;
   background: transparent !important;
   transition: none !important;
 
@@ -411,8 +411,8 @@ const ActionButton = styled(Button)`
   &&.ant-btn:hover,
   &&.ant-btn:focus,
   &&.ant-btn:active {
-    color: #0066cc !important;
-    border-color: #0066cc !important;
+    color: #004AAD !important;
+    border-color: #004AAD !important;
     background: transparent !important;
     box-shadow: none !important;
     opacity: 1 !important;

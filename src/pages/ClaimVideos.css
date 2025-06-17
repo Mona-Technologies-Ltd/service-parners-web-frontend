@@ -30,7 +30,7 @@
 }
 
 .video-modal-header {
-  background-color: #002c77;
+  background-color: #004AAD;
   color: white;
   padding: 16px;
   font-weight: bold;
@@ -61,8 +61,8 @@
 .download-btn {
   font-size: 12px;
   background-color: #f2f7ff;
-  color: #0047bb;
-  border: 1px solid #0047bb;
+  color: #004AAD;
+  border: 1px solid #004AAD;
   /* border-radius: 4px; */
   padding: 6px 12px;
   text-decoration: none;

@@ -315,21 +315,21 @@ const TabsContainer = styled.div`
 const TabItem = styled.div`
   padding: 12px 24px;
   cursor: pointer;
-  color: ${(props) => (props.active ? "#0066cc" : "#666")};
+  color: ${(props) => (props.active ? "#004AAD" : "#666")};
   font-weight: ${(props) => (props.active ? "600" : "normal")};
   border-bottom: ${(props) =>
-    props.active ? "2px solid #0066cc" : "2px solid transparent"};
+    props.active ? "2px solid #004AAD" : "2px solid transparent"};
   margin-right: 24px;
   transition: none;
 
   &:hover {
-    color: ${(props) => (props.active ? "#0066cc" : "#666")};
+    color: ${(props) => (props.active ? "#004AAD" : "#666")};
   }
 `;
 
 const PrintButton = styled(Button)`
   margin-left: auto;
-  background-color: #0066cc !important;
+  background-color: #004AAD !important;
   color: white !important;
   border: none !important;
   transition: none !important;
@@ -341,8 +341,8 @@ const PrintButton = styled(Button)`
   &&.ant-btn:focus,
   &&.ant-btn:active {
     color: white !important;
-    background-color: #0066cc !important;
-    border-color: #0066cc !important;
+    background-color: #004AAD !important;
+    border-color: #004AAD !important;
     box-shadow: none !important;
     opacity: 1 !important;
     transform: none !important;
