@@ -139,20 +139,7 @@ const [claimsPayout, setClaimsPayout] = useState(() => filterPayouts());
       date: "2025-01-15",
     }));
 
-  // Sample data for payouts
-  // const payoutsData = Array(3)
-  //   .fill(null)
-  //   .map((_, index) => ({
-  //     id: index + 1,
-  //     sn: `0${index + 1}`,
-  //     reference: "DWERTHY908",
-  //     approvedClaims: 5,
-  //     amount: "₦23,345",
-  //     dv: index === 0 ? "Upload" : index === 1 ? "Signed" : "Unsigned",
-  //     paymentStatus: index === 0 ? "Pending" : "Paid",
-  //     createdBy: "Admin 1",
-  //     date: "2025-01-15",
-  //   }));
+
 
   // Calculate current page data for claims
   const startIndex = (currentPage - 1) * pageSize;

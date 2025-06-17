@@ -4,6 +4,7 @@ import './RepairClaimModal.css';
 import ReviewCardClaim from './ReviewCardClaim';
 import { toast } from 'react-toastify';
 import RepairClaimResponse from "../../pages/RepairClaimResponse";
+import ClaimVideos from "../../pages/ClaimVideos";
 
 const RepairClaimModal = ({ isOpen, onClose, device }) => {
   const [showQueryForm, setShowQueryForm] = useState(false);
@@ -144,8 +145,10 @@ useEffect(() => {
         </div>
 
         <div className="modal-section">
-          <h6>Review Damage: <button className="watch-video">Watch Video <RxVideo /></button></h6>
-
+          <h6>Review Damage: <button className="watch-video" style={{ borderRadius:0 }} onClick={() => setShowClaimVideos(true)}>Watch Video <RxVideo /></button></h6>
+   {showClaimVideos && (
+            <ClaimVideos onClose={() => setShowClaimVideos(false)} />
+          )}
           <h6>General Description</h6>
           <p><strong>When</strong></p>
           <div className="desc-box">Lorem ipsum dolor sit amet...</div>

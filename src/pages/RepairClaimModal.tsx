@@ -5,6 +5,7 @@ import ResolveClaimModal from "./ResolveClaimModal";
 import ClaimVideos from "./ClaimVideos";
 import RepairClaimResponse from "./RepairClaimResponse";
 import ReviewCardClaim from "../components/claim/ReviewCardClaim";
+import { RxVideo } from "react-icons/rx";
 
 const RepairClaimModal = ({ isOpen, onClose, device }) => {
     const [showResolveModal, setShowResolveModal] = React.useState(false);
@@ -145,8 +146,7 @@ console.log(device)
           {/* Review Damage */}
           <div className="info-section">
             <h3>Review Damage:</h3>
-            <button id="btn" className="btn-red"               onClick={() => setShowClaimVideos(true)}
->Watch Video</button>
+            <button id="btn" className="btn-red" onClick={() => setShowClaimVideos(true)}>Watch Video <RxVideo /></button>
           </div>
  {/* Video Modal */}
           {showClaimVideos && (

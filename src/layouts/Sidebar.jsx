@@ -36,7 +36,7 @@ const Sidebar = ({ collapsed, setCollapsed, setMobileSidebarVisible, mobileSideb
       label: "Devices",
     },
     {
-      key: "/payments",
+      key: "/payout",
       icon: (
         <Icon
           icon="fluent:wallet-credit-card-16-regular"

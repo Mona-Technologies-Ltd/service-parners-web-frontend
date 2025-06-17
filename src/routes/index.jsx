@@ -60,7 +60,7 @@ const router = createBrowserRouter([
         element: <DeviceDetailPage />,
       },
       {
-        path: "/payments",
+        path: "/payout",
         element: <PaymentPage />,
       },
       {
