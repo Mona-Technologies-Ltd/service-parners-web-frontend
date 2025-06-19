@@ -14,6 +14,8 @@ const DevicesPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
+
+
   // Mock data for the devices table
   const allDevicesData = Array(120)
     .fill(null)
@@ -30,6 +32,11 @@ const DevicesPage = () => {
       claims: 3,
       subscription: "Active",
     }));
+      const awaitingPolicyUploadData = allDevicesData.map((item, index) => ({
+  ...item,
+  premiumStatus: index % 2 === 0 ? "Pending" : "Paid",
+  subscription: index % 2 === 0 ? "Expired" : "Active",
+}));
 const filteredDevices = allDevicesData.filter((device) => {
   const matchesModel =
     !selectedDeviceModel || device.model === selectedDeviceModel;
@@ -52,7 +59,9 @@ const totalItems = filteredDevices.length;
 const startIndex = (currentPage - 1) * pageSize;
 const endIndex = startIndex + pageSize;
 const currentPageData = filteredDevices.slice(startIndex, endIndex);
-
+// Modify the currentPageData calculation like this:
+const displayedData =
+  activeTab === "Devices" ? currentPageData : awaitingPolicyUploadData.slice(startIndex, endIndex);
   // Calculate current page data
   // const startIndex = (currentPage - 1) * pageSize;
   // const endIndex = startIndex + pageSize;
@@ -91,37 +100,64 @@ const currentPageData = filteredDevices.slice(startIndex, endIndex);
       key: "premium",
     },
     {
-      title: "Premium Status",
-      dataIndex: "premiumStatus",
-      key: "premiumStatus",
-      render: (status) => {
-        const statusStyle = {
-          Pending: {
-            background: "#FFF8E1",
-            color: "#F57C00",
-          },
-          Paid: {
-            background: "#E8F5E9",
-            color: "#2E7D32",
-          },
-        };
-
-        return <StatusBadge style={statusStyle[status]}>{status}</StatusBadge>;
+  title: "Premium Status",
+  dataIndex: "premiumStatus",
+  key: "premiumStatus",
+  render: (status) => {
+    const statusStyle = {
+      Pending: {
+        background: "#FFE5DB",
+        color: "#FFB82E",
+        // borderRadius: "4px",
+        padding: "4px 8px",
+        display: "inline-block",
+        width:'100%'
       },
-    },
+      Paid: {
+            background: "#DCEBFF",
+        color: "#004AAD",
+        // borderRadius: "4px",
+        padding: "4px 8px",
+        display: "inline-block",
+          width:'100%'
+      },
+    };
+    return <span style={statusStyle[status]}>{status}</span>;
+  },
+},
+
     {
       title: "Claims",
       dataIndex: "claims",
       key: "claims",
     },
+
     {
-      title: "Subscription",
-      dataIndex: "subscription",
-      key: "subscription",
-      render: (status) => {
-        return <SubscriptionBadge>{status}</SubscriptionBadge>;
+  title: "Subscription",
+  dataIndex: "subscription",
+  key: "subscription",
+  render: (status) => {
+    const subStyle = {
+      Expired: {
+        background: "#FFE5DB",
+        color: "#FF4602",
+        // borderRadius: "4px",
+        padding: "4px 8px",
+        display: "inline-block",
+          width:'100%'
       },
-    },
+      Active: {
+        background: "#DCEBFF",
+        color: "#004AAD",
+        // borderRadius: "4px",
+        padding: "4px 8px",
+        display: "inline-block",
+          width:'100%'
+      },
+    };
+    return <span style={subStyle[status]}>{status}</span>;
+  },
+},
     {
       title: "Action",
       key: "action",
@@ -198,6 +234,7 @@ const currentPageData = filteredDevices.slice(startIndex, endIndex);
     >
       <Container>
         <Header>
+          <h6>Devices</h6>
           {/* <Title>Devices</Title> */}
           <FilterSection>
             <FilterLabel>Filter by:</FilterLabel>
@@ -246,7 +283,7 @@ const currentPageData = filteredDevices.slice(startIndex, endIndex);
             <SearchInput placeholder="Search" onChange={handleSearchChange} />
           </FilterSection>
         </Header>
-
+        
         <TabsContainer>
           <TabItem
             active={activeTab === "Devices"}
@@ -267,20 +304,161 @@ const currentPageData = filteredDevices.slice(startIndex, endIndex);
         </TabsContainer>
 
         <div className="sales-page">
+          
           <CustomGrid
-            columns={columns}
-            data={currentPageData}
-            currentPage={currentPage}
-            pageSize={pageSize}
-            totalItems={totalItems}
-            onPageChange={handlePageChange}
-          />
+  columns={columns}
+  data={displayedData}
+  currentPage={currentPage}
+  pageSize={pageSize}
+  totalItems={totalItems}
+  onPageChange={handlePageChange}
+/>
+
         </div>
       </Container>
     </div>
   );
 };
 
+// Styled Components
+// const Container = styled.div`
+//   padding: 20px;
+//   width: 100%;
+// `;
+
+// const Header = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   margin-bottom: 20px;
+// `;
+
+// const Title = styled.h1`
+//   font-size: 24px;
+//   font-weight: 600;
+//   color: #333;
+//   margin: 0;
+// `;
+
+// const FilterSection = styled.div`
+//   display: flex;
+//   align-items: center;
+//   gap: 10px;
+// `;
+
+// const FilterLabel = styled.span`
+//   font-size: 14px;
+//   color: #666;
+// `;
+
+// const SelectWrapper = styled.div``;
+
+// const ArrowIcon = styled.span`
+//   &:after {
+//     content: "▼";
+//     font-size: 10px;
+//   }
+// `;
+
+// const SearchInput = styled(Input)`
+//   width: 200px;
+// `;
+
+// const TabsContainer = styled.div`
+//   display: flex;
+//   border-bottom: 1px solid #e0e0e0;
+//   margin-bottom: 20px;
+//   position: relative;
+// `;
+
+// const TabItem = styled.div`
+//   padding: 10px 20px;
+//   font-size: 16px;
+//   cursor: pointer;
+//   color: ${(props) => (props.active ? "#0066cc" : "#666")};
+//   border-bottom: ${(props) => (props.active ? "2px solid #0066cc" : "none")};
+//   font-weight: ${(props) => (props.active ? "600" : "normal")};
+//   transition: none;
+
+//   &:hover {
+//     color: ${(props) => (props.active ? "#0066cc" : "#666")};
+//   }
+// `;
+
+// const PrintButton = styled(Button)`
+//   position: absolute;
+//   right: 0;
+//   top: 5px;
+//   background-color: #004aad !important;
+//   color: white !important;
+//   border: none !important;
+//   height: 26px;
+//   width: 60px;
+//   transition: none !important;
+
+//   &&&&:hover,
+//   &&&&:focus,
+//   &&&&:active,
+//   &&.ant-btn:hover,
+//   &&.ant-btn:focus,
+//   &&.ant-btn:active {
+//     color: white !important;
+//     background-color: #004AAD !important;
+//     border-color: #004AAD !important;
+//     box-shadow: none !important;
+//     opacity: 1 !important;
+//     transform: none !important;
+//     filter: none !important;
+//   }
+
+//     @media (max-width: 768px) {
+//         height: 26px;
+//         width: 60px;
+//         font-size: .5rem;
+//          right: -1rem;
+//   }
+// `;
+
+// const StatusBadge = styled.div`
+//   display: inline-block;
+//   padding: 4px 12px;
+//   /* border-radius: 4px; */
+//   font-size: 14px;
+//   text-align: center;
+//   width: 10rem;
+// `;
+
+// const SubscriptionBadge = styled.div`
+//   display: inline-block;
+//   padding: 4px 12px;
+//   border-radius: 4px;
+//   font-size: 14px;
+//   background-color: #e3f2fd;
+//   color: #004AAD;
+//   text-align: center;
+// `;
+
+// const ActionButton = styled(Button)`
+//   border: 1px solid #004AAD !important;
+//   color: #004AAD !important;
+//   background: transparent !important;
+//   transition: none !important;
+
+//   &&&&:hover,
+//   &&&&:focus,
+//   &&&&:active,
+//   &&.ant-btn:hover,
+//   &&.ant-btn:focus,
+//   &&.ant-btn:active {
+//     color: #004AAD !important;
+//     border-color: #004AAD !important;
+//     background: transparent !important;
+//     box-shadow: none !important;
+//     opacity: 1 !important;
+//     transform: none !important;
+//     filter: none !important;
+//   }
+// `;
 // Styled Components
 const Container = styled.div`
   padding: 20px;
@@ -292,12 +470,18 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 `;
 
 const Title = styled.h1`
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 600;
-  color: #333;
+  color: #000;
   margin: 0;
 `;
 
@@ -305,14 +489,27 @@ const FilterSection = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
 `;
 
 const FilterLabel = styled.span`
   font-size: 14px;
-  color: #666;
+  color: #000;
 `;
 
-const SelectWrapper = styled.div``;
+const SelectWrapper = styled.div`
+  .ant-select {
+    width: 150px;
+    border-radius: 4px;
+    height: 40px;
+  }
+
+  .ant-select-selector {
+    height: 40px !important;
+    display: flex;
+    align-items: center;
+  }
+`;
 
 const ArrowIcon = styled.span`
   &:after {
@@ -323,6 +520,8 @@ const ArrowIcon = styled.span`
 
 const SearchInput = styled(Input)`
   width: 200px;
+  height: 40px;
+  border-radius: 4px;
 `;
 
 const TabsContainer = styled.div`
@@ -372,18 +571,17 @@ const PrintButton = styled(Button)`
     filter: none !important;
   }
 
-    @media (max-width: 768px) {
-        height: 26px;
-        width: 60px;
-        font-size: .5rem;
-         right: -1rem;
+  @media (max-width: 768px) {
+    height: 26px;
+    width: 60px;
+    font-size: 0.5rem;
+    right: -1rem;
   }
 `;
 
 const StatusBadge = styled.div`
   display: inline-block;
   padding: 4px 12px;
-  /* border-radius: 4px; */
   font-size: 14px;
   text-align: center;
   width: 10rem;

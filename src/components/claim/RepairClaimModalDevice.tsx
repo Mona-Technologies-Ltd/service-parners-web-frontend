@@ -3,11 +3,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import './RepairClaimModal.css';
 import ReviewCardClaim from './ReviewCardClaim';
 import { toast } from 'react-toastify';
+import ClaimVideos from "../../pages/ClaimVideos";
+import RepairClaimResponse from "../../pages/RepairClaimResponse";
 
 const RepairClaimModalDevice = ({ isOpen, onClose, device }) => {
   const [showQueryForm, setShowQueryForm] = useState(false);
   const [showApproveConfirm, setShowApproveConfirm] = useState(false);
 const [selectedFileName, setSelectedFileName] = React.useState('');
+  const [showClaimVideos, setShowClaimVideos] = React.useState(false); // new state
+const [showResponseModal, setShowResponseModal] = React.useState(false);
 
 const handleFileChange = (e) => {
   if (e.target.files.length > 0) {
@@ -113,8 +117,11 @@ useEffect(() => {
             </tbody>
           </table>
         </div>
-
-        <div className="modal-section">
+ {/* Video Modal */}
+          {showClaimVideos && (
+            <ClaimVideos onClose={() => setShowClaimVideos(false)} />
+          )}
+        <div className="modal-section modal-section2">
           <h5>Claims Information</h5>
           <table>
             <thead>
@@ -127,44 +134,41 @@ useEffect(() => {
             </tbody>
           </table>
           <div className="totals">
-            <p>Total: <strong>₦120,000</strong></p>
-            <p>Device Balance: <strong>₦120,000</strong></p>
-            <p>Amount Payable: <strong>₦120,000</strong></p>
+            <p>Total: ₦120,000</p>
+            <p>Device Balance: ₦120,000</p>
+            <p>Amount Payable: ₦120,000</p>
 
           </div>
         </div>
 
         <div className="modal-section">
-          <h6>Review Damage: <button className="watch-video">Watch Video <RxVideo /></button></h6>
+          <h6>Review Damage: <button className="watch-video" onClick={() => setShowClaimVideos(true)}>Watch Video <RxVideo /></button></h6>
 
           <h6>General Description</h6>
           <p><strong>When</strong></p>
-          <div className="desc-box">Lorem ipsum dolor sit amet...</div>
+          <div className="desc-box">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</div>
 
           <p><strong>Where</strong></p>
-          <div className="desc-box">Lorem ipsum dolor sit amet...</div>
+          <div className="desc-box">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</div>
 
           <p><strong>How</strong></p>
-          <div className="desc-box">Lorem ipsum dolor sit amet...</div>
+          <div className="desc-box">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</div>
         </div>
 
         <div id="review-box">
           <ReviewCardClaim />
-          {/* <div className="review-card">
-            <h4>John Doe</h4>
-            <p className="claim-id">Claim ID: CL-134763</p>
-            <p className="claim-type">Accidental Damage</p>
-            <p className="comment">Alive did a great job assisting us...</p>
-            <div className="rating">4.5 ★</div>
-            <div className="timestamp">2 months ago</div>
-          </div> */}
+         
         </div>
 
         <div className="actions">
           <button className="approve-btn" onClick={() => setShowApproveConfirm(true)}>Approve Claim</button>
-          <button className="query-btn" onClick={() => setShowQueryForm(true)}>Query Claim</button>
+          <button className="query-btn" onClick={() => setShowResponseModal(true)}>Query Claim</button>
         </div>
-
+      {/* Conditional Rendering of Response Form */}
+        <RepairClaimResponse
+  isOpen={showResponseModal}
+  onClose={() => setShowResponseModal(false)}
+/>
         {/* {showQueryForm && (
           <div className="query-form-modal">
             <h3>Query Form</h3>
@@ -173,7 +177,7 @@ useEffect(() => {
             <button className="submit-query">Submit Query</button>
           </div>
         )} */}
-        {showQueryForm && (
+        {/* {showQueryForm && (
    <div className="query-form-modal" ref={queryRef}>
   <h3 className="query-form-title">Query Form</h3>
   <textarea
@@ -196,8 +200,8 @@ useEffect(() => {
   <button className="submit-query-btn" onClick={handleSubmitQuery}>
     Submit Query
   </button>
-</div>
-      )}
+</div> */}
+      {/* )} */}
 {showApproveConfirm && (
   <div className="confirm-modal-overlay" onClick={() => setShowApproveConfirm(false)}>
     <div className="confirm-modal" onClick={e => e.stopPropagation()}>

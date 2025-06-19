@@ -66,19 +66,20 @@
 .header {
   background-color: #004AAD;
   color: white;
-  padding: 16px;
+  padding: 13px;
   text-align: center;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 17px;
+  font-weight: 600;
+  
 }
 
 /* Claim Details */
-.claim-details {
+.claim-detailss{
   padding: 16px;
   border-bottom: 1px solid #ddd;
 }
 
-.claim-details p {
+.claim-detailss p {
   margin: 4px 0;
   font-size: 14px;
 }
@@ -125,16 +126,15 @@
   margin-bottom: 12px;
 }
 
-.file-label {
+.file-labels {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   padding: 8px 12px;
   font-size: 14px;
   color: #004AAD;
-  background-color: #eaf3ff;
+  background-color: transparent;
   border: 1px solid #004AAD;
-  /* border-radius: 4px; */
   cursor: pointer;
 }
 
@@ -148,17 +148,13 @@
 }
 
 /* Submit Button */
-.submit-btn {
+.resp_btn {
   width: 100%;
   padding: 12px;
   font-size: 16px;
   color: white;
   background-color: #004AAD;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
 }
 
-.submit-btn:hover {
-  background-color: #00397a;
-}

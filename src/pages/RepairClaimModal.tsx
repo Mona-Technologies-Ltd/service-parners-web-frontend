@@ -1,17 +1,19 @@
 import React from "react";
 import "./RepairClaimModal.css";
 // import ReviewCardClaim from "./ReviewCardClaim";
-import ResolveClaimModal from "./ResolveClaimModal";
+// import ResolveClaimModal from "./ResolveClaimModal";
 import ClaimVideos from "./ClaimVideos";
 import RepairClaimResponse from "./RepairClaimResponse";
 import ReviewCardClaim from "../components/claim/ReviewCardClaim";
 import { RxVideo } from "react-icons/rx";
+import { toast } from 'react-toastify';
 
 const RepairClaimModal = ({ isOpen, onClose, device }) => {
     const [showResolveModal, setShowResolveModal] = React.useState(false);
   const [showClaimVideos, setShowClaimVideos] = React.useState(false); // new state
   const [showResponseForm, setShowResponseForm] = React.useState(false); // New state for Add Response
 const [showResponseModal, setShowResponseModal] = React.useState(false);
+  const [showApproveConfirm, setShowApproveConfirm] = React.useState(false);
 
   if (!isOpen) return null;
 console.log(device)
@@ -30,21 +32,21 @@ console.log(device)
           </div>
 
           {/* Admin Updates */}
-          <div className="admin-updates">
+         {device?.isQuery && device?.isResponse && ( <div className="admin-updates">
             <p>Admin John Doe | 2025-01-15 10:30 AM</p>
             <p>Please ensure the documents are correctly uploaded</p>
             <p>Admin Jane Smith | 2025-01-15 11:00 AM</p>
             <p>Awaiting confirmation from the customer</p>
-          </div>
+          </div>)}
 {
-    device?.isClosed  && ( <div id="action-buttons">
+    !device?.isClosed && device?.status.toLowerCase() !== 'pending'  && ( <div id="action-buttons">
             <button id="btn" className="btn-blue"               
   onClick={() => setShowResponseModal(true)}
 >Add Response</button>
             <button id="btn" className="btn-green"  onClick={() => setShowResolveModal(true)}>Approve Claim</button>
           </div>)
 }
-{!device?.isClosed && (
+{device?.isClosed && device?.isQuery && (
   <button className="Closed_btn">Closed</button>
 )}
        {/* Conditional Rendering of Response Form */}
@@ -54,7 +56,7 @@ console.log(device)
 />
 
 
-        {showResolveModal && (
+        {/* {showResolveModal && (
             <ResolveClaimModal
               onResolve={() => {
                 console.log("Resolved");
@@ -62,7 +64,7 @@ console.log(device)
               }}
               onCancel={() => setShowResolveModal(false)}
             />
-          )}
+          )} */}
 
           {/* User Info */}
           <div className="info-section">
@@ -100,9 +102,9 @@ console.log(device)
               </thead>
               <tbody>
                 <tr>
-                  <td>{device?.deviceId}</td>
-                  <td>{device?.deviceBrand}</td>
-                  <td>{device?.model}</td>
+                  <td className="link">{device?.deviceId}</td>
+                  <td>{device?.deviceModel}</td>
+                  <td>{device?.deviceModel}</td>
                   <td>356789123456789</td>
                   <td className="link">View More</td>
                 </tr>
@@ -144,9 +146,9 @@ console.log(device)
           </div>
 
           {/* Review Damage */}
-          <div className="info-section">
+          <div className="info-section info-review">
             <h3>Review Damage:</h3>
-            <button id="btn" className="btn-red" onClick={() => setShowClaimVideos(true)}>Watch Video <RxVideo /></button>
+            <button  className="btn-red" onClick={() => setShowClaimVideos(true)}>Watch Video <RxVideo /></button>
           </div>
  {/* Video Modal */}
           {showClaimVideos && (
@@ -158,19 +160,37 @@ console.log(device)
             <h3>General Description</h3>
             <div>
               <h4>When</h4>
-              <p className="description">Lorem ipsum dolor sit amet...</p>
+              <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</p>
             </div>
             <div>
               <h4>Where</h4>
-              <p className="description">Lorem ipsum dolor sit amet...</p>
+              <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</p>
             </div>
             <div>
               <h4>How</h4>
-              <p className="description">Lorem ipsum dolor sit amet...</p>
+              <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</p>
             </div>
             
           </div>
   <ReviewCardClaim />
+  {device?.status.toLowerCase() == 'pending'  || device?.status.toLowerCase() == 'queried' ? (
+           <div className="actionsRepair">
+         <button
+          className="approve-btn"
+          onClick={() => {
+            toast.success("Claim Approved Successfully");
+            setTimeout(() => {
+              onClose();
+            }, 1000); // closes after 1 second
+          }}
+        >
+          Approve Claim
+        </button>
+
+          <button className="query-btn"  onClick={() => setShowResponseModal(true)}>Query Claim</button>
+          
+        </div>
+          ) : ''}
         
         </div>
       </div>

@@ -249,6 +249,7 @@ const GridContainer = styled.div`
     text-align: center;
     /* background: red; */
     /* width: 1rem; */
+    color: #000;
   }
 
   .grid-footer {

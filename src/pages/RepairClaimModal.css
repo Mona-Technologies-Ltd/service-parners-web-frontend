@@ -18,7 +18,7 @@
 
 .modal-containers {
   background-color: #fff;
-  width: 50%;
+  width: 40%;
   /* max-width: 800px; */
   /* border-radius: 8px; */
 /* height: 100vh; */
@@ -68,7 +68,10 @@
   font-size: 18px;
   margin-bottom: 8px;
 }
-
+.info-review{
+  display: flex;
+  gap: 1rem;
+}
 .info-table {
   width: 100%;
       border: none;
@@ -104,7 +107,14 @@
   margin-bottom: 16px;
   flex-wrap: wrap;
 }
+.actionsRepair {
+  display: flex;
+    /* flex-direction: column; */
+    justify-content: space-around;
+    gap: 0.5rem;
+    margin-top: 2rem;
 
+  }
 #btn {
   padding: 8px 16px;
   font-size: 14px;
@@ -197,5 +207,17 @@
 
   .info-table{
     font-size: 0.5rem;
+  }
+.actionsRepair {
+    /* flex-direction: column; */
+    justify-content: center;
+    gap: 0.5rem;
+
+  }
+
+  .approve-btn,
+  .query-btn {
+    width: 40%;
+    font-size: 0.6rem;
   }
 }
