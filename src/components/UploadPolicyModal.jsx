@@ -105,7 +105,7 @@ const FileUploadText = styled.span`
 
 const ModalActions = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 12px;
   margin-top: 20px;
 `;
