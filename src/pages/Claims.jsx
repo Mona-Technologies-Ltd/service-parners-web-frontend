@@ -607,6 +607,7 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
   return (
     <div
       style={{
+        width:'100%', 
         background: "#fff",
         boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
         borderRadius: "0",
@@ -616,6 +617,7 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
       <div className="sales-page">
         <div
           style={{
+            width:'100%', 
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -623,51 +625,62 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
             gap: "16px",
           }}
         >
-          <h5>Repair Claims</h5>
-          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <div style={{ }}>
-              <span>Filter by:</span>
-              <Select
-  placeholder="Status"
-  style={{ width: "200px" }}
-  onChange={(value) => setStatusFilter(value)}
-  options={[
-    { value: "awaiting", label: "Awaiting" },
-    { value: "approved", label: "Approved" },
-    { value: "completed", label: "Completed" },
-    { value: "paid", label: "Paid" },
-    { value: "rejected", label: "Rejected" },
-  ]}
-/>
+        
+          <div style={{ width:'100%', display: "flex", alignItems: "center", gap: "16px" }}>
+  <FilterContainer>
+  <LeftTitle>
+    <h5>Repair Claims</h5>
+  </LeftTitle>
 
-<Select
-  placeholder="Date"
-  style={{ width: "200px" }}
-  onChange={(value) => setDateFilter(value)}
-  options={[
-    { value: "today", label: "Today" },
-    { value: "yesterday", label: "Yesterday" },
-    { value: "last7days", label: "Last 7 Days" },
-    { value: "last30days", label: "Last 30 Days" },
-    { value: "thisMonth", label: "This Month" },
-    { value: "lastMonth", label: "Last Month" },
-  ]}
-/>
+  <RightFilters>
+    <SelectWrapper>
+      <FilterLabel>Status:</FilterLabel>
+      <Select
+        placeholder="Status"
+        onChange={(value) => setStatusFilter(value)}
+        options={[
+          { value: "awaiting", label: "Awaiting" },
+          { value: "approved", label: "Approved" },
+          { value: "completed", label: "Completed" },
+          { value: "paid", label: "Paid" },
+          { value: "rejected", label: "Rejected" },
+        ]}
+      />
+    </SelectWrapper>
 
-<Select
-  placeholder="Other"
-  style={{ width: "200px" }}
-  onChange={(value) => setOtherFilter(value)}
-  options={[
-    { value: "awaiting", label: "Awaiting" },
-    { value: "approved", label: "Approved" },
-    { value: "completed", label: "Completed" },
-    { value: "paid", label: "Paid" },
-    { value: "rejected", label: "Rejected" },
-  ]}
-/>
+    <SelectWrapper>
+      <FilterLabel>Date:</FilterLabel>
+      <Select
+        placeholder="Date"
+        onChange={(value) => setDateFilter(value)}
+        options={[
+          { value: "today", label: "Today" },
+          { value: "yesterday", label: "Yesterday" },
+          { value: "last7days", label: "Last 7 Days" },
+          { value: "last30days", label: "Last 30 Days" },
+          { value: "thisMonth", label: "This Month" },
+          { value: "lastMonth", label: "Last Month" },
+        ]}
+      />
+    </SelectWrapper>
+    <SelectWrapper>
+      <FilterLabel>Other:</FilterLabel>
+      <Select
+        placeholder="Other"
+        onChange={(value) => setOtherFilter(value)}
+        options={[
+          { value: "awaiting", label: "Awaiting" },
+          { value: "approved", label: "Approved" },
+          { value: "completed", label: "Completed" },
+          { value: "paid", label: "Paid" },
+          { value: "rejected", label: "Rejected" },
+        ]}
+      />
+    </SelectWrapper>
+  </RightFilters>
+</FilterContainer>
 
-            </div>
+
           </div>
         </div>
 
@@ -693,162 +706,73 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
 };
 
 export default Claims;
-// Styled Components
-const Container = styled.div`
-  padding: 20px;
+const FilterContainer = styled.div`
   width: 100%;
-`;
-
-const Header = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
   margin-bottom: 20px;
+  gap: 16px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const LeftTitle = styled.div`
+  flex-shrink: 0;
+
+  h5 {
+    margin: 0;
+    font-size: 18px;
+  }
+`;
+
+const RightFilters = styled.div`
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-end;
 
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
   }
 `;
 
-const Title = styled.h1`
-  font-size: 16px;
-  font-weight: 600;
-  color: #000;
-  margin: 0;
-`;
-
-const FilterSection = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-`;
-
-const FilterLabel = styled.span`
-  font-size: 14px;
-  color: #000;
-`;
-
+// Styled Components
 const SelectWrapper = styled.div`
   .ant-select {
-    width: 150px;
+    width: 140px; /* Smaller default */
     border-radius: 4px;
-    height: 40px;
+    height: 36px;
   }
 
   .ant-select-selector {
-    height: 40px !important;
+    height: 36px !important;
     display: flex;
     align-items: center;
-  }
-`;
-
-const ArrowIcon = styled.span`
-  &:after {
-    content: "▼";
-    font-size: 10px;
-  }
-`;
-
-const SearchInput = styled(Input)`
-  width: 200px;
-  height: 40px;
-  border-radius: 4px;
-`;
-
-const TabsContainer = styled.div`
-  display: flex;
-  border-bottom: 1px solid #e0e0e0;
-  margin-bottom: 20px;
-  position: relative;
-`;
-
-const TabItem = styled.div`
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  color: ${(props) => (props.active ? "#0066cc" : "#666")};
-  border-bottom: ${(props) => (props.active ? "2px solid #0066cc" : "none")};
-  font-weight: ${(props) => (props.active ? "600" : "normal")};
-  transition: none;
-
-  &:hover {
-    color: ${(props) => (props.active ? "#0066cc" : "#666")};
-  }
-`;
-
-const PrintButton = styled(Button)`
-  position: absolute;
-  right: 0;
-  top: 5px;
-  background-color: #004aad !important;
-  color: white !important;
-  border: none !important;
-  height: 26px;
-  width: 60px;
-  transition: none !important;
-
-  &&&&:hover,
-  &&&&:focus,
-  &&&&:active,
-  &&.ant-btn:hover,
-  &&.ant-btn:focus,
-  &&.ant-btn:active {
-    color: white !important;
-    background-color: #004AAD !important;
-    border-color: #004AAD !important;
-    box-shadow: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
+    font-size: 13px;
   }
 
   @media (max-width: 768px) {
-    height: 26px;
-    width: 60px;
-    font-size: 0.5rem;
-    right: -1rem;
+    .ant-select {
+      width: 100%; /* full width on small screens */
+    }
+  }
+`;
+// Filter container holding all Select filters
+
+
+// Label before the filters
+const FilterLabel = styled.span`
+  font-size: 14px;
+  color: #000;
+  font-weight: 500;
+
+  @media (max-width: 768px) {
+    margin-bottom: 4px;
   }
 `;
 
-const StatusBadge = styled.div`
-  display: inline-block;
-  padding: 4px 12px;
-  font-size: 14px;
-  text-align: center;
-  width: 10rem;
-`;
-
-const SubscriptionBadge = styled.div`
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 4px;
-  font-size: 14px;
-  background-color: #e3f2fd;
-  color: #004AAD;
-  text-align: center;
-`;
-
-const ActionButton = styled(Button)`
-  border: 1px solid #004AAD !important;
-  color: #004AAD !important;
-  background: transparent !important;
-  transition: none !important;
-
-  &&&&:hover,
-  &&&&:focus,
-  &&&&:active,
-  &&.ant-btn:hover,
-  &&.ant-btn:focus,
-  &&.ant-btn:active {
-    color: #004AAD !important;
-    border-color: #004AAD !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-  }
-`;
