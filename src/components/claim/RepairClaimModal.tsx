@@ -81,7 +81,7 @@ useEffect(() => {
       <div className="repair-modal" ref={modalRef}>
         <div className="modal-header">Repair Claim Details</div>
 
-        <div className="modal-section">
+        <div className="modal-section ">
           <p><strong>Claim ID:</strong> {device?.claimId || '12345678'}</p>
           <p><strong>Created On:</strong> 2025-01-15</p>
           <p><strong>Claim Type:</strong> Accidental Damage</p>

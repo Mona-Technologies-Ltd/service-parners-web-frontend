@@ -56,12 +56,14 @@
   overflow-y: auto;
 }
 
-.claim-details,
+.claim-detailss,
 .admin-updates,
 .info-section {
   margin-bottom: 16px;
 }
-.claim-details{
+.claim-detailss{
+  display: flex;
+  flex-direction: column;
   /* gap: 1px; */
 }
 .admin-updates{

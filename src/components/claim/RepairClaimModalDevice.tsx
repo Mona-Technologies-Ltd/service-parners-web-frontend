@@ -80,12 +80,12 @@ useEffect(() => {
       <div className="repair-modal" ref={modalRef}>
         <div className="modal-header">Repair Claim Details</div>
 
-        <div className="modal-section">
-          <p><strong>Claim ID:</strong> {device?.claimId || '12345678'}</p>
-          <p><strong>Created On:</strong> 2025-01-15</p>
-          <p><strong>Claim Type:</strong> Accidental Damage</p>
-          <p><strong>Total Sum Insured:</strong> ₦100,000</p>
-          <p><strong>Balance:</strong> ₦100,000</p>
+        <div id="modal-section2" style={{ display:'flex' }}>
+          <div><strong>Claim ID:</strong> {device?.claimId || '12345678'}</div>
+          <div><strong>Created On:</strong> 2025-01-15</div>
+          <div><strong>Claim Type:</strong> Accidental Damage</div>
+          <div><strong>Total Sum Insured:</strong> ₦100,000</div>
+          <div><strong>Balance:</strong> ₦100,000</div>
         </div>
 
         {/* <div className="modal-section">
@@ -101,7 +101,7 @@ useEffect(() => {
         </div> */}
 
         <div className="modal-section">
-          <h5>Device Information</h5>
+          <h6>Device Information</h6>
           <table>
             <thead>
               <tr><th>Device ID</th><th>Device Brand</th><th>Model</th><th>IMEI</th><th>Policy Document</th></tr>
@@ -122,7 +122,7 @@ useEffect(() => {
             <ClaimVideos onClose={() => setShowClaimVideos(false)} />
           )}
         <div className="modal-section modal-section2">
-          <h5>Claims Information</h5>
+          <h6>Claims Information</h6>
           <table>
             <thead>
               <tr><th>Description</th><th>Amount</th></tr>
@@ -142,7 +142,7 @@ useEffect(() => {
         </div>
 
         <div className="modal-section">
-          <h6>Review Damage: <button className="watch-video" onClick={() => setShowClaimVideos(true)}>Watch Video <RxVideo /></button></h6>
+          <h6>Review Damage: <button className="watch-video" onClick={() => setShowClaimVideos(true)}>Watch Video <RxVideo color="#E52626" /></button></h6>
 
           <h6>General Description</h6>
           <p><strong>When</strong></p>

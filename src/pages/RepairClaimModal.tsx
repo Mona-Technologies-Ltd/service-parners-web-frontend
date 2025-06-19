@@ -23,12 +23,12 @@ console.log(device)
         <div className="modal-header">Repair Claim Details</div>
         <div className="modal-bodys">
           {/* Claim Details */}
-          <div className="claim-details" style={{ display:'flex', flexDirection:'column' }}>
-            <p>Claim ID: {device?.claimId}</p>
-            <p>Created On: {device?.dateQueried}</p>
-            <p>Claim Type: Accidental Damage</p>
-            <p>Total Sum Insured: #10,000</p>
-            <p>Balance: #10,000</p>
+          <div className="claim-detailss" style={{  }} id="">
+            <p><strong>Claim ID:</strong> {device?.claimId}</p>
+            <p><strong>Created On:</strong> {device?.dateQueried}</p>
+            <p><strong>Claim Type:</strong> Accidental Damage</p>
+            <p><strong>Total Sum Insured:</strong> #10,000</p>
+            <p><strong>Balance:</strong> #10,000</p>
           </div>
 
           {/* Admin Updates */}
@@ -68,7 +68,7 @@ console.log(device)
 
           {/* User Info */}
           <div className="info-section">
-            <h3>User Information</h3>
+            <h6>User Information</h6>
             <table className="info-table">
               <thead>
                 <tr>
@@ -89,7 +89,7 @@ console.log(device)
 
           {/* Device Info */}
           <div className="info-section">
-            <h3>Device Information</h3>
+            <h6>Device Information</h6>
             <table className="info-table">
               <thead>
                 <tr>
@@ -114,7 +114,7 @@ console.log(device)
 
           {/* Claims Info */}
           <div className="info-section">
-            <h3>Claims Information</h3>
+            <h6>Claims Information</h6>
             <table className="info-table">
               <thead>
                 <tr>
@@ -147,7 +147,7 @@ console.log(device)
 
           {/* Review Damage */}
           <div className="info-section info-review">
-            <h3>Review Damage:</h3>
+            <h6>Review Damage:</h6>
             <button  className="btn-red" onClick={() => setShowClaimVideos(true)}>Watch Video <RxVideo /></button>
           </div>
  {/* Video Modal */}
@@ -157,17 +157,17 @@ console.log(device)
 
           {/* General Description */}
           <div className="info-section">
-            <h3>General Description</h3>
+            <h6>General Description</h6>
             <div>
-              <h4>When</h4>
+              <h6>When</h6>
               <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</p>
             </div>
             <div>
-              <h4>Where</h4>
+              <h6>Where</h6>
               <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</p>
             </div>
             <div>
-              <h4>How</h4>
+              <h6>How</h6>
               <p className="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.</p>
             </div>
             

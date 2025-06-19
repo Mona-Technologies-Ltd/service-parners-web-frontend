@@ -1,3 +1,5 @@
+import { AiFillStar } from "react-icons/ai"; 
+import { AiTwotoneStar } from "react-icons/ai"; 
 import React from 'react';
 import './ReviewCardClaim.css';
 
@@ -6,7 +8,7 @@ const ReviewCardClaim = () => {
     <div className="review-cards">
       <div>
         <h4>John Doe</h4>
-      <a href=''>Claim ID: CL-134763 </a>
+      <a href='' style={{ color:'#004AAD' }}>Claim ID: CL-134763 </a>
       </div>
       <div style={{ display:'flex' }}>
         <div className="review-content">
@@ -16,7 +18,9 @@ const ReviewCardClaim = () => {
         </p>
         <div className="stars">
           {[1, 2, 3, 4].map((_, i) => (
-            <span key={i} className="star filled">★</span>
+            <AiFillStar color="#FFCE31" key={i}/>
+            // <AiTwotoneStar color="#FFCE31" key={i}  />
+            // <span key={i} className="star filled">★</span>
           ))}
           <span className="star">★</span>
         </div>
