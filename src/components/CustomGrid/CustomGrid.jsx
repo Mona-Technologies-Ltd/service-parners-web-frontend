@@ -250,6 +250,7 @@ const GridContainer = styled.div`
     /* background: red; */
     /* width: 1rem; */
     color: #000;
+    justify-content: center;
   }
 
   .grid-footer {

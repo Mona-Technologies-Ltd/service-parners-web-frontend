@@ -19,6 +19,7 @@ const Claims = () => {
   const [statusFilter, setStatusFilter] = useState(null);
 const [dateFilter, setDateFilter] = useState(null);
 const [otherFilter, setOtherFilter] = useState(null);
+const [searchQuery, setSearchQuery] = useState("");
 
   const pageSize = 10;
 
@@ -445,6 +446,7 @@ isPending:false,
 
   // Calculate total items from the actual data
   // const totalItems = allData.length;
+  // const totalItems = allData.length;
 
   // Calculate the current page's data
   const startIndex = (currentPage - 1) * pageSize;
@@ -590,15 +592,19 @@ const filteredData = allData.filter((item) => {
     ? item.status.toLowerCase() === statusFilter
     : true;
 
-  const matchesOther = otherFilter
-    ? item.status.toLowerCase() === otherFilter
-    : true;
+const matchesSearch = searchQuery
+  ? item.deviceId.toLowerCase().includes(searchQuery) ||
+    item.claimId.toLowerCase().includes(searchQuery)
+  : true;
+
 
   const matchesDate = dateFilter
     ? isWithinDateRange(item.date, dateFilter)
     : true;
 
-  return matchesStatus && matchesOther && matchesDate;
+  // return matchesStatus && matchesOther && matchesDate;
+  return matchesStatus && matchesDate && matchesSearch;
+
 });
 
 const totalItems = filteredData.length;
@@ -637,9 +643,11 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
       <FilterLabel>Status:</FilterLabel>
       <Select
         placeholder="Status"
+          size="small"
         onChange={(value) => setStatusFilter(value)}
         options={[
-          { value: "awaiting", label: "Awaiting" },
+          { value: "status", label: "" },
+           { value: "awaiting", label: "Awaiting" },
           { value: "approved", label: "Approved" },
           { value: "completed", label: "Completed" },
           { value: "paid", label: "Paid" },
@@ -652,6 +660,7 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
       <FilterLabel>Date:</FilterLabel>
       <Select
         placeholder="Date"
+          size="small"
         onChange={(value) => setDateFilter(value)}
         options={[
           { value: "today", label: "Today" },
@@ -663,7 +672,7 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
         ]}
       />
     </SelectWrapper>
-    <SelectWrapper>
+    {/* <SelectWrapper>
       <FilterLabel>Other:</FilterLabel>
       <Select
         placeholder="Other"
@@ -676,7 +685,17 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
           { value: "rejected", label: "Rejected" },
         ]}
       />
-    </SelectWrapper>
+    </SelectWrapper> */}
+    <SelectWrapper>
+  <FilterLabel>Search:</FilterLabel>
+  <Search
+    placeholder="Search by Device ID or Claim ID"
+    allowClear
+    onSearch={(value) => setSearchQuery(value.toLowerCase())}
+    style={{ width: 200 }}
+  />
+</SelectWrapper>
+
   </RightFilters>
 </FilterContainer>
 
@@ -729,50 +748,112 @@ const LeftTitle = styled.div`
   }
 `;
 
+// const RightFilters = styled.div`
+//   display: flex;
+//   gap: 12px;
+//   flex-wrap: wrap;
+//   align-items: flex-end;
+
+//   @media (max-width: 768px) {
+//     flex-direction: column;
+//     align-items: flex-start;
+//   }
+// `;
+
+// // Styled Components
+// const SelectWrapper = styled.div`
+//   .ant-select {
+//     width: 140px; /* Smaller default */
+//     border-radius: 4px;
+//     height: 36px;
+//   }
+
+//   .ant-select-selector {
+//     height: 36px !important;
+//     display: flex;
+//     align-items: center;
+//     font-size: 13px;
+//   }
+
+//   @media (max-width: 768px) {
+//     .ant-select {
+//       width: 100%; /* full width on small screens */
+//     }
+//   }
+// `;
+// // Filter container holding all Select filters
+
+
+// // Label before the filters
+// const FilterLabel = styled.span`
+//   font-size: 14px;
+//   color: #000;
+//   font-weight: 500;
+
+//   @media (max-width: 768px) {
+//     margin-bottom: 4px;
+//   }
+// `;
+const SelectWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .ant-select {
+    width: 120px;
+    font-size: 12px;
+  }
+
+  .ant-select-selector {
+    height: 28px !important;
+    padding: 0 8px !important;
+    font-size: 12px;
+    line-height: 1 !important;
+    display: flex;
+    align-items: center;
+  }
+
+  .ant-select-selection-item {
+    line-height: 1 !important;
+  }
+
+  @media (max-width: 768px) {
+    .ant-select {
+      width: 100%;
+    }
+  }
+`;
+
+
+
+const FilterLabel = styled.span`
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+`;
+
 const RightFilters = styled.div`
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
   align-items: flex-end;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`;
-
-// Styled Components
-const SelectWrapper = styled.div`
-  .ant-select {
-    width: 140px; /* Smaller default */
-    border-radius: 4px;
-    height: 36px;
+  .ant-input-search {
+    width: 200px;
+    height: 32px;
   }
 
-  .ant-select-selector {
-    height: 36px !important;
-    display: flex;
-    align-items: center;
+  .ant-input {
+    height: 32px !important;
     font-size: 13px;
   }
 
   @media (max-width: 768px) {
-    .ant-select {
-      width: 100%; /* full width on small screens */
+    flex-direction: column;
+    align-items: stretch;
+
+    .ant-input-search {
+      width: 100%;
     }
   }
 `;
-// Filter container holding all Select filters
-
-
-// Label before the filters
-const FilterLabel = styled.span`
-  font-size: 14px;
-  color: #000;
-  font-weight: 500;
-
-  @media (max-width: 768px) {
-    margin-bottom: 4px;
-  }
-`;
-

@@ -22,6 +22,10 @@ import CustomGrid from "../components/CustomGrid/CustomGrid";
 import { generatePremiumReportPDF } from "../utils/pdfUtils";
 import InvoiceModalPremium from "./InvoiceModalPremium";
 // import InvoiceModalPremium from "./InvoiceModal";
+import { useNavigate } from "react-router-dom";
+import { DatePicker } from "antd";
+import dayjs from "dayjs";
+import StatCards from "./StatCards";
 
 const { TabPane } = Tabs;
 const { Search } = Input;
@@ -31,17 +35,22 @@ const PremiumPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("unremitted");
   const pageSize = 10;
-const [dateFilter, setDateFilter] = useState("");
+    const navigate = useNavigate();
+// const [dateFilter, setDateFilter] = useState("");
 const [brandFilter, setBrandFilter] = useState("");
 const [statusFilter, setStatusFilter] = useState("");
 const [searchText, setSearchText] = useState("");
 const [showInvoiceModal, setShowInvoiceModal] = useState(false);
 const [invoiceData, setInvoiceData] = useState(null);
+const [dateFilter, setDateFilter] = useState(null);
 
-const handleViewDetails = (record) => {
-  setInvoiceData(record); // or transform the record as needed for invoiceData
-  setShowInvoiceModal(true);
-};
+// const handleViewDetails = (record) => {
+//   setInvoiceData(record); // or transform the record as needed for invoiceData
+//   setShowInvoiceModal(true);
+// };
+  const handleViewDetails = (record) => {
+    navigate(`/devices/${record.id}`);
+  };
 
   // Data for stat cards
   const premiumStats = {
@@ -73,7 +82,8 @@ const handleViewDetails = (record) => {
       model: "Galaxy S22",
       totalSumInsured: "₦750,000",
       premium: "₦7,000",
-      premiumStatus: index % 3 === 0 ? "Pending" : "Paid",
+      // premiumStatus: index % 3 === 0 ? "Pending" : "Paid",
+       premiumStatus: "Pending", // ✅ Always "Pending"
       claims: "3",
       subscription: "Active",
     }));
@@ -327,43 +337,57 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
         break;
     }
   };
+const handleRemittedMenuClick = (e, record) => {
+  const key = e.key;
+  switch (key) {
+    case "1": // Show InvoiceModalPremium
+      setInvoiceData(record);
+      setShowInvoiceModal(true);
+      break;
+    case "2": // View Proof of Payment
+      console.log("View Proof of Payment for", record);
+      break;
+    default:
+      break;
+  }
+};
 
-  const handleRemittedMenuClick = (e, record) => {
-    const key = e.key;
-    switch (key) {
-      case "1": // Download Report
-        console.log("Download Report for", record);
-        // Generate premium report PDF
-        generatePremiumReportPDF({
-          reportId: `RPT${Math.floor(100000 + Math.random() * 900000)}`,
-          generatedBy: "Admin 1/Michael James",
-          generatedOn: new Date()
-            .toISOString()
-            .replace("T", " ")
-            .substring(0, 16),
-          version: "1.0",
-          totalDevices: 10,
-          totalPremium: record.totalPremium || "₦100,000",
-          totalSumInsured: "₦200,000",
-          devices: Array(5).fill({
-            deviceId: "#0001",
-            brand: "Samsung",
-            model: "Galaxy S20",
-            imei: "356789123456789",
-            totalSumInsured: "₦723,345",
-            premium: "₦123,345",
-            date: record.date || "2025-01-15",
-          }),
-        });
-        message.success("Premium report downloaded successfully");
-        break;
-      case "2": // View Proof of Payment
-        console.log("View Proof of Payment for", record);
-        break;
-      default:
-        break;
-    }
-  };
+  // const handleRemittedMenuClick = (e, record) => {
+  //   const key = e.key;
+  //   switch (key) {
+  //     case "1": // Download Report
+  //       console.log("Download Report for", record);
+  //       // Generate premium report PDF
+  //       generatePremiumReportPDF({
+  //         reportId: `RPT${Math.floor(100000 + Math.random() * 900000)}`,
+  //         generatedBy: "Admin 1/Michael James",
+  //         generatedOn: new Date()
+  //           .toISOString()
+  //           .replace("T", " ")
+  //           .substring(0, 16),
+  //         version: "1.0",
+  //         totalDevices: 10,
+  //         totalPremium: record.totalPremium || "₦100,000",
+  //         totalSumInsured: "₦200,000",
+  //         devices: Array(5).fill({
+  //           deviceId: "#0001",
+  //           brand: "Samsung",
+  //           model: "Galaxy S20",
+  //           imei: "356789123456789",
+  //           totalSumInsured: "₦723,345",
+  //           premium: "₦123,345",
+  //           date: record.date || "2025-01-15",
+  //         }),
+  //       });
+  //       message.success("Premium report downloaded successfully");
+  //       break;
+  //     case "2": // View Proof of Payment
+  //       console.log("View Proof of Payment for", record);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -378,7 +402,8 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
     <PremiumPageContainer>
       {/* Stats Cards */}
       <Row gutter={[24, 24]}>
-        <Col xs={24} sm={12} lg={8}>
+        <StatCards />
+        {/* <Col xs={24} sm={12} lg={8}>
           <StatCard
             title="Total Premium"
             value={premiumStats.totalPremium.value}
@@ -404,7 +429,7 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
             iconClass="green-bg"
             change={premiumStats.unremittedPremium.change}
           />
-        </Col>
+        </Col> */}
       </Row>
 <InvoiceModalPremium
   open={showInvoiceModal}
@@ -424,35 +449,9 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
         <div className="filters-container">
           <div className="filters-label">Filter by:</div>
           <div className="filters">
-            {/* <Select defaultValue="" className="filter-select">
-              <Option value="">Date</Option>
-              <Option value="today">Today</Option>
-              <Option value="yesterday">Yesterday</Option>
-              <Option value="last7days">Last 7 Days</Option>
-              <Option value="last30days">Last 30 Days</Option>
-            </Select>
+         
 
-            {activeTab === "unremitted" && (
-              <>
-                <Select defaultValue="" className="filter-select">
-                  <Option value="">Brand</Option>
-                  <Option value="samsung">Samsung</Option>
-                  <Option value="apple">Apple</Option>
-                  <Option value="google">Google</Option>
-                  <Option value="others">Others</Option>
-                </Select>
-
-                <Select defaultValue="" className="filter-select">
-                  <Option value="">Status</Option>
-                  <Option value="active">Active</Option>
-                  <Option value="pending">Pending</Option>
-                  <Option value="inactive">Inactive</Option>
-                </Select>
-              </>
-            )}
-
-            <Search placeholder="Search" className="search-input" /> */}
-            <Select
+            {/* <Select
   value={dateFilter}
   onChange={(value) => setDateFilter(value)}
   className="filter-select"
@@ -462,10 +461,17 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
   <Option value="yesterday">Yesterday</Option>
   <Option value="last7days">Last 7 Days</Option>
   <Option value="last30days">Last 30 Days</Option>
-</Select>
+</Select> */}
 
 {activeTab === "unremitted" && (
   <>
+    <DatePicker
+  className="filter-select"
+  placeholder="Select Date"
+  value={dateFilter}
+  onChange={(date) => setDateFilter(date)}
+  allowClear
+/>
     <Select
       value={brandFilter}
       onChange={(value) => setBrandFilter(value)}
