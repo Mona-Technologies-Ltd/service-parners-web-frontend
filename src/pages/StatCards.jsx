@@ -1,6 +1,8 @@
+
 import React from "react";
 import { BsBagPlus } from "react-icons/bs";
-
+import { IoTrendingUpOutline } from "react-icons/io5"; 
+import { IoTrendingDownOutline } from "react-icons/io5"; 
 import "./StatCards.css";
 
 const stats = [
@@ -9,7 +11,7 @@ const stats = [
     value: "₦ 40,689",
     change: "-18.5%",
     changeText: "From last week",
-    icon: <BsBagPlus className="icon-size" />,
+    icon: <BsBagPlus className="icon-size" color="#004AAD" />,
     color: "blue",
     trend: "down",
   },
@@ -18,7 +20,7 @@ const stats = [
     value: "₦ 40,689",
     change: "-46.5%",
     changeText: "From last week",
-    icon: <BsBagPlus className="icon-size" />,
+    icon: <BsBagPlus className="icon-size" color="#439F6E" />,
     color: "green",
     trend: "down",
   },
@@ -27,7 +29,7 @@ const stats = [
     value: "₦ 40,689",
     change: "8.5%",
     changeText: "From last week",
-    icon: <BsBagPlus className="icon-size" />,
+    icon: <BsBagPlus className="icon-size" color="#FFB82E" />,
     color: "yellow",
     trend: "up",
   },
@@ -50,7 +52,7 @@ const StatCards = () => {
             <span
               className={`trend-icon ${stat.trend === "up" ? "up" : "down"}`}
             >
-              {stat.trend === "up" ? "📈" : "📉"}
+              {stat.trend === "up" ? (<IoTrendingUpOutline color="#FF0000" size={20} />) : (<IoTrendingDownOutline color="#008000" size={20} />)}
             </span>
             <span
               className={`change-percent ${

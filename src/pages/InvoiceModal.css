@@ -2,7 +2,7 @@
 .invoice-container {
   font-family: sans-serif;
   background-color: white;
-  width: 100%;
+  width: 50rem;
   padding: 0;
 }
 
@@ -77,7 +77,7 @@ font-weight: 700;
 }
 
 .invoice-table-section {
-  padding: 24px;
+  padding: 20px;
   height: 20rem;
 }
 
@@ -157,6 +157,9 @@ font-size: 0.7rem;
 }
 
 @media screen and (max-width: 768px) {
+  .invoice-container {
+  width: 100%;
+}
 .invoice-logos {
   max-width: 150px;
   /* position: absolute; */

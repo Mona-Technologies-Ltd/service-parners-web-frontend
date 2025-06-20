@@ -1,6 +1,5 @@
 import React from 'react';
 import { Modal } from 'antd';
-import { CloseOutlined } from '@ant-design/icons';
 // import QRCode from 'qrcode.react';import QRCode from 'qrcode.react';
 // import QRCode from 'qrcode.react';
 // import QRCode from "qrcode";
@@ -14,7 +13,7 @@ const InvoiceModalPremium = ({ open, onCancel }) => {
       onCancel={onCancel}
       footer={null}
       // width={800}
-      // closeIcon={<CloseOutlined />}
+      closeIcon={false}
        className="custom-invoice-modal" // Add a custom class
       bodyStyle={{ padding: 0 }} // Remove default body padding
     //   style={{ padding: 0,  top: 20, background:'red'  }}

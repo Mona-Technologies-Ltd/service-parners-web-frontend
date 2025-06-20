@@ -52,13 +52,14 @@
 }
 
 .stat-icons.blue {
-  background-color: rgba(59, 130, 246, 0.1);
+  background-color: #E4EFFF;
 }
 .stat-icons.green {
-  background-color: rgba(34, 197, 94, 0.1);
+  background-color: #E3FFE3;
+  color: #439F6E;
 }
 .stat-icons.yellow {
-  background-color: rgba(251, 191, 36, 0.2);
+  background-color: #FFF1CE;
 }
 
 .stat-value {
@@ -87,7 +88,7 @@
   color: red;
 }
 .change-percent.green {
-  color: green;
+  color: #008000;
 }
 
 .change-text {
