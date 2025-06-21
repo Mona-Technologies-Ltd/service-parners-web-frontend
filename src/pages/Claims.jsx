@@ -4,13 +4,13 @@ import { Icon } from "@iconify/react";
 import styled from "styled-components";
 import CustomGrid from "../components/CustomGrid/CustomGrid";
 import RepairClaimModal from "./RepairClaimModal";
-// import RepairClaimModal from "../components/claim/RepairClaimModal";
-// import RepairDetailsModal from "../components/RepairDetailsModal/RepairDetailsModal";
-// import { printRepairsReport } from "../utils/printUtils";
+
 
 const { Search } = Input;
 
 const Claims = () => {
+  const { RangePicker } = DatePicker;
+
   const [selectedStatus, setSelectedStatus] = useState(null);
   const [dateRange, setDateRange] = useState([null, null]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,37 +18,9 @@ const Claims = () => {
   const [selectedDevice, setSelectedDevice] = useState(null);
   const [statusFilter, setStatusFilter] = useState(null);
 const [dateFilter, setDateFilter] = useState(null);
-const [otherFilter, setOtherFilter] = useState(null);
 const [searchQuery, setSearchQuery] = useState("");
 
   const pageSize = 10;
-
-  // Generate sample data
-    // const allData = Array(45)
-    //   .fill(null)
-    //   .map((_, index) => ({
-    //     id: index + 1,
-    //     claimId: `PLU${3766 + index}`,
-    //     deviceId: `IP${12567 + index}`,
-    //     deviceModel: "iPhone 13 Pro MAX",
-    //     issue: "Damaged screen",
-    //     amount: "25000.00",
-    //     status:
-    //       index % 5 === 0
-    //         ? "Awaiting"
-    //         : index % 5 === 1
-    //         ? "Approved"
-    //         : index % 5 === 2
-    //         ? "Completed"
-    //         : index % 5 === 3
-    //         ? "Paid"
-    //         : "Rejected",
-    //     teamMember: "John Doe",
-    //     company: "Mona Tech",
-    //     customerName: "John Doe",
-    //     customerPhone: "08143789883",
-    //     date: "Dec 6, 2024",
-    //   }));
 const allData = [
   {
     id: 1,
@@ -598,9 +570,13 @@ const matchesSearch = searchQuery
   : true;
 
 
-  const matchesDate = dateFilter
-    ? isWithinDateRange(item.date, dateFilter)
-    : true;
+  // const matchesDate = dateFilter
+  //   ? isWithinDateRange(item.date, dateFilter)
+  //   : true;
+const matchesDate = dateRange[0] && dateRange[1]
+  ? new Date(item.date) >= new Date(dateRange[0]) &&
+    new Date(item.date) <= new Date(dateRange[1])
+  : true;
 
   // return matchesStatus && matchesOther && matchesDate;
   return matchesStatus && matchesDate && matchesSearch;
@@ -638,65 +614,43 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
     <h5>Repair Claims</h5>
   </LeftTitle>
 
-  <RightFilters>
-    <SelectWrapper>
-      <FilterLabel>Status:</FilterLabel>
-      <Select
-        placeholder="Status"
-          size="small"
-        onChange={(value) => setStatusFilter(value)}
-        options={[
-          { value: "status", label: "" },
-           { value: "awaiting", label: "Awaiting" },
-          { value: "approved", label: "Approved" },
-          { value: "completed", label: "Completed" },
-          { value: "paid", label: "Paid" },
-          { value: "rejected", label: "Rejected" },
-        ]}
-      />
-    </SelectWrapper>
+ <RightFilters>
+  <SelectWrapper>
+  <label>Status:</label>
+  <Select
+    placeholder="Status"
+    size="small"
+    onChange={(value) => setStatusFilter(value)}
+    options={[
+      { value: "awaiting", label: "Awaiting" },
+      { value: "approved", label: "Approved" },
+      { value: "completed", label: "Completed" },
+      { value: "paid", label: "Paid" },
+      { value: "rejected", label: "Rejected" },
+    ]}
+  />
+</SelectWrapper>
 
-    <SelectWrapper>
-      <FilterLabel>Date:</FilterLabel>
-      <Select
-        placeholder="Date"
-          size="small"
-        onChange={(value) => setDateFilter(value)}
-        options={[
-          { value: "today", label: "Today" },
-          { value: "yesterday", label: "Yesterday" },
-          { value: "last7days", label: "Last 7 Days" },
-          { value: "last30days", label: "Last 30 Days" },
-          { value: "thisMonth", label: "This Month" },
-          { value: "lastMonth", label: "Last Month" },
-        ]}
-      />
-    </SelectWrapper>
-    {/* <SelectWrapper>
-      <FilterLabel>Other:</FilterLabel>
-      <Select
-        placeholder="Other"
-        onChange={(value) => setOtherFilter(value)}
-        options={[
-          { value: "awaiting", label: "Awaiting" },
-          { value: "approved", label: "Approved" },
-          { value: "completed", label: "Completed" },
-          { value: "paid", label: "Paid" },
-          { value: "rejected", label: "Rejected" },
-        ]}
-      />
-    </SelectWrapper> */}
-    <SelectWrapper>
-  <FilterLabel>Search:</FilterLabel>
+<SelectWrapper>
+  <label>Date:</label>
+  <RangePicker
+    size="small"
+    onChange={(dates) => setDateRange(dates)}
+    format="MMM D, YYYY"
+  />
+</SelectWrapper>
+
+<SelectWrapper>
+  <label>Search:</label>
   <Search
     placeholder="Search by Device ID or Claim ID"
     allowClear
     onSearch={(value) => setSearchQuery(value.toLowerCase())}
-    style={{ width: 200 }}
   />
 </SelectWrapper>
 
-  </RightFilters>
+</RightFilters>
+
 </FilterContainer>
 
 
@@ -748,112 +702,134 @@ const LeftTitle = styled.div`
   }
 `;
 
+// const SelectWrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   gap: 4px;
+
+//   .ant-select {
+//     width: 150px;
+//     font-size: 12px;
+//   }
+
+//   .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+//     height: 32px !important;
+//     padding: 0 11px !important;
+//     display: flex;
+//     align-items: center;
+//     font-size: 12px;
+//   }
+
+//   .ant-select-selection-item {
+//     line-height: 1;
+//   }
+
+//   @media (max-width: 768px) {
+//     .ant-select {
+//       width: 100% !important;
+//     }
+//   }
+// `;
+
+
 // const RightFilters = styled.div`
 //   display: flex;
 //   gap: 12px;
 //   flex-wrap: wrap;
 //   align-items: flex-end;
 
+//   .ant-input-search {
+//     width: 200px;
+//     height: 32px;
+//   }
+
+//   .ant-input {
+//     height: 32px !important;
+//     font-size: 12px;
+//   }
+
+//   .ant-picker {
+//     height: 32px !important;
+//   }
+
+//   .ant-picker-input > input {
+//     font-size: 12px;
+//     padding: 0 8px;
+//   }
+
 //   @media (max-width: 768px) {
 //     flex-direction: column;
-//     align-items: flex-start;
-//   }
-// `;
+//     align-items: stretch;
 
-// // Styled Components
-// const SelectWrapper = styled.div`
-//   .ant-select {
-//     width: 140px; /* Smaller default */
-//     border-radius: 4px;
-//     height: 36px;
-//   }
-
-//   .ant-select-selector {
-//     height: 36px !important;
-//     display: flex;
-//     align-items: center;
-//     font-size: 13px;
-//   }
-
-//   @media (max-width: 768px) {
+//     .ant-input-search,
+//     .ant-picker,
 //     .ant-select {
-//       width: 100%; /* full width on small screens */
+//       width: 100% !important;
 //     }
 //   }
 // `;
-// // Filter container holding all Select filters
-
-
-// // Label before the filters
 // const FilterLabel = styled.span`
-//   font-size: 14px;
-//   color: #000;
+//   font-size: 13px;
 //   font-weight: 500;
-
-//   @media (max-width: 768px) {
-//     margin-bottom: 4px;
-//   }
+//   color: #333;
 // `;
 const SelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   gap: 4px;
 
-  .ant-select {
-    width: 120px;
-    font-size: 12px;
+  label {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 2px;
   }
 
-  .ant-select-selector {
-    height: 28px !important;
-    padding: 0 8px !important;
-    font-size: 12px;
-    line-height: 1 !important;
+  .ant-select,
+  .ant-picker,
+  .ant-input-search {
+    width: 180px;
+  }
+
+  .ant-select-single:not(.ant-select-customize-input) .ant-select-selector,
+  .ant-picker,
+  .ant-input-search,
+  .ant-input {
+    height: 32px !important;
+    font-size: 13px !important;
     display: flex;
     align-items: center;
   }
 
-  .ant-select-selection-item {
-    line-height: 1 !important;
+  .ant-picker-input > input,
+  .ant-input {
+    font-size: 13px !important;
+    padding: 4px 8px;
   }
 
   @media (max-width: 768px) {
-    .ant-select {
-      width: 100%;
+    .ant-select,
+    .ant-picker,
+    .ant-input-search {
+      width: 100% !important;
     }
   }
 `;
 
+const RightFilters = styled.div`
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: flex-start;
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+`;
 
 const FilterLabel = styled.span`
   font-size: 13px;
   font-weight: 500;
   color: #333;
-`;
-
-const RightFilters = styled.div`
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  align-items: flex-end;
-
-  .ant-input-search {
-    width: 200px;
-    height: 32px;
-  }
-
-  .ant-input {
-    height: 32px !important;
-    font-size: 13px;
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: stretch;
-
-    .ant-input-search {
-      width: 100%;
-    }
-  }
 `;

@@ -82,8 +82,9 @@ const [dateFilter, setDateFilter] = useState(null);
       model: "Galaxy S22",
       totalSumInsured: "₦750,000",
       premium: "₦7,000",
+        premiumStatus: index % 3 === 0 ? "Pending" : "Active",
       // premiumStatus: index % 3 === 0 ? "Pending" : "Paid",
-       premiumStatus: "Pending", // ✅ Always "Pending"
+      //  premiumStatus: "Pending", // ✅ Always "Pending"
       claims: "3",
       subscription: "Active",
     }));
@@ -489,7 +490,7 @@ const handleRemittedMenuClick = (e, record) => {
       onChange={(value) => setStatusFilter(value)}
       className="filter-select"
     >
-      <Option value="">Status</Option>
+      <Option value="">Premium  Status</Option>
       <Option value="active">Active</Option>
       <Option value="pending">Pending</Option>
       <Option value="inactive">Inactive</Option>
