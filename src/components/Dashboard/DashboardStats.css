@@ -1,0 +1,95 @@
+.dashboard-container {
+  padding: 24px;
+  background-color: #f7f9fc;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1c1c1c;
+  margin-bottom: 16px;
+}
+
+.stat-card {
+  background: #ffffff;
+  /* border-radius: 16px; */
+  padding: 20px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-header h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+  margin: 0;
+}
+
+.icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Color backgrounds */
+.icon-circle.blue-bg { background-color: #e0f0ff; }
+.icon-circle.green-bg { background-color: #e6fff4; }
+.icon-circle.yellow-bg { background-color: #fff8e1; }
+.icon-circle.gold-bg { background-color: #fff2cc; }
+
+/* Outline styles */
+.icon-circle.blue-outline { border: 2px solid #339af0; background: #f0f8ff; }
+.icon-circle.green-outline { border: 2px solid #2ecc71; background: #f0fff5; }
+.icon-circle.yellow-outline { border: 2px solid #f1c40f; background: #fffef2; }
+.icon-circle.red-outline { border: 2px solid #e74c3c; background: #fff5f5; }
+
+.stat-body {
+  margin-top: 16px;
+}
+
+.stat-body h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1c1c1c;
+  margin: 0 0 6px;
+}
+
+.stat-change {
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-change.up {
+  color: #00aa63;
+}
+
+.stat-change.down {
+  color: #e30000;
+}
+
+.stat-subtext {
+  font-size: 13px;
+  color: #8c8c8c;
+  margin-top: 4px;
+}

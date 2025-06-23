@@ -157,7 +157,7 @@
 }
 
 .filter-buttons {
-  width: 100%;
+  width: 80%;
   display: flex;
   gap: 8px;
   margin-bottom: 24px;

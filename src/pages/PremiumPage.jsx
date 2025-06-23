@@ -17,7 +17,7 @@ import {
   QuestionCircleOutlined,
 } from "@ant-design/icons";
 import styled from "styled-components";
-import StatCard from "../components/Dashboard/StatCard";
+import StatCard from "../components/Dashboard/DashboardStats";
 import CustomGrid from "../components/CustomGrid/CustomGrid";
 import { generatePremiumReportPDF } from "../utils/pdfUtils";
 import InvoiceModalPremium from "./InvoiceModalPremium";
