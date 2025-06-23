@@ -195,18 +195,18 @@ const DashboardPage = () => {
             marginBottom: "16px",
           }}
         >
-          <h3 style={{ margin: 0 }}>Claims by Device</h3>
-          <div className="filter-buttons" style={{ display: "flex", gap: "0.75rem" }}>
-            <Button type={filter === "today" ? "primary" : "default"} onClick={() => setFilter("today")}>
+          <h3 >Claims by Device</h3>
+          <div className="filter-buttons">
+            <Button type={filter === "today" ? "primary" : "default"} onClick={() => setFilter("today")} id="btn_claims">
               Today
             </Button>
-            <Button type={filter === "week" ? "primary" : "default"} onClick={() => setFilter("week")}>
+            <Button type={filter === "week" ? "primary" : "default"} onClick={() => setFilter("week")} id="btn_claims">
               Last 7 Days
             </Button>
-            <Button type={filter === "month" ? "primary" : "default"} onClick={() => setFilter("month")}>
+            <Button type={filter === "month" ? "primary" : "default"} onClick={() => setFilter("month")} id="btn_claims">
               Last 30 Days
             </Button>
-            <Button type={filter === "year" ? "primary" : "default"} onClick={() => setFilter("year")}>
+            <Button type={filter === "year" ? "primary" : "default"} onClick={() => setFilter("year")} id="btn_claims">
               Last 1 Year
             </Button>
           </div>

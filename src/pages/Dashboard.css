@@ -157,14 +157,16 @@
 }
 
 .filter-buttons {
+  width: 100%;
   display: flex;
   gap: 8px;
   margin-bottom: 24px;
+  justify-content: end;
 }
 
 .filter-buttons .ant-btn {
-  border-radius: 4px;
-  padding: 6px 12px;
+  /* border-radius: 4px; */
+  /* padding: 6px 12px; */
 }
 
 .filter-buttons .ant-btn-primary {
@@ -177,7 +179,9 @@
   border-color: #004aad;
   color: #004aad;
 }
-
+#btn_claims{
+  width: 10%;
+}
 /* Chart Styles */
 .chart-container {
   height: 300px;
@@ -264,6 +268,9 @@
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+  .filter-buttons {
+    width: 80%;
+  }
   .dashboard-container {
     padding: 16px;
   }
@@ -271,6 +278,14 @@
   .stat-card {
     margin-bottom: 16px;
   }
+  #btn_claims{
+  width: 20%;
+  font-size: .4rem;
+}
+
+.claims-by-device h3{
+  font-size: 0.5rem;
+}
 }
 
 /* Override Ant Design card padding */
