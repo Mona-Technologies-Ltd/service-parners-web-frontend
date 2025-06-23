@@ -12,6 +12,7 @@ import {
   message,
   Modal,
   Upload,
+  DatePicker,
 } from "antd";
 import {
   DownOutlined,
@@ -450,7 +451,7 @@ setActiveTab("payouts");
     setInvoiceType("all");
     setIsInvoiceConfirmModalVisible(true);
   };
-
+const { RangePicker } = DatePicker;
 const handleConfirmedGenerateAllInvoices = async () => {
   try {
     const invoiceData = {
@@ -511,6 +512,41 @@ const handleConfirmedGenerateAllInvoices = async () => {
     Generate Invoice
   </Button>
 )}
+ {activeTab === "payouts" && (
+  <div className="filters-container">
+    <div className="filters-label">Filter by:</div>
+    <div className="filters">
+      <RangePicker
+  onChange={(dates) => {
+    if (dates) {
+      setSelectedDateRange(dates); // Store as moment[] or convert to string if needed
+    } else {
+      setSelectedDateRange("");
+    }
+  }}
+  className="filter-select"
+/>
+
+
+      <Select
+        value={selectedStatus}
+        onChange={(value) => setSelectedStatus(value)}
+        className="filter-select"
+      >
+        <Option value="">Status</Option>
+        <Option value="pending">Pending</Option>
+        <Option value="paid">Paid</Option>
+      </Select>
+
+      <Search
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search"
+        className="search-input"
+      />
+    </div>
+  </div>
+)}
 
          
         </div>
@@ -527,43 +563,7 @@ const handleConfirmedGenerateAllInvoices = async () => {
         ) : (
           /* Payouts Tab Content */
           <PayoutsTabContent>
-            <div className="filters-container">
-              <div className="filters-label">Filter by:</div>
-              <div className="filters-container">
-  <div className="filters-label">Filter by:</div>
-  <div className="filters">
-    <Select
-      value={selectedDateRange}
-      onChange={(value) => setSelectedDateRange(value)}
-      className="filter-select"
-    >
-      <Option value="">Date</Option>
-      <Option value="today">Today</Option>
-      <Option value="yesterday">Yesterday</Option>
-      <Option value="last7days">Last 7 Days</Option>
-      <Option value="last30days">Last 30 Days</Option>
-    </Select>
-
-    <Select
-      value={selectedStatus}
-      onChange={(value) => setSelectedStatus(value)}
-      className="filter-select"
-    >
-      <Option value="">Status</Option>
-      <Option value="pending">Pending</Option>
-      <Option value="paid">Paid</Option>
-    </Select>
-
-    <Search
-      value={searchQuery}
-      onChange={(e) => setSearchQuery(e.target.value)}
-      placeholder="Search"
-      className="search-input"
-    />
-  </div>
-</div>
-
-            </div>
+          
 
             {/* Payouts Grid */}
             <CustomGrid
@@ -828,6 +828,7 @@ const PayoutsTable = styled.div`
 `;
 
 const DvButton = styled.div`
+
   display: inline-block;
   padding: 4px 12px;
   font-size: 14px;
@@ -835,7 +836,7 @@ const DvButton = styled.div`
   transition: all 0.3s ease;
 
   &.upload {
-    background-color: #fff8e1;
+    width: 100%;
     color: #f59e0b;
     border: 1px solid #f59e0b;
 
@@ -846,7 +847,7 @@ const DvButton = styled.div`
   }
 
   &.signed {
-    background-color: #e8f5e9;
+     width: 100%;
     color: #10b981;
     border: 1px solid #10b981;
 
@@ -857,7 +858,7 @@ const DvButton = styled.div`
   }
 
   &.unsigned {
-    background-color: #ffebee;
+      width: 100%;
     color: #ef4444;
     border: 1px solid #ef4444;
 

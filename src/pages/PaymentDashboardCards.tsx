@@ -27,7 +27,6 @@ type CardType = BaseCard | DischargeCard;
 interface DashboardCardsProps {
   activeTab: string;
 }
-
 const DashboardCards: React.FC<DashboardCardsProps> = ({ activeTab }) => {
   const baseCards: BaseCard[] = [
     {
@@ -35,7 +34,7 @@ const DashboardCards: React.FC<DashboardCardsProps> = ({ activeTab }) => {
       count: 30,
       amount: "₦ 40,689",
       percent: "-18.5%",
-      icon: <FaListUl />,
+      icon: <img src="/task.svg" alt="approved" style={{ width: 24, height: 24 }} />,
       iconColor: "pink",
       trendIcon: <FiTrendingDown />,
       trendColor: "red",
@@ -45,7 +44,7 @@ const DashboardCards: React.FC<DashboardCardsProps> = ({ activeTab }) => {
       count: 30,
       amount: "₦ 40,689",
       percent: "-18.5%",
-      icon: <FaMoneyCheckAlt />,
+      icon: <img src="/empty-wallet-time.svg" alt="awaiting" style={{ width: 24, height: 24 }} />,
       iconColor: "orange",
       trendIcon: <FiTrendingDown />,
       trendColor: "red",
@@ -55,7 +54,7 @@ const DashboardCards: React.FC<DashboardCardsProps> = ({ activeTab }) => {
       count: 30,
       amount: "₦ 40,689",
       percent: "8.5%",
-      icon: <FaShoppingBag />,
+      icon: <img src="/wallet-minus.svg" alt="confirmed" style={{ width: 24, height: 24 }} />,
       iconColor: "green",
       trendIcon: <FiTrendingUp />,
       trendColor: "green",
@@ -66,8 +65,9 @@ const DashboardCards: React.FC<DashboardCardsProps> = ({ activeTab }) => {
     title: "Discharge Voucher",
     signed: 30,
     unsigned: 30,
-    icon: <FaShoppingBag />,
+    icon: <img src="/wallet-minus.svg" alt="confirmed" style={{ width: 24, height: 24 }} />,
     iconColor: "green",
+    
   };
 
   const cardsToShow: CardType[] =

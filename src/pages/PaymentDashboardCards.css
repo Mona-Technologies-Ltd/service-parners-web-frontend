@@ -28,9 +28,9 @@
 
 .card-title_pay {
   width: 70%;
-  font-size: 0.95rem;
-  color: #2d2d2d;
-  font-weight: 500;
+  font-size: 14px;
+  color: #202224;
+  font-weight: 400;
   margin: 0;
 }
 
@@ -74,7 +74,7 @@
 
 .card-amount_pay {
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 400;
   color: #000;
   margin: 0;
 }

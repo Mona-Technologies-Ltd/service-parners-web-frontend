@@ -62,7 +62,7 @@ const CustomGrid = ({
       return {
         flexGrow: 0,
         flexShrink: 0,
-        flexBasis: "180px",
+        flexBasis: "150px",
       };
     }
 
@@ -72,7 +72,7 @@ const CustomGrid = ({
       return {
         flexGrow: 0,
         flexShrink: 0,
-        flexBasis: "150px",
+        flexBasis: "100px",
       };
     }
 
@@ -91,10 +91,10 @@ const CustomGrid = ({
     // }
 if (column.key === "status") {
   return {
-    width: "130px",
+    // width: "120px",
     flexGrow: 0,
     flexShrink: 0,
-    flexBasis: "130px",
+    flexBasis: "100px",
     maxWidth: "130px",
     minWidth: "130px",
   };
@@ -106,7 +106,7 @@ if (column.key === "approvedClaims") {
     flexGrow: 0,
     flexShrink: 0,
     flexBasis: "100px",
-    // fontSize: "10px",
+    fontSize: "14px",
     whiteSpace: "normal",
     wordBreak: "break-word",
     overflowWrap: "anywhere",
