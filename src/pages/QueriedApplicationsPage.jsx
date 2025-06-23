@@ -5,6 +5,7 @@ import CustomGrid from "../components/CustomGrid/CustomGrid";
 import { Icon } from "@iconify/react";
 import QueriedApplicationDetailsModal from "../components/QueriedApplicationDetailsModal";
 import RepairClaimModal from "./RepairClaimModal";
+import QueriedApplications from "./QueriedApplications";
 
 const QueriedApplicationsPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,7 +39,7 @@ if (!isOpen) return null;
     deviceModel: "iPhone 13 Pro MAX",
     issue: "Damaged screen",
     amount: "25000.00",
-    status: "Pending",
+    status: "Closed",
     teamMember: "John Doe",
     company: "Mona Tech",
     isClosed:false,
@@ -59,7 +60,7 @@ if (!isOpen) return null;
     deviceModel: "iPhone 13 Pro MAX",
     issue: "Damaged screen",
     amount: "25000.00",
-    status: "Approved",
+    status: "Closed",
     teamMember: "John Doe",
     company: "Mona Tech",
     isClosed:true,
@@ -79,7 +80,7 @@ if (!isOpen) return null;
     deviceModel: "iPhone 13 Pro MAX",
     issue: "Damaged screen",
     amount: "25000.00",
-    status: "Paid",
+    status: "Closed",
     teamMember: "John Doe",
     company: "Mona Tech",
     isClosed:true,
@@ -99,7 +100,7 @@ if (!isOpen) return null;
     deviceModel: "iPhone 13 Pro MAX",
     issue: "Damaged screen",
     amount: "25000.00",
-    status: "Paid",
+    status: "Closed",
     teamMember: "John Doe",
     company: "Mona Tech",
     isClosed:true,
@@ -119,7 +120,7 @@ if (!isOpen) return null;
     deviceModel: "iPhone 13 Pro MAX",
     issue: "Damaged screen",
     amount: "25000.00",
-    status: "Pending",
+    status: "Closed",
     teamMember: "John Doe",
     company: "Mona Tech",
     isClosed:false,
@@ -139,7 +140,7 @@ if (!isOpen) return null;
     deviceModel: "iPhone 13 Pro MAX",
     issue: "Damaged screen",
     amount: "25000.00",
-    status: "Pending",
+    status: "Closed",
     teamMember: "John Doe",
     company: "Mona Tech",
     isClosed:false,
@@ -159,7 +160,7 @@ if (!isOpen) return null;
     deviceModel: "iPhone 13 Pro MAX",
     issue: "Damaged screen",
     amount: "25000.00",
-    status: "Approved",
+    status: "Closed",
     teamMember: "John Doe",
     company: "Mona Tech",
     isClosed:true,
@@ -180,7 +181,7 @@ isPending:false,
     deviceModel: "iPhone 13 Pro MAX",
     issue: "Damaged screen",
     amount: "25000.00",
-    status: "Approved",
+    status: "Closed",
     teamMember: "John Doe",
     company: "Mona Tech",
     isClosed:true,
@@ -200,7 +201,7 @@ isPending:false,
     deviceModel: "iPhone 13 Pro MAX",
     issue: "Damaged screen",
     amount: "25000.00",
-    status: "Paid",
+    status: "Closed",
     teamMember: "John Doe",
     company: "Mona Tech",
     isClosed:true,
@@ -424,149 +425,7 @@ isPending:false,
      isExcess: true,
     excess: "#2,000",
   },];
-// const queriedApplicationsData = [
-//   {
-//     id: 1,
-//     claimId: "#0001",
-//     deviceBrand: "iPhone",
-//     model: "iPhone 13 Pro MAX",
-//     issueType: "Damaged Screen",
-//     amount: "#23,345",
-//     dateQueried: "2025-06-10",
-//     newMessages: 4,
-//     isExcess: true,
 
-// isClosed:false,
-//     excess: "#3,000",
-//   },
-//   {
-//     id: 2,
-//     claimId: "#0002",
-//     deviceBrand: "Samsung",
-//     model: "Galaxy S21 Ultra",
-//     issueType: "Battery Issue",
-//     amount: "#18,500",
-//     dateQueried: "2025-06-08",
-//     newMessages: 1,
-//     isExcess: false,
-//     isClosed:true,
-    
-//     excess: "#0",
-//   },
-//   {
-//     id: 3,
-//     claimId: "#0003",
-//     deviceBrand: "Tecno",
-//     model: "Camon 18",
-//     issueType: "Water Damage",
-//     amount: "#12,000",
-//     dateQueried: "2025-06-05",
-//     newMessages: 0,
-//     isExcess: true,
-
-// isClosed:true,
-//     excess: "#1,500",
-//   },
-//   {
-//     id: 4,
-//     claimId: "#0004",
-//     deviceBrand: "Infinix",
-//     model: "Note 12",
-//     issueType: "Cracked Body",
-//     amount: "#9,700",
-//     dateQueried: "2025-06-01",
-//     newMessages: 2,
-//     isExcess: false,
-//     isClosed:true,
-    
-//     excess: "#0",
-//   },
-//   {
-//     id: 5,
-//     claimId: "#0005",
-//     deviceBrand: "Xiaomi",
-//     model: "Redmi Note 11",
-//     issueType: "Damaged Screen",
-//     amount: "#15,600",
-//     dateQueried: "2025-05-29",
-//     newMessages: 1,
- 
-
-// isClosed:false,
-//    isExcess: true,
-//     excess: "#2,000",
-//   },
-//   {
-//     id: 6,
-//     claimId: "#0006",
-//     deviceBrand: "iPhone",
-//     model: "iPhone 12 Mini",
-//     issueType: "Battery Issue",
-//     amount: "#20,000",
-//     dateQueried: "2025-06-13",
-//     newMessages: 0,
-//     isExcess: false,
-//     isClosed:true,
-    
-//     excess: "#0",
-//   },
-//   {
-//     id: 7,
-//     claimId: "#0007",
-//     deviceBrand: "Samsung",
-//     model: "Galaxy A53",
-//     issueType: "Water Damage",
-//     amount: "#14,300",
-//     dateQueried: "2025-06-12",
-//     newMessages: 3,
-//     isExcess: true,
-
-// isClosed:false,
-//     excess: "#1,800",
-//   },
-//   {
-//     id: 8,
-//     claimId: "#0008",
-//     deviceBrand: "Nokia",
-//     model: "G21",
-//     issueType: "Cracked Body",
-//     amount: "#8,900",
-//     dateQueried: "2025-06-11",
-//     newMessages: 0,
-//     isExcess: false,
-//     isClosed:true,
-    
-//     excess: "#0",
-//   },
-//   {
-//     id: 9,
-//     claimId: "#0009",
-//     deviceBrand: "iPhone",
-//     model: "iPhone SE (2020)",
-//     issueType: "Battery Issue",
-//     amount: "#13,500",
-//     dateQueried: "2025-06-09",
-//     newMessages: 2,
-//     isExcess: true,
-
-// isClosed:true,
-//     excess: "#1,000",
-//   },
-//   {
-//     id: 10,
-//     claimId: "#0010",
-//     deviceBrand: "Samsung",
-//     model: "Galaxy Note 10",
-//     issueType: "Damaged Screen",
-//     amount: "#19,200",
-//     dateQueried: "2025-06-07",
-//     newMessages: 1,
-//     isExcess: false,
-//     isClosed:false,
-    
-//     excess: "#0",
-//   },
-// ];
 
 const applyFilters = (data) => {
   return data.filter((item) => {
@@ -619,11 +478,35 @@ const startIndex = (currentPage - 1) * pageSize;
 const endIndex = startIndex + pageSize;
 const currentPageData = filteredData.slice(startIndex, endIndex);
 
-  // Calculate current page data
-  // const startIndex = (currentPage - 1) * pageSize;
-  // const endIndex = startIndex + pageSize;
-  // const currentPageData = queriedApplicationsData.slice(startIndex, endIndex);
-  // const totalItems = queriedApplicationsData.length;
+
+const getStatusColor = (status) => {
+  switch (status?.toLowerCase()) {
+    case "approved":
+      return "#10b981";
+    case "pending":
+      return "#f59e0b";
+    case "closed":
+      return "#DCEBFF";
+    case "queried":
+      return "#FFE5DB";
+    default:
+      return "#9ca3af";
+  }
+};
+const getStatusTextColor = (status) => {
+  switch (status?.toLowerCase()) {
+    case "approved":
+      return "#117A4F"; // green
+    case "pending":
+      return "#D18A00"; // orange
+    case "closed":
+      return "#004AAD"; // blue
+    case "queried":
+      return "#B91C1C"; // red
+    default:
+      return "#6B7280"; // gray
+  }
+};
 
   const handleViewClick = (application) => {
     setSelectedApplication(application);
@@ -651,11 +534,30 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
       dataIndex: "deviceModel",
       key: "model",
     },
-    {
-      title: "Issue Type",
-      dataIndex: "issue",
-      key: "issueType",
-    },
+     {
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
+    render: (value) => (
+      <span
+        style={{
+          width:'100%',
+          padding: "4px 8px",
+          backgroundColor: getStatusColor(value),
+          color: getStatusTextColor(value),
+          fontSize: "12px",
+          fontWeight: "500",
+        }}
+      >
+        {value}
+      </span>
+    ),
+  },
+    // {
+    //   title: "Issue Type",
+    //   dataIndex: "issue",
+    //   key: "issueType",
+    // },
     {
       title: "Amount",
       dataIndex: "amount",
@@ -718,59 +620,9 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
     >
       {/* <ButtonStyleOverrides /> */}
       <Container>
-        <Header>
-          <Title>Queried Applications</Title>
-          <FilterSection>
-  <FilterLabel>Filter by:</FilterLabel>
-  <SelectWrapper>
-    <Select
-      value={dateFilter}
-      onChange={(value) => setDateFilter(value)}
-      placeholder="Date"
-      // style={{ width: 150 }}
-      suffixIcon={<ArrowIcon />}
-    >
-      <Select.Option value="">All Dates</Select.Option>
-      <Select.Option value="today">Today</Select.Option>
-      <Select.Option value="yesterday">Yesterday</Select.Option>
-      <Select.Option value="last7days">Last 7 Days</Select.Option>
-      <Select.Option value="last30days">Last 30 Days</Select.Option>
-    </Select>
-  </SelectWrapper>
-  <SelectWrapper>
-    <Select
-      value={otherFilter}
-      onChange={(value) => setOtherFilter(value)}
-      placeholder="Other"
-      // style={{ width: 150 }}
-      suffixIcon={<ArrowIcon />}
-    >
-      <Select.Option value="">All Issues</Select.Option>
-      <Select.Option value="Damaged Screen">Damaged Screen</Select.Option>
-      <Select.Option value="Battery Issue">Battery Issue</Select.Option>
-      <Select.Option value="Water Damage">Water Damage</Select.Option>
-    </Select>
-  </SelectWrapper>
-</FilterSection>
-
-          {/* <FilterSection>
-            <FilterLabel>Filter by:</FilterLabel>
-            <SelectWrapper>
-              <Select
-                placeholder="Date"
-                style={{ width: 150 }}
-                suffixIcon={<ArrowIcon />}
-              />
-            </SelectWrapper>
-            <SelectWrapper>
-              <Select
-                placeholder="Other"
-                style={{ width: 150 }}
-                suffixIcon={<ArrowIcon />}
-              />
-            </SelectWrapper>
-          </FilterSection> */}
-        </Header>
+      
+          <QueriedApplications />
+         
 {/* <RepairClaimModal /> */}
 {showModal && (
   <RepairClaimModal

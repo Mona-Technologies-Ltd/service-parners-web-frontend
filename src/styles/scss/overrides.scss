@@ -68,6 +68,58 @@
     }
   }
 }
+.query-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: transparent;
+  border-radius: 8px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.filter-label {
+  font-size: 14px;
+  color: #374151;
+}
+
+.calendar-input {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  // border-radius: 4px;
+  background-color: #ffffff;
+  color: #4b5563;
+}
+
+.dropdown {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  // border-radius: 4px;
+  background-color: #ffffff;
+  color: #4b5563;
+}
+
+.search-box {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #d1d5db;
+  // border-radius: 4px;
+  background-color: #ffffff;
+  color: #4b5563;
+}
 
 
 // .ant-input-search { width: 200px; height: 52px; }

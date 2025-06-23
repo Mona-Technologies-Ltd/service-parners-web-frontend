@@ -144,7 +144,7 @@ const chartDataMap = {
       title="Total Unremitted Premium"
       value={overviewData.totalUnremitted.value}
       icon={overviewData.totalUnremitted.icon}
-      iconClass="yellow-bg"
+      iconClass="gold-bg"
       change={overviewData.totalUnremitted.change}
     />
   </Col>

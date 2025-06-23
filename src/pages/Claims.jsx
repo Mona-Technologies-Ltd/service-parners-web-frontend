@@ -253,7 +253,7 @@ isPending:false,
     status: "Queried",
     teamMember: "John Doe",
     company: "Mona Tech",
- isClosed:false,
+    isClosed:false,
     isPending:false,   
     isResponse:true,
     isQuery : true,
@@ -622,11 +622,11 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
     size="small"
     onChange={(value) => setStatusFilter(value)}
     options={[
-      { value: "awaiting", label: "Awaiting" },
+      { value: "pending", label: "Pending" },
       { value: "approved", label: "Approved" },
-      { value: "completed", label: "Completed" },
+      { value: "closed", label: "Closed" },
       { value: "paid", label: "Paid" },
-      { value: "rejected", label: "Rejected" },
+      { value: "queried", label: "Queried" },
     ]}
   />
 </SelectWrapper>

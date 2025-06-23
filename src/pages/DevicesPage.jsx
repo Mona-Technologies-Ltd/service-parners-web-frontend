@@ -106,7 +106,7 @@ const displayedData =
   render: (status) => {
     const statusStyle = {
       Pending: {
-        background: "#FFE5DB",
+        background: "#FFB82E26",
         color: "#FFB82E",
         // borderRadius: "4px",
         padding: "4px 8px",
@@ -114,8 +114,8 @@ const displayedData =
         width:'100%'
       },
       Paid: {
-            background: "#DCEBFF",
-        color: "#004AAD",
+            background: "#E0FFED",
+        color: "#00752F",
         // borderRadius: "4px",
         padding: "4px 8px",
         display: "inline-block",

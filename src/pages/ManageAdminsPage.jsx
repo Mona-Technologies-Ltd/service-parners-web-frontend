@@ -22,18 +22,19 @@ const [selectedAdmin, setSelectedAdmin] = useState(null);
   const pageSize = 10;
 
 
-const allAdminsData = Array(50)
-  .fill(null)
-  .map((_, index) => ({
-    id: index + 1,
-    adminId: `#AD${String(index + 1001).padStart(4, "0")}`,
-    name: ["John Doe", "Jane Smith", "Robert Johnson", "Maria Garcia", "David Chen"][index % 5],
-    email: ["john.doe@example.com", "jane.smith@example.com", "robert.j@example.com", "maria.garcia@example.com", "david.chen@example.com"][index % 5],
-    role: ["Super Admin", "Admin", "Support", "Claims Manager", "Viewer"][index % 5],
-    department: ["IT", "Claims", "Customer Support", "Finance", "Management"][index % 5],
-    dateAdded: new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toLocaleDateString(),
-    status: index % 3 === 0 ? "Active" : index % 3 === 1 ? "Inactive" : "Suspended",
-  }));
+const allAdminsData = Array(10).fill(null).map((_, index) => ({
+  id: index + 1,
+  adminId: `#${String(index + 1).padStart(4, "0")}`,
+  name: "John Joseph Doe",
+  email: "johnjosephdoe@gmail.com",
+  company: "ABC Tech Enterprise, Abuja",
+  phoneNumber: "09034567890",
+  dateCreated: "2025-02-27",
+  action: "More",
+}));
+
+console.log(allAdminsData);
+
  const allInvitationsData = Array(50)
     .fill(null)
     .map((_, index) => ({
@@ -140,7 +141,7 @@ const invitationColumns = [
 
   const columns = [
     {
-      title: "Admin ID",
+      title: "ID",
       dataIndex: "adminId",
       key: "adminId",
     },
@@ -155,43 +156,43 @@ const invitationColumns = [
       key: "email",
     },
     {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
+      title: "Company",
+      dataIndex: "company",
+      key: "company",
     },
     {
-      title: "Department",
-      dataIndex: "department",
-      key: "department",
+      title: "phone Number",
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
     },
     {
-      title: "Date Added",
-      dataIndex: "dateAdded",
-      key: "dateAdded",
+      title: "Date Created",
+      dataIndex: "dateCreated",
+      key: "dateCreated",
     },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-      render: (status) => {
-        const statusStyle = {
-          Active: {
-            background: "#E8F5E9",
-            color: "#2E7D32",
-          },
-          Inactive: {
-            background: "#FFF8E1",
-            color: "#F57C00",
-          },
-          Suspended: {
-            background: "#FFEBEE",
-            color: "#C62828",
-          },
-        };
+    // {
+    //   title: "Status",
+    //   dataIndex: "status",
+    //   key: "status",
+    //   render: (status) => {
+    //     const statusStyle = {
+    //       Active: {
+    //         background: "#E8F5E9",
+    //         color: "#2E7D32",
+    //       },
+    //       Inactive: {
+    //         background: "#FFF8E1",
+    //         color: "#F57C00",
+    //       },
+    //       Suspended: {
+    //         background: "#FFEBEE",
+    //         color: "#C62828",
+    //       },
+    //     };
 
-        return <StatusBadge style={statusStyle[status]}>{status}</StatusBadge>;
-      },
-    },
+    //     return <StatusBadge style={statusStyle[status]}>{status}</StatusBadge>;
+    //   },
+    // },
     {
       title: "Action",
       key: "action",
@@ -470,14 +471,14 @@ const TabGroup = styled.div`
 
 const Tab = styled.div`
   font-weight: ${(props) => (props.active ? "bold" : "normal")};
-  color: ${(props) => (props.active ? "#1976d2" : "#9e9e9e")};
+  color: ${(props) => (props.active ? "#004AAD" : "#9e9e9e")};
   cursor: pointer;
-  border-bottom: ${(props) => (props.active ? "2px solid #1976d2" : "none")};
+  border-bottom: ${(props) => (props.active ? "2px solid #004AAD" : "none")};
   padding-bottom: 4px;
 `;
 
 const AddButton = styled.button`
-  background-color: #1976d2;
+  background-color: #004AAD;
   color: #fff;
   padding: 6px 12px;
   border: none;

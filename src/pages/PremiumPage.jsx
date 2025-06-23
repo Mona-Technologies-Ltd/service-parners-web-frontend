@@ -134,7 +134,6 @@ const [dateFilter, setDateFilter] = useState(null);
           break;
       }
     }
-
     return matchBrand && matchStatus && matchSearch && matchDate;
   });
 };
@@ -153,18 +152,7 @@ const [dateFilter, setDateFilter] = useState(null);
       date: `2025-01-${15 + index}`,
     }));
 
-  // Calculate total items based on active tab
-  // const totalItems =
-  //   activeTab === "unremitted"
-  //     ? unremittedPremiumData.length
-  //     : remittedPremiumData.length;
-
-  // // Calculate the current page's data based on active tab
-  // const startIndex = (currentPage - 1) * pageSize;
-  // const endIndex = Math.min(startIndex + pageSize, totalItems);
-  
-  // const currentPageData =
-  //   activeTab === "unremitted"
+ 
   //     ? unremittedPremiumData.slice(startIndex, endIndex)
   //     : remittedPremiumData.slice(startIndex, endIndex);
 const filteredData =
@@ -211,18 +199,18 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
       dataIndex: "premium",
       key: "premium",
     },
-    {
-      title: "Premium Status",
-      dataIndex: "premiumStatus",
-      key: "premiumStatus",
-      render: (value) => (
-        <PremiumStatusBadge
-          className={value === "Pending" ? "pending" : "paid"}
-        >
-          {value}
-        </PremiumStatusBadge>
-      ),
-    },
+    // {
+    //   title: "Premium Status",
+    //   dataIndex: "premiumStatus",
+    //   key: "premiumStatus",
+    //   render: (value) => (
+    //     <PremiumStatusBadge
+    //       className={value === "Pending" ? "pending" : "paid"}
+    //     >
+    //       {value}
+    //     </PremiumStatusBadge>
+    //   ),
+    // },
     {
       title: "Claims",
       dataIndex: "claims",
@@ -248,20 +236,7 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
   View Details
 </ViewButton>
 
-        // <ActionDropdown
-        //   overlay={
-        //     <Menu onClick={(e) => handleMenuClick(e, record)}>
-        //       <Menu.Item key="1">View Details</Menu.Item>
-        //       <Menu.Item key="2">Edit Premium</Menu.Item>
-        //       <Menu.Item key="3">Cancel Subscription</Menu.Item>
-        //     </Menu>
-        //   }
-        //   trigger={["click"]}
-        // >
-        //   <ViewButton>
-        //     View Details 
-        //   </ViewButton>
-        // </ActionDropdown>
+       
       ),
     },
   ];
@@ -269,7 +244,7 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
   // Columns configuration for remitted premium records
   const remittedColumns = [
     {
-      title: "S/N",
+      title: "Reference no",
       dataIndex: "sn",
       key: "sn",
     },
@@ -404,33 +379,7 @@ const handleRemittedMenuClick = (e, record) => {
       {/* Stats Cards */}
       <Row gutter={[24, 24]}>
         <StatCards />
-        {/* <Col xs={24} sm={12} lg={8}>
-          <StatCard
-            title="Total Premium"
-            value={premiumStats.totalPremium.value}
-            icon={premiumStats.totalPremium.icon}
-            iconClass="pink-bg"
-            change={premiumStats.totalPremium.change}
-          />
-        </Col>
-        <Col xs={24} sm={12} lg={8}>
-          <StatCard
-            title="Total Remitted Premium"
-            value={premiumStats.remittedPremium.value}
-            icon={premiumStats.remittedPremium.icon}
-            iconClass="gold-bg"
-            change={premiumStats.remittedPremium.change}
-          />
-        </Col>
-        <Col xs={24} sm={12} lg={8}>
-          <StatCard
-            title="Total Unremitted Premium"
-            value={premiumStats.unremittedPremium.value}
-            icon={premiumStats.unremittedPremium.icon}
-            iconClass="green-bg"
-            change={premiumStats.unremittedPremium.change}
-          />
-        </Col> */}
+        
       </Row>
 <InvoiceModalPremium
   open={showInvoiceModal}
@@ -440,29 +389,72 @@ const handleRemittedMenuClick = (e, record) => {
 
       {/* Tabs and Table */}
       <PremiumTabsSection>
-        <div className="tabs-header">
+        {/* <div className="tabs-header">
           <Tabs activeKey={activeTab} onChange={handleTabChange}>
             <TabPane tab="Unremitted Premiums" key="unremitted" />
             <TabPane tab="Remitted Premiums" key="remitted" />
           </Tabs>
-        </div>
+        </div> */}
+<div className="tab-filter-wrapper">
+  <div className="tab-section">
+    <Tabs activeKey={activeTab} onChange={handleTabChange}>
+      <TabPane tab="Unremitted Premiums" key="unremitted" />
+      <TabPane tab="Remitted Premiums" key="remitted" />
+    </Tabs>
+  </div>
 
-        <div className="filters-container">
+  <div className="filters">
+    <div className="filters-label">Filter by:</div>
+
+    {activeTab === "unremitted" && (
+      <>
+        <DatePicker
+          className="filter-select"
+          placeholder="Select Date"
+          value={dateFilter}
+          onChange={(date) => setDateFilter(date)}
+          allowClear
+        />
+        <Select
+          value={brandFilter}
+          onChange={(value) => setBrandFilter(value)}
+          className="filter-select"
+        >
+          <Option value="">Brand</Option>
+          <Option value="samsung">Samsung</Option>
+          <Option value="apple">Apple</Option>
+          <Option value="google">Google</Option>
+          <Option value="others">Others</Option>
+        </Select>
+
+        <Select
+          value={statusFilter}
+          onChange={(value) => setStatusFilter(value)}
+          className="filter-select"
+        >
+          <Option value="">Premium Status</Option>
+          <Option value="active">Active</Option>
+          <Option value="pending">Pending</Option>
+          <Option value="inactive">Inactive</Option>
+        </Select>
+      </>
+    )}
+
+    <Search
+      value={searchText}
+      onChange={(e) => setSearchText(e.target.value)}
+      placeholder="Search"
+      className="search-input"
+    />
+  </div>
+</div>
+
+        {/* <div className="filters-container">
           <div className="filters-label">Filter by:</div>
           <div className="filters">
          
 
-            {/* <Select
-  value={dateFilter}
-  onChange={(value) => setDateFilter(value)}
-  className="filter-select"
->
-  <Option value="">Date</Option>
-  <Option value="today">Today</Option>
-  <Option value="yesterday">Yesterday</Option>
-  <Option value="last7days">Last 7 Days</Option>
-  <Option value="last30days">Last 30 Days</Option>
-</Select> */}
+         
 
 {activeTab === "unremitted" && (
   <>
@@ -506,7 +498,7 @@ const handleRemittedMenuClick = (e, record) => {
 />
 
           </div>
-        </div>
+        </div> */}
 
         {/* Premium Records Grid */}
         <CustomGrid
@@ -576,6 +568,43 @@ const PremiumTabsSection = styled.div`
   .search-input {
     width: 240px;
   }
+
+  .tab-filter-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.tab-section {
+  flex: 1 1 auto;
+  min-width: 220px;
+}
+
+.filters {
+  flex: 2 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.filters-label {
+  font-weight: 500;
+  margin-right: 8px;
+  min-width: 70px;
+}
+
+.filter-select {
+  min-width: 150px;
+}
+
+.search-input {
+  width: 200px;
+}
+
 `;
 
 const PremiumStatusBadge = styled.div`

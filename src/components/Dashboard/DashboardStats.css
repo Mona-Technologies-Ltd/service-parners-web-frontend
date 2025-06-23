@@ -56,10 +56,10 @@
 .icon-circle.gold-bg { background-color: #fff2cc; }
 
 /* Outline styles */
-.icon-circle.blue-outline { border: 2px solid #339af0; background: #f0f8ff; }
-.icon-circle.green-outline { border: 2px solid #2ecc71; background: #f0fff5; }
-.icon-circle.yellow-outline { border: 2px solid #f1c40f; background: #fffef2; }
-.icon-circle.red-outline { border: 2px solid #e74c3c; background: #fff5f5; }
+.icon-circle.blue-outline {  background: #f0f8ff; }
+.icon-circle.green-outline { background: #f0fff5; }
+.icon-circle.yellow-outline {  background: #fff2cc; }
+.icon-circle.red-outline { background: #fff5f5; }
 
 .stat-body {
   margin-top: 16px;
