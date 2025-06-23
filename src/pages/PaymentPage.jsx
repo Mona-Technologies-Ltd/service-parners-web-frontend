@@ -250,7 +250,6 @@ case "4": // Upload Unsigned DV
   setIsUploadDVModalVisible(true);
   break;
 
-
     case "5": // Download Signed DV
       console.log("Download Signed DV for", record);
       break;
@@ -494,7 +493,8 @@ const handleConfirmedGenerateAllInvoices = async () => {
   invoiceData={invoiceData}
 />
 
-<DashboardCards />
+<DashboardCards activeTab={activeTab} />
+
       {/* Tabs and Table */}
       <PaymentTabsSection>
         <div className="tabs-header">
