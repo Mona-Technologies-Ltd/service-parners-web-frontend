@@ -29,8 +29,10 @@ const DevicesPage = () => {
       premium: "#7,000",
       premiumStatus:
         index % 3 === 0 ? "Pending" : index % 3 === 1 ? "Paid" : "Pending",
+      // SubStatus:
+      //   index % 3 === 0 ? "Active" :"Expired",
       claims: 3,
-      subscription: "Active",
+      subscription: index % 3 === 0 ? "Active" :"Expired",
     }));
       const awaitingPolicyUploadData = allDevicesData.map((item, index) => ({
   ...item,
@@ -260,20 +262,28 @@ const displayedData =
 </Select>
             </SelectWrapper>
             <SelectWrapper>
-              {/* <Select
-                placeholder="Status"
-                style={{ width: 150 }}
-                onChange={handleStatusChange}
-                suffixIcon={<ArrowIcon />}
-              /> */}
+             
               <Select
-  placeholder="Status"
+  placeholder="Premium status"
   style={{ width: 150 }}
   onChange={handleStatusChange}
   suffixIcon={<ArrowIcon />}
   allowClear
 >
   {[...new Set(allDevicesData.map((d) => d.premiumStatus))].map((status) => (
+    <Select.Option key={status} value={status}>
+      {status}
+    </Select.Option>
+  ))}
+</Select>
+ <Select
+  placeholder="Subscription status"
+  style={{ width: 150 }}
+  onChange={handleStatusChange}
+  suffixIcon={<ArrowIcon />}
+  allowClear
+>
+  {[...new Set(allDevicesData.map((d) => d.subscription))].map((status) => (
     <Select.Option key={status} value={status}>
       {status}
     </Select.Option>
@@ -297,10 +307,10 @@ const displayedData =
           >
             Awaiting Policy Upload
           </TabItem>
-          {activeTab === "Devices" && (
+          {/* {activeTab === "Devices" && (
             // <PrintButton onClick={handlePrint}>Print</PrintButton>
             <PrintButton>Print</PrintButton>
-          )}
+          )} */}
         </TabsContainer>
 
         <div className="sales-page">

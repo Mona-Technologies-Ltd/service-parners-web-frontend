@@ -244,7 +244,7 @@ const currentPageData = filteredData.slice(startIndex, endIndex);
   // Columns configuration for remitted premium records
   const remittedColumns = [
     {
-      title: "Reference no",
+      title: "Reference",
       dataIndex: "sn",
       key: "sn",
     },
@@ -389,12 +389,7 @@ const handleRemittedMenuClick = (e, record) => {
 
       {/* Tabs and Table */}
       <PremiumTabsSection>
-        {/* <div className="tabs-header">
-          <Tabs activeKey={activeTab} onChange={handleTabChange}>
-            <TabPane tab="Unremitted Premiums" key="unremitted" />
-            <TabPane tab="Remitted Premiums" key="remitted" />
-          </Tabs>
-        </div> */}
+       
 <div className="tab-filter-wrapper">
   <div className="tab-section">
     <Tabs activeKey={activeTab} onChange={handleTabChange}>
@@ -405,7 +400,7 @@ const handleRemittedMenuClick = (e, record) => {
 
   <div className="filters">
     <div className="filters-label">Filter by:</div>
-
+{/* 
     {activeTab === "unremitted" && (
       <>
         <DatePicker
@@ -438,7 +433,7 @@ const handleRemittedMenuClick = (e, record) => {
           <Option value="inactive">Inactive</Option>
         </Select>
       </>
-    )}
+    )} */}
 
     <Search
       value={searchText}
@@ -448,57 +443,6 @@ const handleRemittedMenuClick = (e, record) => {
     />
   </div>
 </div>
-
-        {/* <div className="filters-container">
-          <div className="filters-label">Filter by:</div>
-          <div className="filters">
-         
-
-         
-
-{activeTab === "unremitted" && (
-  <>
-    <DatePicker
-  className="filter-select"
-  placeholder="Select Date"
-  value={dateFilter}
-  onChange={(date) => setDateFilter(date)}
-  allowClear
-/>
-    <Select
-      value={brandFilter}
-      onChange={(value) => setBrandFilter(value)}
-      className="filter-select"
-    >
-      <Option value="">Brand</Option>
-      <Option value="samsung">Samsung</Option>
-      <Option value="apple">Apple</Option>
-      <Option value="google">Google</Option>
-      <Option value="others">Others</Option>
-    </Select>
-
-    <Select
-      value={statusFilter}
-      onChange={(value) => setStatusFilter(value)}
-      className="filter-select"
-    >
-      <Option value="">Premium  Status</Option>
-      <Option value="active">Active</Option>
-      <Option value="pending">Pending</Option>
-      <Option value="inactive">Inactive</Option>
-    </Select>
-  </>
-)}
-
-<Search
-  value={searchText}
-  onChange={(e) => setSearchText(e.target.value)}
-  placeholder="Search"
-  className="search-input"
-/>
-
-          </div>
-        </div> */}
 
         {/* Premium Records Grid */}
         <CustomGrid

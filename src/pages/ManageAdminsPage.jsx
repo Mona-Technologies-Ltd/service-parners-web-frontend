@@ -27,7 +27,7 @@ const allAdminsData = Array(10).fill(null).map((_, index) => ({
   adminId: `#${String(index + 1).padStart(4, "0")}`,
   name: "John Joseph Doe",
   email: "johnjosephdoe@gmail.com",
-  company: "ABC Tech Enterprise, Abuja",
+  // company: "ABC Tech Enterprise, Abuja",
   phoneNumber: "09034567890",
   dateCreated: "2025-02-27",
   action: "More",
@@ -155,11 +155,11 @@ const invitationColumns = [
       dataIndex: "email",
       key: "email",
     },
-    {
-      title: "Company",
-      dataIndex: "company",
-      key: "company",
-    },
+    // {
+    //   title: "Company",
+    //   dataIndex: "company",
+    //   key: "company",
+    // },
     {
       title: "phone Number",
       dataIndex: "phoneNumber",

@@ -14,7 +14,7 @@ const CustomGrid = ({
   const totalPages = Math.ceil(totalItems / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = Math.min(startIndex + pageSize, totalItems);
-
+// console.log(columns)
   const generatePaginationNumbers = () => {
     const delta = 2;
     const range = [];
@@ -48,6 +48,7 @@ const CustomGrid = ({
 
   // Calculate automatic column width if not specified
   const getColumnStyle = (column) => {
+    console.log(column.key)
     if (column.width) {
       return {
         width: column.width,
@@ -87,7 +88,7 @@ const CustomGrid = ({
     //     flexBasis: "130px",
     //   };
 
-      // Approved Claims
+      // Approved ClaimsOnboarding
     // }
 if (column.key === "status") {
   return {
@@ -112,7 +113,29 @@ if (column.key === "approvedClaims") {
     overflowWrap: "anywhere",
   };
 }
-
+if (column.key === "onboardingDate") {
+  return {
+    flexGrow: 0,
+    flexShrink: 0,
+    flexBasis: "100px",
+    fontSize: "4px",
+    whiteSpace: "normal",
+    wordBreak: "break-word",
+    overflowWrap: "anywhere",
+  };
+}
+// if (column.dataIndex === "onboardingDate") {
+//   console.log(3333333)
+//   return {
+//     flexGrow: 0,
+//     flexShrink: 0,
+//     flexBasis: "100px",
+//     fontSize: "5px",
+//     whiteSpace: "normal",
+//     wordBreak: "break-word",
+//     overflowWrap: "anywhere",
+//   };
+// }
     // Default flexible width with min/max constraints
     return {
       flexGrow: 1,
@@ -239,11 +262,12 @@ const GridContainer = styled.div`
   }
 
   .grid-cell {
+    
     padding: 12px 16px;
     display: flex;
     align-items: center;
-    white-space: nowrap;
-    overflow: hidden;
+    /* white-space: nowrap; */
+    /* overflow: hidden; */
     text-overflow: ellipsis;
     box-sizing: border-box;
     text-align: center;
@@ -251,6 +275,8 @@ const GridContainer = styled.div`
     /* width: 1rem; */
     color: #000;
     justify-content: center;
+    font-size: 12.4px;
+    /* width: 30rem; */
   }
 
   .grid-footer {

@@ -42,7 +42,7 @@ const ReportsPage = () => {
       model: "Galaxy S10",
       totalSumInsured: "#273,345",
       premium: "#25,345",
-      status: "Unpaid",
+      status: "Pending",
       onboardingDate: "2025-01-15",
       expiryDate: "2025-01-15",
     },
@@ -86,7 +86,7 @@ const ReportsPage = () => {
       key: "status",
       render: (status) => {
         const statusStyle = {
-          Unpaid: {
+          Pending: {
             background: "#FFE5DB",
             color: "#FF4602",
           },
