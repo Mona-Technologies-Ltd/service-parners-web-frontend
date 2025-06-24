@@ -3,7 +3,7 @@ import React from "react";
 import "./RepairClaimResponse.css";
 import { toast } from 'react-toastify';
 
-const RepairClaimResponse = ({ isOpen, onClose }) => {
+const RepairClaimResponse = ({ isOpen, onClose, onSubmitSuccess }) => {
   if (!isOpen) return null;
 
   return (
@@ -47,30 +47,28 @@ const RepairClaimResponse = ({ isOpen, onClose }) => {
         </div>
 
         {/* Response Form */}
-<form
-  className="response-form"
-  onSubmit={(e) => {
-    e.preventDefault();
-    toast("Response submitted successfully", {
-      style: {
-        backgroundColor: "#fdecea", // light red background
-        color: "#d32f2f",            // deep red text
-        fontWeight: "bold",
-      },
-      icon: false, // no error icon
-    });
+        <form
+          className="response-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            toast("Response submitted successfully", {
+              style: {
+                backgroundColor: "#fdecea",
+                color: "#d32f2f",
+                fontWeight: "bold",
+              },
+              icon: false,
+            });
 
-    setTimeout(() => {
-      onClose();
-    }, 1000); // close after 1 second
-  }}
->
-
-
-          <textarea
-            className="response-input"
-            placeholder="Type your response here..."
-          ></textarea>
+            // Notify parent to close both modals
+            setTimeout(() => {
+              if (onSubmitSuccess) {
+                onSubmitSuccess();  // Close both modals from parent
+              }
+            }, 1000);
+          }}
+        >
+          <textarea className="response-input" placeholder="Type your response here..."></textarea>
 
           <div className="file-upload">
             <label className="file-labels" htmlFor="file-input">
@@ -80,9 +78,7 @@ const RepairClaimResponse = ({ isOpen, onClose }) => {
             <span className="file-placeholder">No file chosen</span>
           </div>
 
-          <input type="submit" value='Submit Response' className="resp_btn" />
-            {/* Submit Response
-          </input> */}
+          <input type="submit" value="Submit Response" className="resp_btn" />
         </form>
       </div>
     </div>

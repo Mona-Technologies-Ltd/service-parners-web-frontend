@@ -87,8 +87,8 @@ const ReportsPage = () => {
       render: (status) => {
         const statusStyle = {
           Pending: {
-            background: "#FFE5DB",
-            color: "#FF4602",
+            background: "#FFB82E26",
+            color: "#FFB82E",
           },
           Paid: {
             background: "#E8F5E9",

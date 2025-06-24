@@ -1,7 +1,5 @@
 import React from "react";
 import "./RepairClaimModal.css";
-// import ReviewCardClaim from "./ReviewCardClaim";
-// import ResolveClaimModal from "./ResolveClaimModal";
 import ClaimVideos from "./ClaimVideos";
 import RepairClaimResponse from "./RepairClaimResponse";
 import ReviewCardClaim from "../components/claim/ReviewCardClaim";
@@ -50,21 +48,15 @@ console.log(device)
   <button className="Closed_btn">Closed</button>
 )}
        {/* Conditional Rendering of Response Form */}
-        <RepairClaimResponse
+      
+<RepairClaimResponse
   isOpen={showResponseModal}
   onClose={() => setShowResponseModal(false)}
+  onSubmitSuccess={() => {
+    setShowResponseModal(false);  // close child modal
+    onClose();                    // close parent modal
+  }}
 />
-
-
-        {/* {showResolveModal && (
-            <ResolveClaimModal
-              onResolve={() => {
-                console.log("Resolved");
-                setShowResolveModal(false); // Close after resolve
-              }}
-              onCancel={() => setShowResolveModal(false)}
-            />
-          )} */}
 
           {/* User Info */}
           <div className="info-section">
